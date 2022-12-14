@@ -1,0 +1,31 @@
+{
+  "name": "airbnb-clone",
+  "version": "1.0.0",
+  "description": "## Database Schema Design",
+  "main": "index.js",
+  "dependencies": {
+    "validator": "^13.7.0",
+    "express-validator": "^6.14.2",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend",
+    "build": "npm run --prefix backend build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenpicazo/Airbnb-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevenpicazo/Airbnb-clone/issues"
+  },
+  "homepage": "https://github.com/stevenpicazo/Airbnb-clone#readme"
+}
