@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     state: DataTypes.STRING,
     country: DataTypes.STRING,
     lat: DataTypes.DECIMAL,
-    ing: DataTypes.DECIMAL,
+    lng: DataTypes.DECIMAL,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     price: DataTypes.DECIMAL
