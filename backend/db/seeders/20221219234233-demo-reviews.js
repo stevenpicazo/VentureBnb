@@ -14,13 +14,13 @@ module.exports = {
       {
         spotId: 2,
         userId: 2,
-        review: 'Immaculate Spot!!!',
+        review: 'Such a great spot, owner left everything nice and ready for us.',
         stars: 5
       },
       {
         spotId: 3,
         userId: 3,
-        review: 'Immaculate Spot!!!',
+        review: 'Beautiful house. Enjoyed my stay.',
         stars: 5
       }
     ], {});
