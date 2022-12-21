@@ -38,23 +38,51 @@ router.post('/', validateSpotCreation, requireAuth, async (req, res, next) => {
 router.post('/:id/images', requireAuth, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.id)
     const { url, preview } = req.body
-
+    
+    if (!spot) {
+        res.status = 404;
+        res.json({
+            "message": "Spot couldn't be found"
+        })
+    }
+    
     const image = await SpotImage.create({
         url,
         preview,
         spotId: spot.id 
-    })
-    console.log(image.id)
-    
+    })    
     const spotImageInfo = {
         image: image.id,
         url: image.url,
         preview: image.preview
     }
 
-    console.log(spotImageInfo)
+
 
     return res.json(spotImageInfo)
+})
+
+//! Edit a Spot
+router.put('/:id', requireAuth, async (req, res, next) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const updatedSpot = await Spot.findByPk(req.params.id)
+    const ownerId = req.user.id
+
+
+    if (!updatedSpot) {
+        res.status = 404;
+        res.json({
+            "message": "Spot couldn't be found"
+        })
+    }
+
+    await updatedSpot.set({
+        ownerId,
+        ...req.body
+    })
+
+    return res.json(updatedSpot)
+
 })
 
 //! Get all spots owned by current User
