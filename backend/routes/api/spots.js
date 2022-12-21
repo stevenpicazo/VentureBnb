@@ -50,12 +50,7 @@ const router = express.Router();
 
 //! GET ALL SPOTS
 router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll({
-        // include: [
-        //     {model: SpotImage},
-        //     {model: Review}
-        // ]
-    })
+    const spots = await Spot.findAll()
 
     const spotsList = []
     for (let spot of spots) {
