@@ -7,72 +7,36 @@ const { requireAuth } = require('../../utils/auth')
 
 const router = express.Router();
 
-//! Get all spots(flawed)
-// router.get('/', async (req, res, next) => {
-    // const spots = await Spot.findAll({
-    //     include: [
-    //         {model: Review},
-    //         {model: SpotImage}
-    //     ]
-    // })
-
-    // let spotsList = []
-    // spots.forEach(spot => {
-    //     spotsList.push(spot.toJSON())
-    // })
-
-    // spotsList.forEach(spot => {
-    //     spot.SpotImages.forEach(image => {
-    //         if (image.preview) {
-    //              spot.preview = image.url
-    //         }
-    //     })
-    //     if (!spot.preview) {
-    //         spot.preview = 'No preview image available.'
-    //     }
-    //     // console.log(spot.SpotImages)
-    //     delete spot.SpotImages
-    // })
-
-//     spotsList.forEach(reviews => {
-//         reviews.Reviews.forEach(el => {
-//             // console.log(el)
-//             reviews.stars = [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
-//         })
-//         delete reviews.Reviews
-//     })
-
-
-//     return res.json(spotsList)
-
-// })
-
+const validateSpotCreation = [
+    check('address').exists({ checkFalsy: true }).withMessage("Street address is required"),
+    check('city').exists({ checkFalsy: true }).withMessage("City is required"),
+    check('state').exists({ checkFalsy: true }).withMessage("State is required"),
+    check('country').exists({ checkFalsy: true }).withMessage("Country is required"),
+    check('lat').exists({ checkFalsy: true }).withMessage("Latitude is not valid"),
+    check('lng').exists({ checkFalsy: true }).withMessage("Longitude is not valid"),
+    check('name').exists({ checkFalsy: true }).isLength({ max: 49 }).withMessage( "Name must be less than 50 characters"),
+    check('description').exists({ checkFalsy: true }).withMessage("Description is required"),
+    check('price').exists({ checkFalsy: true }).withMessage("Price per day is required"),
+    handleValidationErrors
+]
 
 //! Create A Spot 
-router.post('/', requireAuth, async (req, res, next) => {
-    // const spot = await Spot.findOne()
+router.post('/', validateSpotCreation, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
     const ownerId = req.user.id
 
     const spot = await Spot.create({
+        ownerId,
         ...req.body,
-        ownerId
     })
 
-    if (!spot) {
-        res.status(400)
-
-    }
-
-    if (spot) {
-        res.status(201)
-        res.json(spot)
-    }
+    return res.json(spot)
+    
 })
 
 //! Get all spots owned by current User
 router.get('/current', async (req, res, next) => {
-     const spots = await Spot.findAll()
+    const spots = await Spot.findAll()
     const finalSpotList = []
     for (let spot of spots) {
         const review = await spot.getReviews({
@@ -195,8 +159,9 @@ router.get('/:id', async (req, res, next) => {
 
 //! GET ALL SPOTS
 router.get('/', async (req, res, next) => {
+
     const spots = await Spot.findAll()
-    const spotsList = []
+    const finalSpotList = []
     for (let spot of spots) {
         const review = await spot.getReviews({
             attributes: [[sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']]
@@ -204,39 +169,100 @@ router.get('/', async (req, res, next) => {
         const avgObject = review[0].toJSON()
         const avgRating = avgObject.avgRating
 
-        let spotImage = await SpotImage.findOne({
-            where: {
-                preview: true,
-                spotId: spot.id
-            }
-        })
 
-        if (spotImage) spotImage = spotImage.url
-        else spotImage.preview = 'No image available'
-        
-        const spots = {
-            id: spot.id,
-            ownerId: spot.ownerId,
-            address: spot.address,
-            city: spot.city,
-            state: spot.state,
-            country: spot.country,
-            lat: spot.lat,
-            lng: spot.lng,
-            name: spot.name,
-            description: spot.description,
-            price: spot.price,
-            createdAt: spot.createdAt,
-            updatedAt: spot.updatedAt,
-            avgRating: avgRating,
-            previewImage: spotImage
-        }
-        spotsList.push(spots)
+
+        const spots = await Spot.findAll({
+            include: [
+                {model: Review},
+                {model: SpotImage}
+            ]
+        })
+    
+        let spotsList = []
+        spots.forEach(spot => {
+            spotsList.push(spot.toJSON())
+        })
+    
+        spotsList.forEach(spot => {
+            spot.SpotImages.forEach(image => {
+                if (image.preview) {
+                     spot.preview = image.url
+                }
+            })
+            if (!spot.preview) {
+                spot.preview = 'No preview image available.'
+            }
+            delete spot.SpotImages
+                
+            const info = {
+                id: spot.id,
+                ownerId: spot.ownerId,
+                address: spot.address,
+                city: spot.city,
+                state: spot.state,
+                country: spot.country,
+                lat: spot.lat,
+                lng: spot.lng,
+                name: spot.name,
+                description: spot.description,
+                price: spot.price,
+                createdAt: spot.createdAt,
+                updatedAt: spot.updatedAt,
+                avgRating: avgRating,
+                previewImage: spot.preview
+            }
+                finalSpotList.push(info)
+
+            })
     }
 
     return res.json({
-        Spots: spotsList
+        Spots: finalSpotList
     })
+
+    //! Initial way I completed this route
+    // const spots = await Spot.findAll()
+    // const spotsList = []
+    // for (let spot of spots) {
+    //     const review = await spot.getReviews({
+    //         attributes: [[sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']]
+    //     })
+    //     const avgObject = review[0].toJSON()
+    //     const avgRating = avgObject.avgRating
+
+    //     let spotImage = await SpotImage.findOne({
+    //         where: {
+    //             preview: true,
+    //             spotId: spot.id
+    //         }
+    //     })
+
+    //     if (spotImage) spotImage = spotImage.url
+    //     else spotImage.preview = 'No image available'
+        
+    //     const spots = {
+    //         id: spot.id,
+    //         ownerId: spot.ownerId,
+    //         address: spot.address,
+    //         city: spot.city,
+    //         state: spot.state,
+    //         country: spot.country,
+    //         lat: spot.lat,
+    //         lng: spot.lng,
+    //         name: spot.name,
+    //         description: spot.description,
+    //         price: spot.price,
+    //         createdAt: spot.createdAt,
+    //         updatedAt: spot.updatedAt,
+    //         avgRating: avgRating,
+    //         previewImage: spotImage
+    //     }
+    //     spotsList.push(spots)
+    // }
+
+    // return res.json({
+    //     Spots: spotsList
+    // })
 })
 
 
