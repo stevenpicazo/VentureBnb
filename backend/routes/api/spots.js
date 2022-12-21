@@ -1,6 +1,5 @@
 const express = require('express')
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User, Spot, SpotImage, Session, Booking, Review, ReviewImage, sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -10,12 +9,12 @@ const router = express.Router();
 
 //! Get all spots(flawed)
 // router.get('/', async (req, res, next) => {
-//     const spots = await Spot.findAll({
-//         include: [
-//             {model: Review},
-//             {model: SpotImage}
-//         ]
-//     })
+    // const spots = await Spot.findAll({
+    //     include: [
+    //         {model: Review},
+    //         {model: SpotImage}
+    //     ]
+    // })
 
     // let spotsList = []
     // spots.forEach(spot => {
@@ -49,10 +48,32 @@ const router = express.Router();
 // })
 
 
+//! Create A Spot 
+router.post('/', requireAuth, async (req, res, next) => {
+    // const spot = await Spot.findOne()
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const ownerId = req.user.id
+
+    const spot = await Spot.create({
+        ...req.body,
+        ownerId
+    })
+
+    if (!spot) {
+        res.status(400)
+
+    }
+
+    if (spot) {
+        res.status(201)
+        res.json(spot)
+    }
+})
+
 //! Get all spots owned by current User
 router.get('/current', async (req, res, next) => {
-    const spots = await Spot.findAll()
-    const spotsList = []
+     const spots = await Spot.findAll()
+    const finalSpotList = []
     for (let spot of spots) {
         const review = await spot.getReviews({
             attributes: [[sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']]
@@ -60,37 +81,55 @@ router.get('/current', async (req, res, next) => {
         const avgObject = review[0].toJSON()
         const avgRating = avgObject.avgRating
 
-        let spotImage = await SpotImage.findOne({
-            where: {
-                preview: true,
-                spotId: spot.id
-            }
-        })
 
-        if (spotImage) spotImage = spotImage.url
-        else spotImage.preview = 'No image available'
-        
-        const spots = {
-            id: spot.id,
-            ownerId: spot.ownerId,
-            address: spot.address,
-            city: spot.city,
-            state: spot.state,
-            country: spot.country,
-            lat: spot.lat,
-            lng: spot.lng,
-            name: spot.name,
-            description: spot.description,
-            price: spot.price,
-            createdAt: spot.createdAt,
-            updatedAt: spot.updatedAt,
-            avgRating: avgRating,
-            previewImage: spotImage
-        }
-        spotsList.push(spots)
+
+        const spots = await Spot.findAll({
+            include: [
+                {model: Review},
+                {model: SpotImage}
+            ]
+        })
+    
+        let spotsList = []
+        spots.forEach(spot => {
+            spotsList.push(spot.toJSON())
+        })
+    
+        spotsList.forEach(spot => {
+            spot.SpotImages.forEach(image => {
+                if (image.preview) {
+                     spot.preview = image.url
+                }
+            })
+            if (!spot.preview) {
+                spot.preview = 'No preview image available.'
+            }
+            delete spot.SpotImages
+                
+            const info = {
+                id: spot.id,
+                ownerId: spot.ownerId,
+                address: spot.address,
+                city: spot.city,
+                state: spot.state,
+                country: spot.country,
+                lat: spot.lat,
+                lng: spot.lng,
+                name: spot.name,
+                description: spot.description,
+                price: spot.price,
+                createdAt: spot.createdAt,
+                updatedAt: spot.updatedAt,
+                avgRating: avgRating,
+                previewImage: spot.preview
+            }
+                finalSpotList.push(info)
+
+            })
     }
+
     return res.json({
-        Spots: spotsList
+        Spots: finalSpotList
     })
     
 })
