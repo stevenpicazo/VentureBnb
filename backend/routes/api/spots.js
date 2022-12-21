@@ -75,10 +75,7 @@ router.get('/', async (req, res, next) => {
         if (spotImage) spotImage = spotImage.url
         else spotImage.preview = 'No image available'
         
-
-
-
-        const spotInfo = {
+        const spots = {
             id: spot.id,
             ownerId: spot.ownerId,
             address: spot.address,
@@ -95,10 +92,12 @@ router.get('/', async (req, res, next) => {
             avgRating: avgRating,
             previewImage: spotImage
         }
-        spotsList.push(spotInfo)
+        spotsList.push(spots)
     }
 
-    return res.json(spotsList)
+    return res.json({
+        Spots: spotsList
+    })
 })
 
 
