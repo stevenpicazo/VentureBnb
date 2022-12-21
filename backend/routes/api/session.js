@@ -4,6 +4,7 @@ const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { requireAuth } = require('../../utils/auth')
 const router = express.Router();
 
 const validateLogin = [
@@ -41,6 +42,7 @@ const validateLogin = [
     }
   );
 
+
 // Log out
 router.delete(
   '/',
@@ -51,11 +53,9 @@ router.delete(
 );
 
 
+
 // Restore session user
-router.get(
-  '/',
-  restoreUser,
-  (req, res) => {
+router.get('/', restoreUser,(req, res) => {
     const { user } = req;
     if (user) {
       return res.json({
@@ -64,6 +64,15 @@ router.get(
     } else return res.json({});
   }
 );
+
+// //! Get the current user
+// router.get('/', requireAuth, async (req, res, next) => {
+//   const userInfo = await User.findByPk(req.params.id)
+//   if (userInfo) {
+//     res.status(200)
+//     res.json(userInfo)
+//   }
+// })
 
 
 // ...
