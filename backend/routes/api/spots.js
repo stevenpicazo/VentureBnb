@@ -21,7 +21,7 @@ const validateSpotCreation = [
 ]
 
 //! Create A Spot 
-router.post('/', validateSpotCreation, async (req, res, next) => {
+router.post('/', validateSpotCreation, requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
     const ownerId = req.user.id
 
@@ -32,6 +32,29 @@ router.post('/', validateSpotCreation, async (req, res, next) => {
 
     return res.json(spot)
     
+})
+
+//! Add an Image to a Spot based on the Spot's id
+router.post('/:id/images', requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.id)
+    const { url, preview } = req.body
+
+    const image = await SpotImage.create({
+        url,
+        preview,
+        spotId: spot.id 
+    })
+    console.log(image.id)
+    
+    const spotImageInfo = {
+        image: image.id,
+        url: image.url,
+        preview: image.preview
+    }
+
+    console.log(spotImageInfo)
+
+    return res.json(spotImageInfo)
 })
 
 //! Get all spots owned by current User

@@ -31,6 +31,15 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    scopes: {
+      // spotImage() {
+      //   const { SpotImage } = require('./spotimage')
+      //   return {
+      //     include: SpotImage,
+      //     exclude: ['createdAt', 'updatedAt', 'spotId']
+      //   }
+      // }
+    }
   });
   return Spot;
 };
