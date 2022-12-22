@@ -20,6 +20,76 @@ const spotValidator = [
     handleValidationErrors
 ]
 
+const reviewValidator = [
+    check('review').exists({ checkFalsy: true }).withMessage("Review text is required"),
+    check('stars').exists({ checkFalsy: true }).isLength({min: 1, max: 5}).withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+]
+
+//! Create a Review for a Spot based on the Spot's id
+router.post('/:spotId/reviews', reviewValidator, requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId)
+    const { review, stars } = req.body
+    const userId = req.user.id
+
+    if (!spot) {
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+    const singleReview = await Review.findOne({
+        where: {
+            userId,
+            spotId: req.params.spotId
+        }
+    })
+
+    // if there is already a review in place
+    if (singleReview) {
+        res.status(403)
+        res.json({
+            "message": "User already has a review for this spot",
+            "statusCode": 403
+          })
+    } 
+    // otherwise create a new review
+    else {
+        const officialReview = await Review.create({
+                userId,
+                spotId: req.params.spotId,
+                review,
+                stars
+        })
+
+        if (stars > 5) {
+            res.status(400)
+            res.json({
+                "message": "Bad request.",
+                "statusCode": 400,
+                "errors": [
+                    "Stars must be an integer from 1 to 5"
+                ]
+            })
+        }
+
+        if (stars < 1) {
+            res.status(400)
+            res.json({
+                "message": "Bad request.",
+                "statusCode": 400,
+                "errors": [
+                    "Stars must be an integer from 1 to 5"
+                ]
+            })
+        }
+
+        res.json(officialReview)
+    }
+
+})
+
 //! Create A Spot 
 router.post('/', spotValidator, requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
@@ -41,18 +111,18 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const ownerId = req.user.id
 
     if (!spot) {
-        res.status = 404;
+        res.status(404);
         res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404      
         })
     }
     
-    if (ownerId !== spot.ownerId) {
-        const error = Error('Authorization not granted')
-        error.status = 403
-        next(error)
-    }
+    // if (ownerId !== spot.ownerId) {
+    //     const error = Error('Authorization not granted')
+    //     error.status(403)
+    //     next(error)
+    // }
 
     const image = await SpotImage.create({
         url,
@@ -68,9 +138,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
         preview: image.preview,
         // spotId: image.spotId
     }
-
-
-
+    
     return res.json(spotImageInfo)
 })
 
@@ -82,7 +150,7 @@ router.put('/:spotId', spotValidator, requireAuth, async (req, res, next) => {
 
 
     if (!updatedSpot) {
-        res.status = 404;
+        res.status(404);
         res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404      
@@ -91,7 +159,7 @@ router.put('/:spotId', spotValidator, requireAuth, async (req, res, next) => {
 
     if (ownerId !== spot.ownerId) {
         const error = Error('Authorization not granted')
-        error.status = 403
+        error.status(403)
         next(error)
     }
 
@@ -122,6 +190,9 @@ router.get('/current', async (req, res, next) => {
         console.log(review)
 
         const spots = await Spot.findAll({
+            where: {
+                ownerId: req.user.id
+            },
             include: [
                 {model: Review},
                 {model: SpotImage}
@@ -170,6 +241,32 @@ router.get('/current', async (req, res, next) => {
         Spots: finalSpotList
     })
     
+})
+
+//! Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          })
+    }
+
+    const review = await Review.findAll({
+        where: {
+            spotId: req.params.spotId
+        },
+
+        include: [
+           { model: User, attributes: ['id', 'firstName', 'lastName'] },
+           { model: ReviewImage, attributes: ['id', 'url']}
+        ]
+    })
+    
+    return res.json(review)
 })
 
 //! Get details of a Spot from an id
@@ -221,6 +318,7 @@ router.get('/:spotId', async (req, res, next) => {
     spotsList.push(spotsInfo)
 
     if (!spot) {
+        res.status(404)
         res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404

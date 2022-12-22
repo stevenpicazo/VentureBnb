@@ -20,14 +20,14 @@ module.exports = {
         references: {
           model: 'Spots',
       },
-      // allowNull: false
+      allowNull: false
       },
       userId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
       },
-      // allowNull: false
+      allowNull: false
       },
       review: {
         type: Sequelize.STRING

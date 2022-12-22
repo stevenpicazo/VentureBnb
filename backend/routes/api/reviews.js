@@ -1,50 +1,42 @@
 const express = require('express')
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User, Spot, SpotImage, Session, Booking, Review, ReviewImage, sequelize } = require('../../db/models');
+const { User, Spot, SpotImage, Session, Booking, Review, ReviewImage } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth')
 const router = express.Router();
 
-//! Create a Review for a Spot based on the Spot's id
-router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
-    const spot = await Spot.findByPk(req.params.spotId)
-    const { review, stars } = req.body
-
-    if (!spot) {
-        res.status = 404,
+//! Add an Image to a Review based on the Review's id 
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+    const review = await Review.findByPk(req.params.reviewId)
+    const { url } = req.body
+    
+    if (!review) {
+        res.status(404)
         res.json({
-            "message": "Spot couldn't be found",
+            "message": "Review couldn't be found",
             "statusCode": 404
           })
     }
 
-    const newReview = await Review.create({
-        review,
-        stars,
-        spotId: spot.id
+    const image = await ReviewImage.create({
+        reviewId: req.params.reviewId,
+        url,
     })
-
-    const spotReview = {
-        id: newReview.review,
-        stars: newReview.stars
+    const reviewImageInfo = {
+        id: image.id,
+        url: image.url
     }
-
-    // console.log(spotReview)
-
-    return res.json(spotReview)
+    // console.log(reviewImageInfo)
+    res.json(reviewImageInfo)
 
 })
 
 
+
 //! Get all Reviews of the Current User
 router.get('/current', requireAuth, async(req, res, next) => {
-    
     const userId = req.user.id
-
-    const image = await SpotImage.findAll({
-        attributes: ['url']
-    })
     const allReviews = []
     const reviews = await Review.findAll({
         where: { userId },
@@ -52,8 +44,12 @@ router.get('/current', requireAuth, async(req, res, next) => {
         { model: User, attributes: ['id', 'firstName', 'lastName'] },
         { model: Spot, attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'], 
         include: [
-            { model: SpotImage , attributes: ['preview', 'url'] }
+            { model: SpotImage , attributes: ['preview', 'url'], 
+            where: {
+                preview: true
+            }}
         ]},
+        
         { model: ReviewImage, attributes: ['id', 'url']},
       ]
     })
@@ -62,11 +58,10 @@ router.get('/current', requireAuth, async(req, res, next) => {
     reviews.forEach(el => {
         reviewInfo.push(el.toJSON())
     })
-    // console.log(reviewInfo)
     reviewInfo.forEach(info => {
-        // console.log(info.preview)
+        // console.log(info)
         info.Spot.SpotImages.forEach(image => {
-
+            // console.log(image)
             if (!image.preview) {
                 info.Spot.previewImage = 'No preview image available.'
             }
@@ -79,17 +74,11 @@ router.get('/current', requireAuth, async(req, res, next) => {
         delete info.Spot.SpotImages
         allReviews.push(info)
     })
-
-    
+    // console.log(allReviews)
 
     return res.json({
         Reviews: allReviews
     })
-
 })
-
-
-
-
 
 module.exports = router
