@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Spot.init({
-    ownerId: DataTypes.INTEGER,
+    ownerId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE'
+    },
     address: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
@@ -31,15 +34,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
-    scopes: {
-      // spotImage() {
-      //   const { SpotImage } = require('./spotimage')
-      //   return {
-      //     include: SpotImage,
-      //     exclude: ['createdAt', 'updatedAt', 'spotId']
-      //   }
-      // }
-    }
   });
   return Spot;
 };

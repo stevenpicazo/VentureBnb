@@ -157,11 +157,11 @@ router.put('/:spotId', spotValidator, requireAuth, async (req, res, next) => {
         })
     }
 
-    if (ownerId !== spot.ownerId) {
-        const error = Error('Authorization not granted')
-        error.status(403)
-        next(error)
-    }
+    // if (ownerId !== spot.ownerId) {
+    //     const error = Error('Authorization not granted')
+    //     error.status(403)
+    //     next(error)
+    // }
 
     await updatedSpot.set({
         ownerId,
@@ -266,7 +266,8 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         ]
     })
     
-    return res.json(review)
+    return res.json({
+        Reviews: review})
 })
 
 //! Get details of a Spot from an id

@@ -6,8 +6,37 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth')
 const router = express.Router();
 
+const reviewValidator = [
+    check('review').exists({ checkFalsy: true }).withMessage("Review text is required"),
+    check('stars').exists({ checkFalsy: true }).isLength({ min: 1, max: 5 }).withMessage( "Name must be less than 50 characters"),
+    handleValidationErrors
+]
+
+//! Update and return an existing review.
+router.put('/:reviewId', requireAuth, async (req, res, next) => {
+    const reviewById = await Review.findByPk(req.params.reviewId)
+    const { review, stars } = req.body
+    
+    if (!reviewById) {
+        res.status(404)
+        res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+      }
+    
+    if (reviewById) {
+        if (review) reviewById.review = review
+        if (stars) reviewById.stars = stars
+
+        await reviewById.save()
+        return res.json(reviewById)
+    }
+})
+
+
 //! Add an Image to a Review based on the Review's id 
-router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+router.post('/:reviewId/images', reviewValidator, requireAuth, async (req, res, next) => {
     const review = await Review.findByPk(req.params.reviewId)
     const { url } = req.body
     
@@ -31,8 +60,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     res.json(reviewImageInfo)
 
 })
-
-
 
 //! Get all Reviews of the Current User
 router.get('/current', requireAuth, async(req, res, next) => {
@@ -79,6 +106,28 @@ router.get('/current', requireAuth, async(req, res, next) => {
     return res.json({
         Reviews: allReviews
     })
+})
+
+//! Delete a Review
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
+    const reviewById = await Review.findByPk(req.params.reviewId)
+    console.log(reviewById)
+
+    if (!reviewById) {
+        res.status(404)
+        res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+    }
+
+    if (reviewById) {
+        await reviewById.destroy()
+        res.json({
+            "message": "Successfully deleted",
+            "statusCode": 200
+          })
+    }
 })
 
 module.exports = router
