@@ -10,7 +10,7 @@ const { User } = require('../models')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     options.tableName = 'Users';
-    return queryInterface.bulkInsert(options, [
+    await queryInterface.bulkInsert(options, [
       {
         firstName: 'userFirstName1',
         lastName: 'userLastName1',
