@@ -12,6 +12,41 @@ const reviewValidator = [
     handleValidationErrors
 ]
 
+//! Add an Image to a Review based on the Review's id 
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+    const review = await Review.findByPk(req.params.reviewId)
+    const { url } = req.body
+    
+    if (!review) {
+        res.status(404)
+        res.json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+    }
+
+    const image = await ReviewImage.create({
+        reviewId: req.params.reviewId,
+        url,
+    })
+
+    if (url > 10) {
+        res.status(403)
+        res.json({
+            "message": "Maximum number of images for this resource was reached",
+            "statusCode": 403
+          })
+    }
+
+    const reviewImageInfo = {
+        id: image.id,
+        url: image.url
+    }
+    console.log(reviewImageInfo)
+    res.json(reviewImageInfo)
+
+})
+
 //! Update and return an existing review.
 router.put('/:reviewId', requireAuth, async (req, res, next) => {
     const reviewById = await Review.findByPk(req.params.reviewId)
@@ -32,33 +67,6 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
         await reviewById.save()
         return res.json(reviewById)
     }
-})
-
-
-//! Add an Image to a Review based on the Review's id 
-router.post('/:reviewId/images', reviewValidator, requireAuth, async (req, res, next) => {
-    const review = await Review.findByPk(req.params.reviewId)
-    const { url } = req.body
-    
-    if (!review) {
-        res.status(404)
-        res.json({
-            "message": "Review couldn't be found",
-            "statusCode": 404
-          })
-    }
-
-    const image = await ReviewImage.create({
-        reviewId: req.params.reviewId,
-        url,
-    })
-    const reviewImageInfo = {
-        id: image.id,
-        url: image.url
-    }
-    // console.log(reviewImageInfo)
-    res.json(reviewImageInfo)
-
 })
 
 //! Get all Reviews of the Current User

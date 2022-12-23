@@ -4,6 +4,7 @@ const { User, Spot, SpotImage, Session, Booking, Review, ReviewImage, sequelize 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth')
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -84,9 +85,103 @@ router.post('/:spotId/reviews', reviewValidator, requireAuth, async (req, res, n
                 ]
             })
         }
-
+        res.status(201)
         res.json(officialReview)
     }
+
+})
+
+//! Create a Booking from a Spot based on the Spot's id
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { startDate, endDate } = req.body
+    const spotById = await Spot.findByPk(req.params.spotId)
+    const userId = req.user.id
+
+    if (!spotById) {
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+
+    const bookings = await Booking.findAll({
+        //! checking if bookings have dates that overlap with each other
+        where: {
+            spotId: req.params.spotId,
+            startDate: { [Op.lte]: endDate },
+            endDate: { [Op.gte]: startDate}
+        }
+    })
+        //! if there are overlapping bookings this error is thrown
+    if (bookings) {
+        res.status(403)
+        res.json({
+            "message": "Sorry, this spot is already booked for the specified dates",
+            "statusCode": 403,
+            "errors": {
+              "startDate": "Start date conflicts with an existing booking",
+              "endDate": "End date conflicts with an existing booking"
+            }
+          })
+    }
+
+    // bookings.forEach(booking => {
+    //     if ((startDate >= booking.startDate && endDate >= booking.startDate) && (startDate <= booking.endDate && endDate <= booking.endDate)) {
+    //         res.json({
+    //             "message": "Sorry, this spot is already booked for the specified dates",
+    //             "statusCode": 403,
+    //             "errors": {
+    //               "startDate": "Start date conflicts with an existing booking",
+    //               "endDate": "End date conflicts with an existing booking"
+    //         }
+    //           })
+    //         }
+    //         if (startDate <= booking.startDate && endDate >= booking.startDate) {
+    //             res.json({
+    //                 "message": "Sorry, this spot is already booked for the specified dates",
+    //                 "statusCode": 403,
+    //                 "errors": {
+    //                   "startDate": "Start date conflicts with an existing booking",
+    //                   "endDate": "End date conflicts with an existing booking"
+    //             }
+    //               })
+    //         } 
+    //         if (startDate <= booking.endDate && endDate >= booking.endDate) {
+    //             res.json({
+    //                 "message": "Sorry, this spot is already booked for the specified dates",
+    //                 "statusCode": 403,
+    //                 "errors": {
+    //                   "startDate": "Start date conflicts with an existing booking",
+    //                   "endDate": "End date conflicts with an existing booking"
+    //             }
+    //               })
+    //         }
+    // })
+
+    const startDate2 = new Date(startDate);
+    const endDate2 = new Date(endDate);
+    
+    if (endDate2 <= startDate2) {
+        res.status(400)
+        res.json({
+            message: "Validation error",
+            statusCode: 400,
+            errors: {
+              endDate: "endDate cannot be on or before startDate",
+            },
+          });
+    }
+
+    // if (userId !== spotById.ownerId) {
+        const newBooking = await Booking.create({
+            spotId: req.params.spotId,
+            userId,
+            startDate,
+            endDate
+        })
+        res.json(newBooking)
+    // } 
 
 })
 
@@ -100,6 +195,7 @@ router.post('/', spotValidator, requireAuth, async (req, res, next) => {
         ...req.body,
     })
 
+    res.status(201)
     return res.json(spot)
     
 })
