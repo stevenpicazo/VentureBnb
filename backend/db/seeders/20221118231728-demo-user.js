@@ -5,6 +5,7 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
+const { User } = require('../models')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -32,6 +33,8 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password3')
       }
     ], {});
+    const users = await User.findAll()
+    console.log(users)
   },
 
   down: async (queryInterface, Sequelize) => {
