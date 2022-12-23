@@ -35,7 +35,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
           })
     }
 
-    const bookings = await Booking.findAll({
+    const bookings = await Booking.findOne({
         //! checking if bookings have dates that overlap with each other
         where: {
             spotId: req.params.bookingId,
@@ -166,7 +166,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     if (!bookingById) {
         res.status(404)
         res.json({
-            "message": "booking couldn't be found",
+            "message": "Booking couldn't be found",
             "statusCode": 404
           })
     }

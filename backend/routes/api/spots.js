@@ -27,6 +27,19 @@ const reviewValidator = [
     handleValidationErrors
 ]
 
+const validateQuerys = [
+    check('page').isInt({min: 1, max: 10}).withMessage("Page must be greater than or equal to 1").toInt().default(1),
+    check('size').isInt({min: 1}).withMessage("Page must be greater than or equal to 1").toInt().default(20),
+    check('maxLat').isDecimal().withMessage("Maximum latitude is invalid"),   
+    check('minLat').isDecimal().withMessage("Minimum latitude is invalid"),    
+    check('minLng').isDecimal().withMessage("Minimum longitude is invalid"),    
+    check('maxLng').isDecimal().withMessage("Maximum longitude is invalid"),    
+    check('minPrice').isDecimal({min: 0}).withMessage("Minimum price must be greater than or equal to 0"),    
+    check('maxPrice').isDecimal({min: 0}).withMessage("Maximum price must be greater than or equal to 0"),
+    handleValidationErrors    
+]
+
+
 //! Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews', reviewValidator, requireAuth, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId)
@@ -105,7 +118,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         })
     }
 
-    const bookings = await Booking.findAll({
+    const bookings = await Booking.findOne({
         //! checking if bookings have dates that overlap with each other
         where: {
             spotId: req.params.spotId,
@@ -125,39 +138,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             }
           })
     }
-
-    // bookings.forEach(booking => {
-    //     if ((startDate >= booking.startDate && endDate >= booking.startDate) && (startDate <= booking.endDate && endDate <= booking.endDate)) {
-    //         res.json({
-    //             "message": "Sorry, this spot is already booked for the specified dates",
-    //             "statusCode": 403,
-    //             "errors": {
-    //               "startDate": "Start date conflicts with an existing booking",
-    //               "endDate": "End date conflicts with an existing booking"
-    //         }
-    //           })
-    //         }
-    //         if (startDate <= booking.startDate && endDate >= booking.startDate) {
-    //             res.json({
-    //                 "message": "Sorry, this spot is already booked for the specified dates",
-    //                 "statusCode": 403,
-    //                 "errors": {
-    //                   "startDate": "Start date conflicts with an existing booking",
-    //                   "endDate": "End date conflicts with an existing booking"
-    //             }
-    //               })
-    //         } 
-    //         if (startDate <= booking.endDate && endDate >= booking.endDate) {
-    //             res.json({
-    //                 "message": "Sorry, this spot is already booked for the specified dates",
-    //                 "statusCode": 403,
-    //                 "errors": {
-    //                   "startDate": "Start date conflicts with an existing booking",
-    //                   "endDate": "End date conflicts with an existing booking"
-    //             }
-    //               })
-    //         }
-    // })
 
     const startDate2 = new Date(startDate);
     const endDate2 = new Date(endDate);
@@ -490,7 +470,15 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 })  
 
 //! GET ALL SPOTS
-router.get('/', async (req, res, next) => {
+router.get('/', validateQuerys, async (req, res, next) => {
+    let { page, size, minLat, maxLat, mLng, maxLng, minPrice, maxPrice } = req.query
+    if (!page) page = 1
+    if (!size) size = 20
+    page = parseInt(page)
+    size = parseInt(size) 
+
+    if (!page || page > 20) page = 1
+    if (!size || size > 20) size = 20
 
     const spots = await Spot.findAll()
     const finalSpotList = []

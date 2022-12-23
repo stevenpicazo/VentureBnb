@@ -6,9 +6,14 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth')
 const router = express.Router();
 
-const reviewValidator = [
-    check('review').exists({ checkFalsy: true }).withMessage("Review text is required"),
-    check('stars').exists({ checkFalsy: true }).isLength({ min: 1, max: 5 }).withMessage( "Name must be less than 50 characters"),
+// const reviewValidator = [
+//     check('review').exists({ checkFalsy: true }).withMessage("Review text is required"),
+//     check('stars').exists({ checkFalsy: true }).isLength({ min: 1, max: 5 }).withMessage( "Name must be less than 50 characters"),
+//     handleValidationErrors
+// ]
+const reviewsValidate = [
+    check('review').not().isEmpty().withMessage('Review text is required'),
+    check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
     handleValidationErrors
 ]
 
@@ -24,31 +29,35 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             "statusCode": 404
           })
     }
-
-    const image = await ReviewImage.create({
-        reviewId: req.params.reviewId,
-        url,
+    const reviewImages = await ReviewImage.findAll({
+        where: {
+            reviewId: req.params.reviewId
+        }
     })
-
-    if (url > 10) {
+    if (reviewImages.length >= 10) {
         res.status(403)
         res.json({
             "message": "Maximum number of images for this resource was reached",
             "statusCode": 403
           })
+    } else {
+        const image = await ReviewImage.create({
+            reviewId: req.params.reviewId,
+            url,
+        })
+    
+        const reviewImageInfo = {
+            id: image.id,
+            url: image.url
+        }
+        // console.log(reviewImageInfo)
+        res.json(reviewImageInfo)
+    
     }
-
-    const reviewImageInfo = {
-        id: image.id,
-        url: image.url
-    }
-    console.log(reviewImageInfo)
-    res.json(reviewImageInfo)
-
 })
 
 //! Update and return an existing review.
-router.put('/:reviewId', requireAuth, async (req, res, next) => {
+router.put('/:reviewId', reviewsValidate, requireAuth, async (req, res, next) => {
     const reviewById = await Review.findByPk(req.params.reviewId)
     const { review, stars } = req.body
     
