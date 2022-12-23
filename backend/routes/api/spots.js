@@ -30,12 +30,12 @@ const reviewValidator = [
 const validateQuerys = [
     check('page').isInt({min: 1, max: 10}).withMessage("Page must be greater than or equal to 1").toInt().default(1),
     check('size').isInt({min: 1}).withMessage("Page must be greater than or equal to 1").toInt().default(20),
-    check('maxLat').isDecimal().withMessage("Maximum latitude is invalid"),   
-    check('minLat').isDecimal().withMessage("Minimum latitude is invalid"),    
-    check('minLng').isDecimal().withMessage("Minimum longitude is invalid"),    
-    check('maxLng').isDecimal().withMessage("Maximum longitude is invalid"),    
-    check('minPrice').isDecimal({min: 0}).withMessage("Minimum price must be greater than or equal to 0"),    
-    check('maxPrice').isDecimal({min: 0}).withMessage("Maximum price must be greater than or equal to 0"),
+    check('maxLat').isDecimal().withMessage("Maximum latitude is invalid").optional(),   
+    check('minLat').isDecimal().withMessage("Minimum latitude is invalid").optional(),    
+    check('minLng').isDecimal().withMessage("Minimum longitude is invalid").optional(),    
+    check('maxLng').isDecimal().withMessage("Maximum longitude is invalid").optional(),    
+    check('minPrice').isDecimal({min: 0}).withMessage("Minimum price must be greater than or equal to 0").optional(),    
+    check('maxPrice').isDecimal({min: 0}).withMessage("Maximum price must be greater than or equal to 0").optional(),
     handleValidationErrors    
 ]
 
@@ -482,6 +482,13 @@ router.get('/', validateQuerys, async (req, res, next) => {
 
     if (!page || page > 20) page = 1
     if (!size || size > 20) size = 20
+
+    let pagination = {};
+
+    if (size >= 1 && page >= 1) {
+      pagination.limit = size;
+      pagination.offset = size * (page - 1);
+    }
 
     const spots = await Spot.findAll()
     const finalSpotList = []
