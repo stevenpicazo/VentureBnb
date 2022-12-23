@@ -409,6 +409,8 @@ router.get('/:spotId', async (req, res, next) => {
             spotId: spot.id
         }
     })
+    
+    const reviewCount = await Review.count({ where: { spotId: spot.id } });
 
     if (filteredSpotImage) filteredSpotImage = filteredSpotImage.url
     else filteredSpotImage.preview = 'No image available'
@@ -427,8 +429,9 @@ router.get('/:spotId', async (req, res, next) => {
         price: spot.price,
         createdAt: spot.createdAt,
         updatedAt: spot.updatedAt,
-        avgRating: avgRating,
-        previewImage: filteredSpotImage,
+        numReviews: reviewCount,
+        avgStarRating: avgRating,
+        // previewImage: filteredSpotImage,
         SpotImages: image,
         Owner: user
     }
