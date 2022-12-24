@@ -34,7 +34,6 @@ module.exports = {
       }
     ], {});
     const users = await User.findAll()
-    console.log(users)
   },
 
   down: async (queryInterface, Sequelize) => {

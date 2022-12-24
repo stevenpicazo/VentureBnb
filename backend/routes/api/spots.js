@@ -397,7 +397,9 @@ router.get('/:spotId', async (req, res, next) => {
     const avgObject = review[0].toJSON()
     const avgRating = avgObject.avgRating
 
-    const image = await SpotImage.findAll()
+    const image = await SpotImage.findAll({
+        attributes: [ 'id', 'url', 'preview' ]
+    })
 
     const user = await User.findOne({
         attributes: ['id', 'firstName', 'lastName']
