@@ -96,14 +96,13 @@ router.get('/current', requireAuth, async(req, res, next) => {
         
         { model: ReviewImage, attributes: ['id', 'url']},
       ]
-    })
+})
 
     const reviewInfo = []
     reviews.forEach(el => {
         reviewInfo.push(el.toJSON())
     })
     reviewInfo.forEach(info => {
-        // console.log(info)
         info.Spot.SpotImages.forEach(image => {
             // console.log(image)
             if (!image.preview) {

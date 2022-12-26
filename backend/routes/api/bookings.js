@@ -21,8 +21,11 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
           })
     }
 
+
     const startDate2 = new Date(startDate);
     const endDate2 = new Date(endDate);
+    
+    if (endDate2)
     
     if (endDate2 <= startDate2) {
         res.status(400)
@@ -55,49 +58,13 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
           })
     }
 
-
-
-
-
-
-    // bookings.forEach(booking => {
-    //     if ((startDate >= booking.startDate && endDate >= booking.startDate) && (startDate <= booking.endDate && endDate <= booking.endDate)) {
-    //         res.status(403)
-    //         res.json({
-    //             "message": "Sorry, this spot is already booked for the specified dates",
-    //             "statusCode": 403,
-    //             "errors": {
-    //               "startDate": "Start date conflicts with an existing booking",
-    //               "endDate": "End date conflicts with an existing booking"
-    //             }
-    //           })
-
-
-    //     } else if (startDate <= booking.startDate && endDate >= booking.startDate) {
-    //         res.status(403)
-    //         res.json({
-    //             "message": "Sorry, this spot is already booked for the specified dates",
-    //             "statusCode": 403,
-    //             "errors": {
-    //               "startDate": "Start date conflicts with an existing booking",
-    //               "endDate": "End date conflicts with an existing booking"
-    //             }
-    //           })
-
-
-    //     } else if (startDate <= booking.endDate && endDate >= booking.endDate) {
-    //         res.status(403)
-    //         res.json({
-    //             "message": "Sorry, this spot is already booked for the specified dates",
-    //             "statusCode": 403,
-    //             "errors": {
-    //               "startDate": "Start date conflicts with an existing booking",
-    //               "endDate": "End date conflicts with an existing booking"
-    //             }
-    //           })
-    //     }
-    // })
-  
+    if (new Date() > endDate2) {
+        res.status(403)
+        res.json({
+            "message": "Past bookings can't be modified",
+            "statusCode": 403
+          })
+    }
 
     if (bookingById) {
         if (startDate) bookingById.startDate = startDate
@@ -106,16 +73,6 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     
         return res.json(bookingById)
     }
-
-    if (new Date() > endDate2) {
-        res.status(403)
-        res.json({
-            "message": "Past bookings can't be modified",
-            "statusCode": 403
-          })
-        
-    }
-
 })
 
 //! Get all of the Current User's Bookings
