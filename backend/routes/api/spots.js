@@ -394,25 +394,26 @@ router.get('/', queryValidator, async (req, res, next) => {
     let { page, size } = req.query;
   
     if (!page || page <= 1 || isNaN(page)) page = 1
-    if (!size || size <= 1 || isNaN(size)) size = 20;
+    if (!size || size <= 1 || isNaN(size)) size = 20
     
     if (size > 20) size = 20;
   
-    page = parseInt(page);  
-    size = parseInt(size);
+    page = parseInt(page)
+    size = parseInt(size)
   
-    let pagination = {};
+    let pagination = {}
   
     if (size >= 1 && page >= 1) {
-      pagination.limit = size;
-      pagination.offset = size * (page - 1);
+      pagination.limit = size
+      pagination.offset = size * (page - 1)
     }
 
     const spots = await Spot.findAll({
         include: [
             { model: SpotImage },
             { model: Review}
-        ]
+        ],
+        ...pagination
     })
     
     const allSpots = []
