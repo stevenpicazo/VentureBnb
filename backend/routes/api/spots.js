@@ -393,7 +393,7 @@ router.get('/', queryValidator, async (req, res, next) => {
 
     let { page, size } = req.query;
   
-    if (!page || page <= 1 || isNaN(page)) page = 1
+    if (!page || page <= 1 || isNaN(page)) page = 1 
     if (!size || size <= 1 || isNaN(size)) size = 20
     
     if (size > 20) size = 20;
@@ -405,7 +405,7 @@ router.get('/', queryValidator, async (req, res, next) => {
   
     if (size >= 1 && page >= 1) {
       pagination.limit = size
-      pagination.offset = size * (page - 1)
+      pagination.offset = size * (page - 1) // figures out what page to start at
     }
 
     const spots = await Spot.findAll({
