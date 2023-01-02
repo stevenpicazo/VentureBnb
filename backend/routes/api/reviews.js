@@ -6,11 +6,6 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth')
 const router = express.Router();
 
-// const reviewValidator = [
-//     check('review').exists({ checkFalsy: true }).withMessage("Review text is required"),
-//     check('stars').exists({ checkFalsy: true }).isLength({ min: 1, max: 5 }).withMessage( "Name must be less than 50 characters"),
-//     handleValidationErrors
-// ]
 const reviewsValidate = [
     check('review').not().isEmpty().withMessage('Review text is required'),
     check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
@@ -24,11 +19,19 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     
     if (!review) {
         res.status(404)
-        res.json({
+        return res.json({
             "message": "Review couldn't be found",
             "statusCode": 404
           })
     }
+
+    if (req.user.id !== review.userId) {
+        res.status(403)
+        return res.json({
+            "message": "Not authorized add an image to review"
+        })
+    }
+
     const reviewImages = await ReviewImage.findAll({
         where: {
             reviewId: req.params.reviewId
@@ -36,7 +39,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     })
     if (reviewImages.length >= 10) {
         res.status(403)
-        res.json({
+        return res.json({
             "message": "Maximum number of images for this resource was reached",
             "statusCode": 403
           })
@@ -51,8 +54,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             url: image.url
         }
         // console.log(reviewImageInfo)
-        res.json(reviewImageInfo)
-    
+        return res.json(reviewImageInfo)
     }
 })
 
@@ -63,11 +65,18 @@ router.put('/:reviewId', reviewsValidate, requireAuth, async (req, res, next) =>
     
     if (!reviewById) {
         res.status(404)
-        res.json({
+        return res.json({
             "message": "Review couldn't be found",
             "statusCode": 404
           })
       }
+
+    if (req.user.id !== reviewById.userId) {
+        res.status(403)
+        return res.json({
+            "message": "Not authorized to edit review"
+        })
+    }
     
     if (reviewById) {
         if (review) reviewById.review = review
@@ -78,7 +87,7 @@ router.put('/:reviewId', reviewsValidate, requireAuth, async (req, res, next) =>
     }
 })
 
-//! Get all Reviews of the Current User
+// //! Get all Reviews of the Current User
 router.get('/current', requireAuth, async(req, res, next) => {
     const userId = req.user.id
     const allReviews = []
@@ -93,16 +102,15 @@ router.get('/current', requireAuth, async(req, res, next) => {
                 preview: true
             }}
         ]},
-        
         { model: ReviewImage, attributes: ['id', 'url']},
       ]
-})
+    })
 
     const reviewInfo = []
     reviews.forEach(el => {
         reviewInfo.push(el.toJSON())
     })
-    reviewInfo.forEach(info => {
+    for (let info of reviewInfo) {
         info.Spot.SpotImages.forEach(image => {
             // console.log(image)
             if (!image.preview) {
@@ -116,30 +124,36 @@ router.get('/current', requireAuth, async(req, res, next) => {
 
         delete info.Spot.SpotImages
         allReviews.push(info)
-    })
-    // console.log(allReviews)
+    }
 
     return res.json({
         Reviews: allReviews
     })
 })
 
+
 //! Delete a Review
 router.delete('/:reviewId', requireAuth, async (req, res, next) => {
     const reviewById = await Review.findByPk(req.params.reviewId)
-    console.log(reviewById)
 
     if (!reviewById) {
         res.status(404)
-        res.json({
+        return res.json({
             "message": "Review couldn't be found",
             "statusCode": 404
           })
     }
 
+    if (req.user.id !== reviewById.userId) {
+        res.status(403)
+        res.json({
+            "message": "Not authorized to delete review"
+        })
+    }
+
     if (reviewById) {
         await reviewById.destroy()
-        res.json({
+        return res.json({
             "message": "Successfully deleted",
             "statusCode": 200
           })
