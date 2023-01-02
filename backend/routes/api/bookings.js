@@ -49,7 +49,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             startDate: { [Op.lte]: newEndingDate },
             endDate: { [Op.gte]: newStartingDate },
             id: { [Op.not]: bookingById.id }, // allows for current user bookings to be edited
-            id: { [Op.ne]: req.params.bookingId } // excluding 
+            id: { [Op.ne]: req.params.bookingId } 
           }
     })
 
@@ -156,7 +156,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
         })
     }
 
-    if (bookingById.createdAt <= new Date()) {
+    if (bookingById.startDate <= new Date().getTime() && bookingById.endDate >= new Date().getTime()) {
         res.status(403)
         return res.json({
             "message": "Bookings that have been started can't be deleted",
