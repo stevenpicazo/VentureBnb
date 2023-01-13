@@ -48,8 +48,8 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
             spotId: bookingById.spotId,
             startDate: { [Op.lte]: newEndingDate },
             endDate: { [Op.gte]: newStartingDate },
-            id: { [Op.not]: bookingById.id }, // allows for current user bookings to be edited
-            id: { [Op.ne]: req.params.bookingId } 
+            id: { [Op.not]: bookingById.id }, // allows for current user bookings to be edited (excludes current booking by id)
+            id: { [Op.ne]: req.params.bookingId } // allows for current booking to be edited without receiving a conflicting error 
           }
     })
 
