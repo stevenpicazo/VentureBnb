@@ -53,7 +53,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             id: image.id,
             url: image.url
         }
-        // console.log(reviewImageInfo)
         return res.json(reviewImageInfo)
     }
 })
@@ -112,7 +111,6 @@ router.get('/current', requireAuth, async(req, res, next) => {
     })
     for (let info of reviewInfo) {
         info.Spot.SpotImages.forEach(image => {
-            // console.log(image)
             if (!image.preview) {
                 info.Spot.previewImage = 'No preview image available.'
             }
