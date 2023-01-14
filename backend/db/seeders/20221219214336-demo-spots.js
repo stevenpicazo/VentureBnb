@@ -13,40 +13,77 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         ownerId: 1,
-        address: '123 AddressOne',
-        city: 'San Francisco',
-        state: 'California',
+        address: '405 Heavenly Ave',
+        city: 'Miami',
+        state: 'Florida',
         country: 'United States of America',
         lat: 37.7645358,
         lng: -122.4730327,
-        name: 'demo-name1',
-        description: 'Dream Land1',
-        price: 101.1
+        name: 'Miller Private Mansion',
+        description: 'Party hard',
+        price: 10000
       },
       {
         ownerId: 2,
-        address: '123 AddressTwo',
+        address: '821 Beverly Way',
         city: 'San Francisco',
         state: 'California',
         country: 'United States of America',
         lat: 47.7645358,
         lng: -223.4730327,
-        name: 'demo-name2',
+        name: 'West Hills Mansion',
         description: 'Dream Land2',
-        price: 102.2
+        price: 550
       },
       {
         ownerId: 3,
-        address: '123 AddressThree',
-        city: 'San Francisco',
+        address: '123 Tropican Ct.',
+        city: 'San Diego',
         state: 'California',
         country: 'United States of America',
         lat: 57.7645358,
         lng: -334.4730327,
-        name: 'demo-name2',
-        description: 'Dream Land3',
-        price: 103.3
+        name: 'Potter Mansion',
+        description: 'Amazing view. Very close to the city.',
+        price: 450
+      },
+      {
+        ownerId: 1,
+        address: '405 Heavenly Ave',
+        city: 'Miami',
+        state: 'Florida',
+        country: 'United States of America',
+        lat: 37.7645358,
+        lng: -122.4730327,
+        name: 'Miller Private Mansion',
+        description: 'Party hard',
+        price: 10000
+      },
+      {
+        ownerId: 2,
+        address: '821 Beverly Way',
+        city: 'San Francisco',
+        state: 'California',
+        country: 'United States of America',
+        lat: 47.7645358,
+        lng: -223.4730327,
+        name: 'West Hills Mansion',
+        description: 'Dream Land2',
+        price: 550
+      },
+      {
+        ownerId: 3,
+        address: '123 Tropican Ct.',
+        city: 'San Diego',
+        state: 'California',
+        country: 'United States of America',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Potter Mansion',
+        description: 'Amazing view. Very close to the city.',
+        price: 450
       }
+
     ], {});
   },
 
