@@ -10,7 +10,10 @@ function SpotsList ({spot}) {
         <div key={spot.id} className="spot-card">
             <img src={spot.previewImage} className="spot-image"/>
             <div className="spot-info">
-                Spot Info goes here
+                <div className="spot-city">{spot.city}, {spot.state}</div>
+                <div className="spot-name">{spot.name}</div>
+                <div className="spot-price">${spot.price}</div>
+                <div className="night">night</div>
             </div>
         </div>
     )
