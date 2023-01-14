@@ -1,3 +1,16 @@
 .hidden {
     display: none;
 }
+
+.profile-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profile-container {
+    align-items: flex-start;
+    display: flex;
+}

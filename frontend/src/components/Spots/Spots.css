@@ -1,0 +1,29 @@
+.spot-list {
+    display: flex;
+    /* max-width: 250px; */
+    border-radius: 5px;
+    padding-left: 35px;
+    padding-right:  35px;
+    padding-top: 15px;
+    gap: 25px;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.spot-image {
+    /* width: 19vw; */
+    /* height: 26vh; */
+    width: 160px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    
+}
+
+.spot-card {
+
+}
+
+.spot-info {
+
+}
