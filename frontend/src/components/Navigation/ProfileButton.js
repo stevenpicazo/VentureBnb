@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import './ProfileButton.css'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory()
 
   const openMenu = () => {
     if (showMenu) return;
@@ -37,41 +40,54 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
+  const demoUser = (e) => {
+    e.preventDefault()
+    const password = 'password'
+    const credential = "demo@user.io"
+    dispatch(sessionActions.login({credential, password}))
+    closeMenu()
+  }
+
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
      <div className="profile-wrapper">
         <div className="profile-container">
-          <button onClick={openMenu}>
+          <button className="open-menu-button" onClick={openMenu}>
+            <i className="fa-solid fa-bars"></i>
             <i className="fas fa-user-circle" />
           </button>
           <ul className={ulClassName} ref={ulRef}>
             {user ? (
               <>
-                <li>{user.username}</li>
-                <li>{user.firstName} {user.lastName}</li>
-                <li>{user.email}</li>
-                <li>
+                <div>
                   <button onClick={logout}>Log Out</button>
-                </li>
+                </div>
               </>
             ) : (
               <>
-                <li>
+                <div>
                   <OpenModalButton
                     buttonText="Log In"
                     onButtonClick={closeMenu}
                     modalComponent={<LoginFormModal />}
                   />
-                </li>
-                <li>
+                </div>
+                <div>
                   <OpenModalButton
                     buttonText="Sign Up"
                     onButtonClick={closeMenu}
                     modalComponent={<SignupFormModal />}
                   />
-                </li>
+                </div>
+                <div 
+                  className="demo-user"
+                  onClick={demoUser} 
+                  type='submit'
+                  >Demo User
+                </div>
               </>
             )}
           </ul>
@@ -82,3 +98,4 @@ function ProfileButton({ user }) {
 }
 
 export default ProfileButton;
+

@@ -27,17 +27,17 @@ module.exports = {
       },
       {
         spotId: 4,
-        url: 'preview image',
+        url: 'https://a0.muscache.com/im/pictures/aa14b501-f602-4dc4-abe1-b92c1ce319b8.jpg?im_w=1200',
         preview: true
       },
       {
         spotId: 5,
-        url: 'preview image',
+        url: 'https://a0.muscache.com/im/pictures/41558477-1dc1-4c63-b23d-b0f4ade79d62.jpg?im_w=1200',
         preview: true
       },
       {
         spotId: 6,
-        url: 'preview image',
+        url: 'https://a0.muscache.com/im/pictures/48333c7b-3959-4822-b643-11053a481e91.jpg?im_w=1200',
         preview: true
       },
     ], {});

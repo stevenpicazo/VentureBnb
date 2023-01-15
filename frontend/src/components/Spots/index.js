@@ -25,31 +25,4 @@ const Spots = () => {
 
 export default Spots
 
-
-
-        
-        // <div className='nav-bar'>
-        //     <div className="spots-list">
-        //         TESTING MY HOME PAGE
-        //         <div className="spot-card">
-        //             <div className="preview-image">
-        //                 <div className="spot-info">
-        //                 </div>
-        //             </div>
-        //         </div>
-        //         <div className="spot-card">
-        //             <div className="preview-image">
-        //                 <div className="spot-info">
-        //                 </div>
-        //             </div>
-        //         </div>
-        //         <div className="spot-card">
-        //             <div className="preview-image">
-        //                 <div className="spot-info">
-        //                 </div>
-        //             </div>
-        //         </div>
-                
-        //     </div>
-        // </div>
         
