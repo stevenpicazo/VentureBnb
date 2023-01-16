@@ -149,7 +149,6 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             "statusCode": 404      
         })
     }
-
     const user = await User.findOne({
         where: {
             id: req.user.id,

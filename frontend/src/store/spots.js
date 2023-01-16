@@ -1,5 +1,7 @@
 //! Imports
 import { csrfFetch } from "./csrf"
+// import { useHistory } from "react-router-dom"
+
 
 const CREATE_SPOTS = 'spots/CREATE'
 const LOAD_SPOTBYID = 'spots/LOAD_SPOT_DETAILS'
@@ -46,18 +48,17 @@ export const thunkGetSpotById = (spotId) => async (dispatch) => {
     }
 }
 
-
 export const creatThunk = (spots) => async (dispatch) => {
-    const res = await fetch('/api/spots', {
+    const res = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spots)
     })
-
     if (res.ok) {
         const spots = await res.json()
-        dispatch(actionCreateSpots(spots))
-        // return spots
+        dispatch(actionReadSpots(spots))
+        // const history = useHistory();
+        // history.push("/spots/host");
     }
 }
 
@@ -72,16 +73,19 @@ export const spotReducer = (state = initialState, action) => {
                 newState[spot.id] = spot
             }
             return newState
-
         }
         case LOAD_SPOTBYID: {
             let newState = Object.assign({}, state)
             newState[action.spotById.id] = action.spotById;
             return newState
         } 
-
-
-
+        // case CREATE_SPOTS: {
+        //     let newState = Object.assign({}, state)
+        //     for (let spot of action.spots.Spots) {
+        //         newState[spot.id] = action.spot
+        //     }
+        //     return newState
+        // }
     default: 
         return state
     }
