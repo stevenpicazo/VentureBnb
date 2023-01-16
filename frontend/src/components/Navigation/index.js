@@ -14,14 +14,15 @@ function Navigation({ isLoaded }){
       {/* <i class="fa-brands fa-gg-circle"> */}
         <NavLink exact to="/">Home</NavLink>
       </div>
+      
       <div className='create-spot-button'>
-        <NavLink className="creat-spot-navlink" to={'/spots/host'}>
-        {isLoaded && (
-          <CreateSpot user={sessionUser} />
-        )}
+      {sessionUser ? 
+        <NavLink className="creat-spot-navlink" to={'/host'}>
           Venture your home
         </NavLink>
-      </div>
+      : null}
+      </div> 
+
       <div className='profile-button'>
       {isLoaded && (
           <ProfileButton user={sessionUser} />

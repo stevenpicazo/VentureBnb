@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
@@ -8,6 +9,7 @@ import SignupFormModal from '../SignupFormModal';
 import './ProfileButton.css'
 
 function ProfileButton({ user }) {
+  const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -37,6 +39,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push('/')
     closeMenu();
   };
 
@@ -64,7 +67,14 @@ function ProfileButton({ user }) {
               <>
                 <div>
                   <button onClick={logout}>Log Out</button>
-                </div>
+                </div> 
+                <div className='my-listings-div'>
+                {sessionUser ? 
+                  <NavLink onClick={closeMenu} className="my-listings-navlink" to={'/listings'}>
+                    My listings
+                  </NavLink>
+                : null}
+                </div> 
               </>
             ) : (
               <>
@@ -88,6 +98,7 @@ function ProfileButton({ user }) {
                   type='submit'
                   >Demo User
                 </div>
+
               </>
             )}
           </ul>

@@ -2,15 +2,15 @@
 import { csrfFetch } from "./csrf"
 // import { useHistory } from "react-router-dom"
 
-
-const CREATE_SPOTS = 'spots/CREATE'
 const LOAD_SPOTBYID = 'spots/LOAD_SPOT_DETAILS'
 const READ_SPOTS = 'spots/READ'
+const CREATE_SPOT = 'create/SPOT'
 // const UPDATE_SPOTS = 'spots/UPDATE'
 // const DELETE_SPOTS = 'spots/DELETE'
 
 //! Actions
 export const actionReadSpots = (spots) => {
+    console.log('Spot in da action --->', spots);
     return {
         type: READ_SPOTS,
         spots
@@ -24,12 +24,13 @@ export const actionGetSpotById = (spotById) => {
     }
 }
 
-export const actionCreateSpots = (spots) => {
+export const actionCreateSpot = (spot) => {
     return {
-        type: CREATE_SPOTS,
-        spots
+        type: CREATE_SPOT,
+        spot
     }
 }
+
 
 //! Thunks
 export const readThunk = () => async (dispatch) => {
@@ -41,7 +42,7 @@ export const readThunk = () => async (dispatch) => {
 }
 
 export const thunkGetSpotById = (spotId) => async (dispatch) => {
-    const res = await fetch(`/api/spots/${spotId}`)
+    const res = await csrfFetch(`/api/spots/${spotId}`)
     if (res.ok) {
         const spotById = await res.json()
         dispatch((actionGetSpotById(spotById)))
@@ -49,17 +50,21 @@ export const thunkGetSpotById = (spotId) => async (dispatch) => {
 }
 
 export const creatThunk = (spots) => async (dispatch) => {
-    const res = await csrfFetch('/api/spots', {
+    return csrfFetch('/api/spots', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spots)
     })
-    if (res.ok) {
-        const spots = await res.json()
-        dispatch(actionReadSpots(spots))
-        // const history = useHistory();
-        // history.push("/spots/host");
-    }
+    .then(res => {
+        if (res.ok) {
+            return res.json()
+        }
+    })
+    .then(spot => {
+        console.log('spot in da thunk -->', spot)
+        dispatch(actionCreateSpot(spot))
+        return spot
+    })
 }
 
 //! Reducer
@@ -79,13 +84,11 @@ export const spotReducer = (state = initialState, action) => {
             newState[action.spotById.id] = action.spotById;
             return newState
         } 
-        // case CREATE_SPOTS: {
-        //     let newState = Object.assign({}, state)
-        //     for (let spot of action.spots.Spots) {
-        //         newState[spot.id] = action.spot
-        //     }
-        //     return newState
-        // }
+        case CREATE_SPOT: {
+            let newState = Object.assign({}, state)
+            newState[action.spot.id] = action.spot
+            return newState
+        }
     default: 
         return state
     }
