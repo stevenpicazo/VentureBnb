@@ -98,8 +98,13 @@ export const creatThunk = (spots) => async (dispatch) => {
     })
 }
 
-export const actionDeleteSpot = () => async (spotId) => {
+export const actionDeleteSpot = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(actionDeleteSpot(data))
+        return data
+    }
 }
 
 //! Reducer
@@ -134,6 +139,11 @@ export const spotReducer = (state = initialState, action) => {
         case CREATE_SPOT: {
             let newState = Object.assign({}, state)
             newState[action.spot.id] = action.spot
+            return newState
+        }
+        case DELETE_SPOTS: {
+            let newState = Object.assign({}, state)
+            delete newState[action.spot]
             return newState
         }
         default: 

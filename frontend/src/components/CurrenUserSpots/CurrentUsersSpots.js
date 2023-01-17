@@ -15,13 +15,12 @@ export default function Profile() {
   if (!spots) return null;
 
   return (
-    <div className="my-listings-container">
-        {/* <h1>My Listings</h1> */}
+    <div>
+        <h1 className="userspots-h1">My Listings</h1>
         {Object.values(spots).map((userspot) => (
-            <div key={`userspot-${userspot.id}`} userspot={userspot} className="userspot-image"> 
+            // <div key={`userspot-${userspot.id}`} userspot={userspot} className="userspot-image"> 
            <UserSpotDetails key={userspot.id} userspot={userspot}/>
 
-            </div>
         ))}
     </div>
   );
