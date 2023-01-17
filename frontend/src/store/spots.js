@@ -13,7 +13,7 @@ const READ_SPOTS = 'spots/READ'
 const LOAD_SPOTBYID = 'spots/LOAD_SPOT_DETAILS'
 const CREATE_SPOT = 'create/SPOT'
 const LOAD_CURRENT_USER_SPOTS = 'currentUsers/LOAD_CURRENT_USER_SPOTS'
-// const UPDATE_SPOTS = 'spots/UPDATE'
+const UPDATE_SPOT = 'spots/UPDATE'
 const DELETE_SPOTS = 'spots/DELETE'
 
 //! Actions
@@ -38,7 +38,14 @@ export const actionCreateSpot = (spot) => {
     }
 }
 
-export const deleteSpot = (spot) => {
+export const actionEditSpot = (spot) => {
+    return {
+        tpye: UPDATE_SPOT,
+        spot
+    }
+}
+
+export const actionDeleteSpot = (spot) => {
     return {
         type: DELETE_SPOTS,
         spot
@@ -98,12 +105,26 @@ export const creatThunk = (spots) => async (dispatch) => {
     })
 }
 
-export const actionDeleteSpot = (spotId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${spotId}`)
+export const editThunk = (spot, spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(spot)
+    })
     if (res.ok) {
-        const data = await res.json()
-        dispatch(actionDeleteSpot(data))
-        return data
+        dispatch(actionEditSpot(spot))
+        return spot
+    }
+}
+
+export const deleteThunk = (spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: "DELETE"
+    })
+    if (res.ok) {
+        const spot = await res.json()
+        dispatch(actionDeleteSpot(spot))
+        return spot
     }
 }
 
@@ -141,9 +162,13 @@ export const spotReducer = (state = initialState, action) => {
             newState[action.spot.id] = action.spot
             return newState
         }
+        case UPDATE_SPOT: {
+            let newState = Object.assign({}, state)
+            return newState
+        }
         case DELETE_SPOTS: {
             let newState = Object.assign({}, state)
-            delete newState[action.spot]
+            delete newState[action.spot.id]
             return newState
         }
         default: 

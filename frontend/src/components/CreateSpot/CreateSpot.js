@@ -71,8 +71,8 @@ function CreateSpot() {
               name,
               description,
               price,
+              previewImage
             },
-            { url: previewImage, preview: true }
           )
         )
           .then((res) => {
