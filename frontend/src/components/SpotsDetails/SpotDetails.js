@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 function SpotDetails () {
     const dispatch = useDispatch()
     const { spotId } = useParams()
-    const spot = useSelector((state) => state.spots[spotId])
+    const spot = useSelector((state) => state.spots.SpotDetails)
     // console.log('ALL MY SPOTS ', allSpots)
 
     useEffect(() => {

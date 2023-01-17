@@ -6,7 +6,8 @@ import Navigation from "./components/Navigation";
 import Spots from "./components/Spots"
 import SpotDetails from "./components/SpotsDetails/SpotDetails";
 import CreateSpot from "./components/CreateSpot/CreateSpot";
-import OwnersSpots from "./components/MySpots/OwnerSpots";
+import CurrentUserSpots from "./components/CurrenUserSpots/CurrentUsersSpots";
+// import MySpots from "./components/MySpots"
 
 function App() {
   const dispatch = useDispatch();
@@ -23,12 +24,13 @@ function App() {
           <Route exact path = "/">
             <Spots/>
           </Route>
+          <Route path={'/listings'}>
+            <CurrentUserSpots />
+          </Route>
           <Route path={"/host"}>
             <CreateSpot />
           </Route>
-          <Route path={"/listings"}>
-            <OwnersSpots />
-          </Route>
+ 
           <Route exact path={"/spots/:spotId"}>
             <SpotDetails />
           </Route>

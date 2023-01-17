@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { creatThunk } from '../../store/spots';
+// import { creatThunk } from '../../store/spots';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import * as spotsActions from "../../store/spots";
 
 function CreateSpot() {
     const history = useHistory()
@@ -13,36 +14,41 @@ function CreateSpot() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
+    const [previewImage, setPreviewImage] = useState('')
     const [newSpotId, setNewSpotId] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
 
     useEffect(() => {
         const errors = []
-        if (!address) {
-            errors.push('Address is required');
-        }
-        if (!city) {
-        errors.push('City is required');
-        }
-        if (!state) {
-        errors.push('State is required');
-        }
-        if (!country) {
-        errors.push('Country is required');
-        }
-        if (!name) {
-        errors.push('Name of location is required');
-        }
-        if (!description) {
-        errors.push('Description is required');
-        }
-        if (!price) {
-        errors.push('Price is required');
-        }
-        if (!Number(price)) {
-        errors.push('Price must be a number');
-        }
+        // if (!address) {
+        //     errors.push('Address is required');
+        // }
+        // if (!city) {
+        // errors.push('City is required');
+        // }
+        // if (!state) {
+        // errors.push('State is required');
+        // }
+        // if (!country) {
+        // errors.push('Country is required');
+        // }
+        // if (!name) {
+        // errors.push('Name of location is required');
+        // }
+        // if (!description) {
+        // errors.push('Description is required');
+        // }
+        // if (!price) {
+        // errors.push('Price is required');
+        // }
+        // if (!Number(price)) {
+        // errors.push('Price must be a number');
+        // }
+
+        // if (!previewImage) {
+        //     errors.push('Image is required');
+        // }
 
         // if (!address || !city || !state || !country || !name 
         //     || !description || !price || !Number(price)) {
@@ -52,34 +58,31 @@ function CreateSpot() {
         setValidationErrors(errors)
     }, [name, address, city, state, country, name, description, price])
 
-    let newSpot;
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setHasSubmitted(true);
-        if (validationErrors.length) return;
-        const newSpotInfo = {
-        address,
-        city,
-        state,
-        country,
-        name,
-        description,
-        price,
-        submittedOn: new Date()
-    }
-
-        setAddress('')
-        setCity('')
-        setState('')
-        setCountry('')
-        setName('')
-        setDescription('')
-        setPrice('')
-
-        newSpot = await dispatch(creatThunk(newSpotInfo))
-        if (newSpot) setNewSpotId(newSpot.id)
-        history.push('/')
-    };
+        setValidationErrors([]);
+        return dispatch(
+          spotsActions.creatThunk(
+            {
+              address,
+              city,
+              state,
+              country,
+              name,
+              description,
+              price,
+            },
+            { url: previewImage, preview: true }
+          )
+        )
+          .then((res) => {
+            history.push(`/spots/${res.id}`);
+          })
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.validationErrors) setValidationErrors(data.validationErrors);
+          });
+      };
 
     return (
         <div>
@@ -104,6 +107,7 @@ function CreateSpot() {
                 type='text'
                 onChange={e => setAddress(e.target.value)}
                 value={address}
+                required
             />
             </div>
             <div>
@@ -113,6 +117,7 @@ function CreateSpot() {
                 type='text'
                 onChange={e => setCity(e.target.value)}
                 value={city}
+                required
             />
             </div>
             <div>
@@ -122,6 +127,7 @@ function CreateSpot() {
                 type='text'
                 onChange={e => setState(e.target.value)}
                 value={state}
+                required
             />
             </div>
             <div>
@@ -131,6 +137,7 @@ function CreateSpot() {
                 type='text'
                 onChange={e => setCountry(e.target.value)}
                 value={country}
+                required
             />
             </div>
             <div>
@@ -140,6 +147,7 @@ function CreateSpot() {
                 type='text'
                 onChange={e => setName(e.target.value)}
                 value={name}
+                required
             />
             </div>
             <div>
@@ -149,6 +157,7 @@ function CreateSpot() {
                 type='text'
                 onChange={e => setDescription(e.target.value)}
                 value={description}
+                required
             />
             </div>
             <div>
@@ -158,6 +167,16 @@ function CreateSpot() {
                 type='number'
                 onChange={e => setPrice(e.target.value)}
                 value={price}
+                required
+            />
+            </div>
+            <div>
+            <label htmlFor='previewImage'>Image URL:</label>
+            <input
+                type="url"
+                value={previewImage}
+                onChange={(e) => setPreviewImage(e.target.value)}
+                required
             />
             </div>
             <button>Submit</button>
@@ -167,3 +186,20 @@ function CreateSpot() {
 }
 
 export default CreateSpot
+
+// const [previewImage, setPreviewImage] = useState('')
+
+// if (!previewImage) {
+//     errors.push('Image is required');
+// }
+
+{/* <div>
+<label htmlFor='previewImage'>Image URL:</label>
+<input
+   type="url"
+   value={previewImage}
+   onChange={(e) => setPreviewImage(e.target.value)}
+   required
+   placeholder="www.imageurl.com"
+/>
+</div> */}
