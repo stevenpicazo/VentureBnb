@@ -19,7 +19,7 @@ function EditSpotForm() {
     // const [newSpotId, setNewSpotId] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
-    const [loaded, setLoading] = useState(false)
+    // const [loaded, setLoading] = useState(false)
     
     const {spotId} = useParams()
     // const spot = useSelector(state => state.spots)

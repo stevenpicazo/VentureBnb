@@ -16,48 +16,9 @@ function CreateSpot() {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [previewImage, setPreviewImage] = useState('')
-    const [newSpotId, setNewSpotId] = useState('')
+    const [newSpot, setNewSpotId] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
-
-    // useEffect(() => {
-    //     const errors = []
-    //     // if (!address) {
-    //     //     errors.push('Address is required');
-    //     // }
-    //     // if (!city) {
-    //     // errors.push('City is required');
-    //     // }
-    //     // if (!state) {
-    //     // errors.push('State is required');
-    //     // }
-    //     // if (!country) {
-    //     // errors.push('Country is required');
-    //     // }
-    //     // if (!name) {
-    //     // errors.push('Name of location is required');
-    //     // }
-    //     // if (!description) {
-    //     // errors.push('Description is required');
-    //     // }
-    //     // if (!price) {
-    //     // errors.push('Price is required');
-    //     // }
-    //     // if (!Number(price)) {
-    //     // errors.push('Price must be a number');
-    //     // }
-
-    //     // if (!previewImage) {
-    //     //     errors.push('Image is required');
-    //     // }
-
-    //     // if (!address || !city || !state || !country || !name 
-    //     //     || !description || !price || !Number(price)) {
-    //     //     errors.push('Please fill out this field');
-    //     // }
-
-    //     setValidationErrors(errors)
-    // }, [name, address, city, state, country, name, description, price])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -87,9 +48,9 @@ function CreateSpot() {
 
     return (
         <div>
-        <h2>Create a listing</h2>
+        <h2 className='listings-h2'>Create a listing</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form className='create-listing-form' onSubmit={handleSubmit}>
             <ul className="errors">
             {hasSubmitted && validationErrors.length && (
                 <ul className="errors">
@@ -102,83 +63,92 @@ function CreateSpot() {
             <div>
             <label htmlFor='address'>Address:</label>
             <input
-                id='address'
+                className='address'
                 type='text'
                 onChange={e => setAddress(e.target.value)}
                 value={address}
+                placeholder='Address'
                 required
             />
             </div>
             <div>
             <label htmlFor='city'>City:</label>
             <input
-                id='city'
+                className='city'
                 type='text'
                 onChange={e => setCity(e.target.value)}
                 value={city}
+                placeholder='City'
                 required
             />
             </div>
             <div>
             <label htmlFor='state'>State:</label>
             <input
-                id='state'
+                className='state'
                 type='text'
                 onChange={e => setState(e.target.value)}
                 value={state}
+                placeholder='State'
                 required
             />
             </div>
             <div>
             <label htmlFor='country'>Country:</label>
             <input
-                id='country'
+                className='country'
                 type='text'
                 onChange={e => setCountry(e.target.value)}
                 value={country}
+                placeholder='Country'
                 required
             />
             </div>
             <div>
             <label htmlFor='name'>Name of location:</label>
             <input
-                id='name'
+                className='name'
                 type='text'
                 onChange={e => setName(e.target.value)}
                 value={name}
+                placeholder='Name of location'
                 required
             />
             </div>
             <div>
             <label htmlFor='description'>Description:</label>
             <input
-                id='description'
+                className='description'
                 type='text'
                 onChange={e => setDescription(e.target.value)}
                 value={description}
+                placeholder='Description'
                 required
             />
             </div>
             <div>
             <label htmlFor='price'>Price:</label>
             <input
-                id='price'
+                className='price'
                 type='number'
                 onChange={e => setPrice(e.target.value)}
                 value={price}
+                placeholder='Price'
                 required
             />
             </div>
             <div>
             <label htmlFor='previewImage'>Image URL:</label>
             <input
+                className='previewImage'
                 type="url"
                 value={previewImage}
                 onChange={(e) => setPreviewImage(e.target.value)}
+                placeholder='Preview image url'
                 required
             />
             </div>
-            <button>Submit</button>
+            <button className='listings-button'>Submit</button>
         </form>
         </div>
     );

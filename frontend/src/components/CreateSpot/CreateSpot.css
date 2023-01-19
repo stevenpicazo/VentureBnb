@@ -1,16 +1,49 @@
-/* .spot-form {
-    display:inline-flex;
-    flex-direction:column;
-    width: 400px; 
+.listings-h2 {
+    display: flex;
+    justify-content: center;
 }
 
-.errors {
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    margin-bottom: 20px;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    display:inline-block;
-    border: black;
-    text-align: block;
-    border-style: dashed;
-} */
+.create-listing-form {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-right: 60px;
+    padding-left: 60px;
+    margin: auto;
+    border: 1px solid rgb(202, 194, 194);
+    max-width: 650px;
+    color: black;
+    /* border-radius: 7px; */
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.20);
+}
+
+label {
+
+}
+
+.address, .city, .state, .country, .name, 
+.description, .price, .previewImage {
+    margin-top: 7px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 3px 0 3px;
+    border: 1px solid rgba(3, 3, 3, .6);
+    border-radius: 2px;
+    
+    /* align-items: center; */
+}
+
+.listings-button {
+    width: 100%;
+    margin: 15px 0 9px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #FF385C;
+    color: rgb(243, 243, 243);
+}
+
+.listings-button:hover {
+    background-color: #fa5674;
+}
