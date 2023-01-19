@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import Spots from "./components/Spots"
+import Spots from "./components/Spots";
 import SpotDetails from "./components/SpotsDetails/SpotDetails";
 import CreateSpot from "./components/CreateSpot/CreateSpot";
 import CurrentUserSpots from "./components/CurrenUserSpots/CurrentUsersSpots";
+import EditSpotForm from "./components/EditSpotForm";
 // import MySpots from "./components/MySpots"
 
 function App() {
@@ -27,10 +28,12 @@ function App() {
           <Route path={'/listings'}>
             <CurrentUserSpots />
           </Route>
+          <Route path={'/edit/listing/:spotId'}>
+            <EditSpotForm />
+          </Route>
           <Route path={"/host"}>
             <CreateSpot />
           </Route>
- 
           <Route exact path={"/spots/:spotId"}>
             <SpotDetails />
           </Route>

@@ -1,11 +1,12 @@
+import React from "react";
 import { useEffect, useState } from 'react';
-// import { creatThunk } from '../../store/spots';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import * as spotsActions from "../../store/spots";
-import './CreateSpot.css'
 
-function CreateSpot() {
+function EditSpotForm() {
+    
+    const {spotId} = useParams()
     const history = useHistory()
     const dispatch = useDispatch()
     const [address, setAddress] = useState('');
@@ -15,55 +16,25 @@ function CreateSpot() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
-    const [newSpotId, setNewSpotId] = useState('')
+    // const [newSpotId, setNewSpotId] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
 
-    // useEffect(() => {
-    //     const errors = []
-    //     // if (!address) {
-    //     //     errors.push('Address is required');
-    //     // }
-    //     // if (!city) {
-    //     // errors.push('City is required');
-    //     // }
-    //     // if (!state) {
-    //     // errors.push('State is required');
-    //     // }
-    //     // if (!country) {
-    //     // errors.push('Country is required');
-    //     // }
-    //     // if (!name) {
-    //     // errors.push('Name of location is required');
-    //     // }
-    //     // if (!description) {
-    //     // errors.push('Description is required');
-    //     // }
-    //     // if (!price) {
-    //     // errors.push('Price is required');
-    //     // }
-    //     // if (!Number(price)) {
-    //     // errors.push('Price must be a number');
-    //     // }
 
-    //     // if (!previewImage) {
-    //     //     errors.push('Image is required');
-    //     // }
-
-    //     // if (!address || !city || !state || !country || !name 
-    //     //     || !description || !price || !Number(price)) {
-    //     //     errors.push('Please fill out this field');
-    //     // }
-
-    //     setValidationErrors(errors)
-    // }, [name, address, city, state, country, name, description, price])
+    useEffect(() => {
+        dispatch(spotsActions.thunkGetSpotById(spotId))
+    },[dispatch, spotId])
+ 
+    useEffect(() => {
+        const errors = []
+        setValidationErrors(errors)
+    }, [name, address, city, state, country, name, description, price])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setValidationErrors([]);
         return dispatch(
-          spotsActions.creatThunk(
+          spotsActions.editThunk(
             {
               address,
               city,
@@ -72,22 +43,20 @@ function CreateSpot() {
               name,
               description,
               price,
+            //   previewImage
             },
-            { url: previewImage, preview: true }
+            spotId
           )
         )
-          .then(() => {
-            history.push(`/listings`);
-          })
           .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.validationErrors) setValidationErrors(data.validationErrors);
+            const spotData = await res.json();
+            if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
           });
       };
 
     return (
         <div>
-        <h2>Create a listing</h2>
+        <h2>Edit Listing</h2>
 
         <form onSubmit={handleSubmit}>
             <ul className="errors">
@@ -169,7 +138,7 @@ function CreateSpot() {
                 required
             />
             </div>
-            <div>
+            {/* <div>
             <label htmlFor='previewImage'>Image URL:</label>
             <input
                 type="url"
@@ -177,12 +146,11 @@ function CreateSpot() {
                 onChange={(e) => setPreviewImage(e.target.value)}
                 required
             />
-            </div>
+            </div> */}
             <button>Submit</button>
         </form>
         </div>
     );
 }
 
-export default CreateSpot
-
+export default EditSpotForm;

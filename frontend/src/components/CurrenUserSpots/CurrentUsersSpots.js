@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
-import UserSpotDetails from "./UserSpotDetails";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import './CurrentUserSpots.css'
 
 function Profile() {
@@ -26,7 +25,7 @@ function Profile() {
     setHasSubmitted(!hasSubmitted)
     history.push('/listings')
     })
-}
+  }
 
   return (
     <div>
@@ -44,11 +43,13 @@ function Profile() {
                   onClick={() => deleteSpot(userspot)}>
                       Delete Listing
                   </button>
+                  <button onClick={(e) => {
+                    e.preventDefault();
+                    history.push(`/edit/listing/${userspot.id}`);
+                  }}>Edit</button> 
               </div>
             </div>
           </div>
-            // <div key={userspot.id} userspot={userspot} className="userspot-image"> 
-
         ))}
     </div>
   );

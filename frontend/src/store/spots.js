@@ -40,7 +40,7 @@ export const actionCreateSpot = (spot) => {
 
 export const actionEditSpot = (spot) => {
     return {
-        tpye: UPDATE_SPOT,
+        type: UPDATE_SPOT,
         spot
     }
 }
@@ -74,6 +74,7 @@ export const thunkGetSpotById = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
     if (res.ok) {
         const spotById = await res.json()
+        // console.log('spotbyid', spotById)
         dispatch((actionGetSpotById(spotById)))
     }
 }
@@ -88,33 +89,37 @@ export const thunkCurrentUsersSpots = () => async (dispatch) => {
     }
 }
 
-export const creatThunk = (spots) => async (dispatch) => {
-    return csrfFetch('/api/spots', {
+export const creatThunk = (spots, previewImage) => async (dispatch) => {
+    const res = await csrfFetch('/api/spots', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        // headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spots)
-    })
-    .then(res => {
-        if (res.ok) {
-            return res.json()
-        }
-    })
-    .then(spot => {
+    });
+    if(res.ok){
+        const spot = await res.json()
         dispatch(actionCreateSpot(spot))
-        return spot
-    })
+        const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
+            method: "POST",
+            body: JSON.stringify(previewImage),
+        });
+        if (imageRes.ok) {
+            return spot;
+        }
+    }
 }
 
 export const editThunk = (spot, spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(spot)
-    })
+      method: "PUT",
+      body: JSON.stringify(spot),
+    });
+  
     if (res.ok) {
-        dispatch(actionEditSpot(spot))
-        return spot
-    }
+      const spot = await res.json();
+      console.log('spot in the edit thunk --> ', spot)
+      dispatch(actionEditSpot(spot));
+      return spot
+  };
 }
 
 export const deleteThunk = (spotId) => async (dispatch) => {
@@ -148,6 +153,7 @@ export const spotReducer = (state = initialState, action) => {
         case LOAD_SPOTBYID: {
             let newState = Object.assign({}, state)
             newState.SpotDetails = action.spotById
+            // newState[action.spotById] = action.spotById
             return newState
         } 
         case LOAD_CURRENT_USER_SPOTS: {
@@ -164,6 +170,7 @@ export const spotReducer = (state = initialState, action) => {
         }
         case UPDATE_SPOT: {
             let newState = Object.assign({}, state)
+            newState[action.spot.id] = action.spot
             return newState
         }
         case DELETE_SPOTS: {

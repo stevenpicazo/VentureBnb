@@ -7,7 +7,7 @@ function SpotsList ({spot}) {
             to={`/spots/${spot.id}`}
             activeClassName="active"
         >
-            <div key={spot.id} className="spot-card">
+            <div className="spot-card">
                 <img src={spot.previewImage} className="spot-image"/>
                 <div className="spot-info">
                     <div className="spot-city-state">{spot.city}, {spot.state}</div>
