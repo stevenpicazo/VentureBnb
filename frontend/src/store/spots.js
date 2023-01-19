@@ -74,7 +74,7 @@ export const thunkGetSpotById = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
     if (res.ok) {
         const spotById = await res.json()
-        // console.log('spotbyid', spotById)
+        // console.log('spotbyid thunk -->', spotById)
         dispatch((actionGetSpotById(spotById)))
     }
 }
@@ -151,9 +151,12 @@ export const spotReducer = (state = initialState, action) => {
         //     return newState
         // } 
         case LOAD_SPOTBYID: {
+            let SpotDetails = Object.assign({}, state)
             let newState = Object.assign({}, state)
             newState.SpotDetails = action.spotById
-            // newState[action.spotById] = action.spotById
+            // newState[action.spotById.id] = action.spotById
+            // newState['SpotDetails'] = newState[action.spotById.id]
+            // console.log('newState', newState[action.spotById.id])
             return newState
         } 
         case LOAD_CURRENT_USER_SPOTS: {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as spotsActions from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import './CurrentUserSpots.css'
 
 function Profile() {
@@ -11,7 +12,7 @@ function Profile() {
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
   // const spots = Object.values(spotsObj)
-
+  // const { spotId } = useParams() 
 
     useEffect(() => {
       dispatch(spotsActions.thunkCurrentUsersSpots())
@@ -19,12 +20,12 @@ function Profile() {
 
   if (!spotsObj) return;
 
-  const deleteSpot = (spot) => {
-    // e.preventDefault()
-    dispatch(spotsActions.deleteThunk(spot.id)).then(() => {
+  const deleteSpot = async (e, spotId) => {
+    e.preventDefault()
+    await dispatch(spotsActions.deleteThunk(spotId))
     setHasSubmitted(!hasSubmitted)
-    history.push('/listings')
-    })
+    await history.push('/listings')
+    
   }
 
   return (
@@ -40,7 +41,7 @@ function Profile() {
                   <div className="userspot-city-state">{userspot.city}, {userspot.state}</div>
                   <button 
                   className="userspot-delete-button"
-                  onClick={() => deleteSpot(userspot)}>
+                  onClick={(e) => deleteSpot(e, userspot.id)}>
                       Delete Listing
                   </button>
                   <button onClick={(e) => {

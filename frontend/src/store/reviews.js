@@ -10,7 +10,7 @@ const normalizeData = (data) => {
 
 const LOAD_REVIEW = 'reviews/READ'
 const CREATE_REVIEW = 'reviews/CREATE'
-const DELETE_REVIEW = 'spots/DELETE'
+const DELETE_REVIEW = 'reviews/DELETE'
 // const UPDATE = 'spots/UPDATE'
 //! ACTIONS
 export const actionLoadReview = (reviews) => {
@@ -38,7 +38,7 @@ export const reviewBySpotIdThunk = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
     if (res.ok) {
         const review = await res.json()
-        console.log('reviews in the thunk -->', review)
+        // console.log('reviews in the thunk -->', review)
         dispatch((actionLoadReview(review)))
     }
 }
@@ -57,8 +57,13 @@ export const createThunk = (review, spotId) => async (dispatch) => {
 export const deleteThunk = (reviewId) => async (dispatch) => {
     const res = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE',
-        body: JSON.stringify()
     })
+    if (res.ok) {
+        const review = await res.json()
+        console.log('review in the thunk -->', review)
+        dispatch(actionDeleteReview(review))
+        return review
+    }
 }
 
 //! REDUCER
@@ -68,11 +73,6 @@ export const reviewsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_REVIEW: {
             let newState = Object.assign({}, state)
-            // for (let review of action.reviews.Reviews) {
-            //     console.log('reviews in the reducer -->', review)
-            //     newState[review.spotId] = review
-            // }
-            // return newState
             const reviews = normalizeData(action.reviews.Reviews) 
             newState.Reviews = reviews
             return newState
@@ -82,10 +82,11 @@ export const reviewsReducer = (state = initialState, action) => {
             newState[action.review.id] = action.spot
             return newState
         }
-        case DELETE_REVIEW: {
-            let newState = Object.assign({}, state)
-
-        }
+        // case DELETE_REVIEW: {
+        //     let newState = Object.assign({}, state)
+        //     delete newState[action.review.id]
+        //     return newState
+        // }
         default: 
             return state
     }

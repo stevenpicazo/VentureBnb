@@ -16,7 +16,7 @@ const Spots = () => {
     return (
         <div className="spot-list">
             {spotsArr.map(spot => (
-                <SpotsList spot={spot}/>
+                <SpotsList key={`spot-${spot.id}`} spot={spot}/>
             ))}
         </div>
     )

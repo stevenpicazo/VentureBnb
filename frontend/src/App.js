@@ -28,7 +28,7 @@ function App() {
           <Route path={'/listings'}>
             <CurrentUserSpots />
           </Route>
-          <Route path={'/edit/listing/:spotId'}>
+          <Route exact path={'/edit/listing/:spotId'}>
             <EditSpotForm />
           </Route>
           <Route path={"/host"}>
