@@ -18,10 +18,11 @@ function SpotDetails () {
 
     const { spotId } = useParams()
     const sessionUser = useSelector(state => state.session.user);
-    const spot = useSelector((state) => state.spots.SpotDetails)
+    const spot = useSelector((state) => state.spots[spotId])
+    console.log('spotDetails -->', spot)
+
     
     const reviewsObj = useSelector((state) => state.reviews.Reviews)
-    // console.log('spotDetails -->', spot)
     
     useEffect(() => {
         dispatch(thunkGetSpotById(spotId))
@@ -69,7 +70,9 @@ function SpotDetails () {
                 <h1>{spot.name}</h1>
                 
                 <div className="spot-card"> 
-                    <img src={spot.SpotImages[0].url} className="spot-image"/>
+                {spot.SpotImages.map(image => (
+                    <img src={image.url} className="spot-image"/>
+                ))}
                         <div className="spot-info"> 
                             <div>{spot.address}</div>
                             <div>{spot.description}</div>

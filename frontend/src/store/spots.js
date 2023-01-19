@@ -138,6 +138,11 @@ const initialState = {}
 
 export const spotReducer = (state = initialState, action) => {
     switch(action.type) {
+        case UPDATE_SPOT: {
+            let newState = Object.assign({}, state)
+            newState[action.spot.id] = action.spot
+            return newState
+        }
         case READ_SPOTS: {
             let newState = Object.assign({}, state)
             for (let spot of action.spots.Spots) {
@@ -153,8 +158,8 @@ export const spotReducer = (state = initialState, action) => {
         case LOAD_SPOTBYID: {
             let SpotDetails = Object.assign({}, state)
             let newState = Object.assign({}, state)
-            newState.SpotDetails = action.spotById
-            // newState[action.spotById.id] = action.spotById
+            // newState.SpotDetails = action.spotById
+            newState[action.spotById.id] = action.spotById
             // newState['SpotDetails'] = newState[action.spotById.id]
             // console.log('newState', newState[action.spotById.id])
             return newState
@@ -167,11 +172,6 @@ export const spotReducer = (state = initialState, action) => {
             return newState
         }
         case CREATE_SPOT: {
-            let newState = Object.assign({}, state)
-            newState[action.spot.id] = action.spot
-            return newState
-        }
-        case UPDATE_SPOT: {
             let newState = Object.assign({}, state)
             newState[action.spot.id] = action.spot
             return newState

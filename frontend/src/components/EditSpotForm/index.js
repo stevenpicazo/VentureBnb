@@ -1,12 +1,11 @@
 import React from "react";
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
 import * as spotsActions from "../../store/spots";
 
 function EditSpotForm() {
     
-    const {spotId} = useParams()
     const history = useHistory()
     const dispatch = useDispatch()
     const [address, setAddress] = useState('');
@@ -16,19 +15,23 @@ function EditSpotForm() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
+    // const [previewImage, setPreviewImage] = useState('')
     // const [newSpotId, setNewSpotId] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
-
+    const [loaded, setLoading] = useState(false)
+    
+    const {spotId} = useParams()
+    // const spot = useSelector(state => state.spots)
+    // console.log('spots from the selector -->', spot) 
 
     useEffect(() => {
         dispatch(spotsActions.thunkGetSpotById(spotId))
     },[dispatch, spotId])
  
-    useEffect(() => {
-        const errors = []
-        setValidationErrors(errors)
-    }, [name, address, city, state, country, name, description, price])
+    // if (!loaded) {
+    //     return null
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -45,10 +48,10 @@ function EditSpotForm() {
               price,
             //   previewImage
             },
+            // spot.id
             spotId
           )
-        )
-          .catch(async (res) => {
+        ).catch(async (res) => {
             const spotData = await res.json();
             if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
           });
@@ -58,7 +61,7 @@ function EditSpotForm() {
         <div>
         <h2>Edit Listing</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={() =>handleSubmit}>
             <ul className="errors">
             {hasSubmitted && validationErrors.length && (
                 <ul className="errors">
@@ -147,7 +150,7 @@ function EditSpotForm() {
                 required
             />
             </div> */}
-            <button>Submit</button>
+            <button onClick={(e) => handleSubmit(e) }>Submit</button>
         </form>
         </div>
     );
