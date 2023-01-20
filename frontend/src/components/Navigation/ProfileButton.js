@@ -45,8 +45,8 @@ function ProfileButton({ user }) {
 
   const demoUser = (e) => {
     e.preventDefault()
-    const password = 'password'
-    const credential = "demo@user.io"
+    const password = 'password2'
+    const credential = "FakeUser1"
     dispatch(sessionActions.login({credential, password}))
     closeMenu()
   }

@@ -47,10 +47,10 @@ function CreateSpot() {
       };
 
     return (
-        <div>
-        <h2 className='listings-h2'>Create a listing</h2>
+        <div className='form-container'>
 
         <form className='create-listing-form' onSubmit={handleSubmit}>
+                <h2 className='listings-h2'>Create a listing</h2>
             <ul className="errors">
             {hasSubmitted && validationErrors.length && (
                 <ul className="errors">

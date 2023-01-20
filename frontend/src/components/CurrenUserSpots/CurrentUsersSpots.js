@@ -13,12 +13,13 @@ function Profile() {
 
   // const spots = Object.values(spotsObj)
   // const { spotId } = useParams() 
-
+const [loaded, setLoaded] = useState('')
     useEffect(() => {
-      dispatch(spotsActions.thunkCurrentUsersSpots())
+      dispatch(spotsActions.thunkCurrentUsersSpots()).then(() => setLoaded(true))
     }, [dispatch, hasSubmitted]);
 
-  if (!spotsObj) return;
+  if (!spotsObj) return null
+  if (!loaded) return null
 
   const deleteSpot = async (e, spotId) => {
     e.preventDefault()

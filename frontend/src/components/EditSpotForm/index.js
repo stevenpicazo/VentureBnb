@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
 import * as spotsActions from "../../store/spots";
+import './EditSpot.css'
 
 function EditSpotForm() {
     
@@ -72,10 +73,10 @@ function EditSpotForm() {
       }
 
     return (
-        <div>
-        <h2>Edit Listing</h2>
+        <div className="form-container">
 
-        <form onSubmit={() =>handleSubmit}>
+        <form className="edit-spot-form" onSubmit={handleSubmit}>
+        <h2 className="edit-h2">Edit Listing</h2>
             <ul className="errors">
             {hasSubmitted && validationErrors.length && (
                 <ul className="errors">
@@ -88,7 +89,7 @@ function EditSpotForm() {
             <div>
             <label htmlFor='address'>Address:</label>
             <input
-                id='address'
+                className='address'
                 type='text'
                 onChange={e => setAddress(e.target.value)}
                 value={address}
@@ -98,7 +99,7 @@ function EditSpotForm() {
             <div>
             <label htmlFor='city'>City:</label>
             <input
-                id='city'
+                className='city'
                 type='text'
                 onChange={e => setCity(e.target.value)}
                 value={city}
@@ -108,7 +109,7 @@ function EditSpotForm() {
             <div>
             <label htmlFor='state'>State:</label>
             <input
-                id='state'
+                className='state'
                 type='text'
                 onChange={e => setState(e.target.value)}
                 value={state}
@@ -118,7 +119,7 @@ function EditSpotForm() {
             <div>
             <label htmlFor='country'>Country:</label>
             <input
-                id='country'
+                className='country'
                 type='text'
                 onChange={e => setCountry(e.target.value)}
                 value={country}
@@ -128,7 +129,7 @@ function EditSpotForm() {
             <div>
             <label htmlFor='name'>Name of location:</label>
             <input
-                id='name'
+                className='name'
                 type='text'
                 onChange={e => setName(e.target.value)}
                 value={name}
@@ -138,7 +139,7 @@ function EditSpotForm() {
             <div>
             <label htmlFor='description'>Description:</label>
             <input
-                id='description'
+                className='description'
                 type='text'
                 onChange={e => setDescription(e.target.value)}
                 value={description}
@@ -148,7 +149,7 @@ function EditSpotForm() {
             <div>
             <label htmlFor='price'>Price:</label>
             <input
-                id='price'
+                className='price'
                 type='number'
                 onChange={e => setPrice(e.target.value)}
                 value={price}
@@ -164,7 +165,7 @@ function EditSpotForm() {
                 required
             />
             </div> */}
-            <button onClick={(e) => handleSubmit(e) }>Submit</button>
+            <button className='listings-button' onClick={(e) => handleSubmit(e) }>Submit</button>
         </form>
         </div>
     );

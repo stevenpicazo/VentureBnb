@@ -55,7 +55,7 @@ function SpotDetails () {
         return dispatch(
             reviewsActions.createThunk(
                 {review, stars}, 
-                spot.id))
+                spot.id)).then(() => history.push('/'))
             .catch(async (res) => {
                 const reviewData = await res.json()
                 if (reviewData && reviewData.validationErrors) {

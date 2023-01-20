@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { readThunk } from "../../store/spots";
 import SpotsList from "./SpotsList";
@@ -8,15 +8,16 @@ const Spots = () => {
     const dispatch = useDispatch()
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)
-    console.log('spots', spotsArr)
+    // console.log('spots', spotsArr)
+    const [loaded, setLoaded] = useState('')
+
     
     useEffect(() => {
         dispatch(readThunk())
     }, [dispatch])
     
-    // if (!spots.length) {
-    //     return null
-    // }
+    if (!spotsArr.length) return null
+    
     return (
         <div className="spot-list">
             {spotsArr.map(spot => (

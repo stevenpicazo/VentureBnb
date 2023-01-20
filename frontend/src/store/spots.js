@@ -116,7 +116,7 @@ export const editThunk = (spot, spotId) => async (dispatch) => {
   
     if (res.ok) {
       const spot = await res.json();
-      console.log('spot in the edit thunk --> ', spot)
+    //   console.log('spot in the edit thunk --> ', spot)
       dispatch(actionEditSpot(spot));
       return spot
   };
@@ -179,7 +179,7 @@ export const spotReducer = (state = initialState, action) => {
         }
         case DELETE_SPOTS: {
             let newState = Object.assign({}, state)
-            delete newState[action.spot.id]
+            // delete newState[action.spot.id]
             return newState
         }
         default: 
