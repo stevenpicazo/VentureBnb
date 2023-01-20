@@ -8,6 +8,7 @@ import SpotDetails from "./components/SpotsDetails/SpotDetails";
 import CreateSpot from "./components/CreateSpot/CreateSpot";
 import CurrentUserSpots from "./components/CurrenUserSpots/CurrentUsersSpots";
 import EditSpotForm from "./components/EditSpotForm";
+import Reviews from "./components/SpotsDetails/Reviews";
 // import MySpots from "./components/MySpots"
 
 function App() {
@@ -22,8 +23,8 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path = "/">
-            <Spots/>
+          <Route exact path="/">
+            <Spots />
           </Route>
           <Route path={'/listings'}>
             <CurrentUserSpots />
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path={"/host"}>
             <CreateSpot />
+          </Route>
+          <Route path={"/review/:spotId"}>
+            <Reviews />
           </Route>
           <Route exact path={"/spots/:spotId"}>
             <SpotDetails />

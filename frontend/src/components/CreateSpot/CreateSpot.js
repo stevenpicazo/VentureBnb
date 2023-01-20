@@ -50,7 +50,7 @@ function CreateSpot() {
         <div className='form-container'>
 
         <form className='create-listing-form' onSubmit={handleSubmit}>
-                <h2 className='listings-h2'>Create a listing</h2>
+                <h2 className='listings-h2'>Venture your home</h2>
             <ul className="errors">
             {hasSubmitted && validationErrors.length && (
                 <ul className="errors">
@@ -61,7 +61,7 @@ function CreateSpot() {
             )}
             </ul>
             <div>
-            <label htmlFor='address'>Address:</label>
+            <label htmlFor='address'></label>
             <input
                 className='address'
                 type='text'
@@ -72,7 +72,7 @@ function CreateSpot() {
             />
             </div>
             <div>
-            <label htmlFor='city'>City:</label>
+            <label htmlFor='city'></label>
             <input
                 className='city'
                 type='text'
@@ -83,7 +83,7 @@ function CreateSpot() {
             />
             </div>
             <div>
-            <label htmlFor='state'>State:</label>
+            <label htmlFor='state'></label>
             <input
                 className='state'
                 type='text'
@@ -94,7 +94,7 @@ function CreateSpot() {
             />
             </div>
             <div>
-            <label htmlFor='country'>Country:</label>
+            <label htmlFor='country'></label>
             <input
                 className='country'
                 type='text'
@@ -105,7 +105,7 @@ function CreateSpot() {
             />
             </div>
             <div>
-            <label htmlFor='name'>Name of location:</label>
+            <label htmlFor='name'></label>
             <input
                 className='name'
                 type='text'
@@ -116,7 +116,7 @@ function CreateSpot() {
             />
             </div>
             <div>
-            <label htmlFor='description'>Description:</label>
+            <label htmlFor='description'></label>
             <input
                 className='description'
                 type='text'
@@ -127,7 +127,7 @@ function CreateSpot() {
             />
             </div>
             <div>
-            <label htmlFor='price'>Price:</label>
+            <label htmlFor='price'></label>
             <input
                 className='price'
                 type='number'
@@ -138,7 +138,7 @@ function CreateSpot() {
             />
             </div>
             <div>
-            <label htmlFor='previewImage'>Image URL:</label>
+            <label htmlFor='previewImage'></label>
             <input
                 className='previewImage'
                 type="url"

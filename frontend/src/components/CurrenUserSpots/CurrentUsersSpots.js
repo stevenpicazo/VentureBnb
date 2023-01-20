@@ -7,7 +7,9 @@ import './CurrentUserSpots.css'
 
 function Profile() {
   const dispatch = useDispatch();
-  const spotsObj = useSelector(state => state.spots.CurrentUsersSpots);
+  const { ownerId }= useParams()
+  const spotsObj = useSelector(state => state.spots);
+  console.log('spotobj -->,', spotsObj)
   const history = useHistory()
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -45,8 +47,8 @@ const [loaded, setLoaded] = useState('')
                       Delete Listing
                   </button>
                   <button onClick={(e) => {
-                    e.preventDefault();
-                    history.push(`/edit/listing/${userspot.id}`);
+                    e.preventDefault()
+                    history.push(`/edit/listing/${userspot.id}`)
                   }}>Edit</button> 
               </div>
             </div>

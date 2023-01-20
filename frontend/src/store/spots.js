@@ -83,8 +83,8 @@ export const thunkCurrentUsersSpots = () => async (dispatch) => {
     const res = await csrfFetch('/api/spots/current')
     if (res.ok) {
         const spots = await res.json()
-        // console.log('currentuser spots in da thunk -->', spots)
-        dispatch(actionGetCurrentUsersSpots(spots))
+        console.log('currentuser spots in da thunk -->', spots.Spots)
+        dispatch(actionGetCurrentUsersSpots(spots.Spots))
         return spots
     }
 }
@@ -128,7 +128,9 @@ export const deleteThunk = (spotId) => async (dispatch) => {
     })
     if (res.ok) {
         const spot = await res.json()
+        console.log('delete spotThunk -->', spot)
         dispatch(actionDeleteSpot(spot))
+        
         return spot
     }
 }
@@ -167,9 +169,11 @@ export const spotReducer = (state = initialState, action) => {
         } 
         case LOAD_CURRENT_USER_SPOTS: {
             let newState = Object.assign({}, state)
-            const usersSpots = normalizeData(action.usersSpotById.Spots)
-            newState.CurrentUsersSpots = usersSpots
-            // console.log('currentUsersNewState-->', newState)
+            // const usersSpots = normalizeData(action.usersSpotById.Spots)
+            // newState.CurrentUsersSpots = usersSpots
+            const usersSpots = normalizeData(action.usersSpotById)
+            newState= usersSpots
+            console.log('currentUsersNewState-->', newState)
             return newState
         }
         case CREATE_SPOT: {

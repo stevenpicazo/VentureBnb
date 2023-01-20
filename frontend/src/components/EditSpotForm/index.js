@@ -23,7 +23,7 @@ function EditSpotForm() {
     const [loaded, setLoading] = useState(false)
     // const spotById = useSelector(state => state.CurrentUsersSpots)
     // const spot = useSelector(state => state.spots[spotId])
-    const spot = useSelector(state => state.spots)
+    // const spot = useSelector(state => state.spots)
     // console.log('spots from the selector -->', spot)
     const {spotId} = useParams()
 
@@ -52,25 +52,15 @@ function EditSpotForm() {
             },
             spotId
           )
-
         )
       .then(() => {
         history.push(`/spots/${spotId}`);
       })
-        .catch(async (res) => {
-            const spotData = await res.json();
-            if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
-          })
-        //   .then(()=> {
-        //     setAddress('')
-        //     setCity('')
-        //     setState('')
-        //     setCountry('')
-        //     setName('')
-        //     setDescription('')
-        //     setPrice(e)
-        //   })
-      }
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.validationErrors) setValidationErrors(data.validationErrors);
+      });
+  };
 
     return (
         <div className="form-container">
@@ -87,72 +77,79 @@ function EditSpotForm() {
             )}
             </ul>
             <div>
-            <label htmlFor='address'>Address:</label>
+            <label htmlFor='address'></label>
             <input
                 className='address'
                 type='text'
                 onChange={e => setAddress(e.target.value)}
                 value={address}
+                placeholder='Address'
                 required
             />
             </div>
             <div>
-            <label htmlFor='city'>City:</label>
+            <label htmlFor='city'></label>
             <input
                 className='city'
                 type='text'
                 onChange={e => setCity(e.target.value)}
                 value={city}
+                placeholder='City'
                 required
             />
             </div>
             <div>
-            <label htmlFor='state'>State:</label>
+            <label htmlFor='state'></label>
             <input
                 className='state'
                 type='text'
                 onChange={e => setState(e.target.value)}
                 value={state}
+                placeholder='State'
                 required
             />
             </div>
             <div>
-            <label htmlFor='country'>Country:</label>
+            <label htmlFor='country'></label>
             <input
                 className='country'
                 type='text'
                 onChange={e => setCountry(e.target.value)}
                 value={country}
+                placeholder='Country'
                 required
             />
             </div>
             <div>
-            <label htmlFor='name'>Name of location:</label>
+            <label htmlFor='name'></label>
             <input
                 className='name'
                 type='text'
                 onChange={e => setName(e.target.value)}
                 value={name}
+                placeholder='Name'
                 required
             />
             </div>
             <div>
-            <label htmlFor='description'>Description:</label>
+            <label htmlFor='description'></label>
             <input
                 className='description'
                 type='text'
                 onChange={e => setDescription(e.target.value)}
                 value={description}
+                placeholder='Description'
                 required
             />
             </div>
             <div>
-            <label htmlFor='price'>Price:</label>
+            <label htmlFor='price'></label>
             <input
                 className='price'
                 type='number'
                 onChange={e => setPrice(e.target.value)}
                 value={price}
+                placeholder='Price'
                 required
             />
             </div>
@@ -165,7 +162,8 @@ function EditSpotForm() {
                 required
             />
             </div> */}
-            <button className='listings-button' onClick={(e) => handleSubmit(e) }>Submit</button>
+            <button className='listings-button'
+             >Submit</button>
         </form>
         </div>
     );
