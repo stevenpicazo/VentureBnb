@@ -20,10 +20,11 @@ function EditSpotForm() {
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
     const [loaded, setLoading] = useState(false)
-    const spotById = useSelector(state => state.CurrentUsersSpots)
-    const {spotId} = useParams()
+    // const spotById = useSelector(state => state.CurrentUsersSpots)
     // const spot = useSelector(state => state.spots[spotId])
+    const spot = useSelector(state => state.spots)
     // console.log('spots from the selector -->', spot)
+    const {spotId} = useParams()
 
     useEffect(() => {
         dispatch(spotsActions.thunkGetSpotById(spotId))
@@ -53,7 +54,7 @@ function EditSpotForm() {
 
         )
       .then(() => {
-        history.push(`/edit/listing/${spotId}`);
+        history.push(`/spots/${spotId}`);
       })
         .catch(async (res) => {
             const spotData = await res.json();

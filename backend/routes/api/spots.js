@@ -214,6 +214,7 @@ router.put('/:spotId', spotValidator, requireAuth, async (req, res, next) => {
     await updatedSpot.set({
         ...req.body
     })
+    await updatedSpot.save() 
 
     return res.json(updatedSpot)
 })

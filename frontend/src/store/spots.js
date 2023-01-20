@@ -92,7 +92,7 @@ export const thunkCurrentUsersSpots = () => async (dispatch) => {
 export const creatThunk = (spots, previewImage) => async (dispatch) => {
     const res = await csrfFetch('/api/spots', {
         method: 'POST',
-        // headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spots)
     });
     if(res.ok){
@@ -138,11 +138,20 @@ const initialState = {}
 
 export const spotReducer = (state = initialState, action) => {
     switch(action.type) {
+        // case UPDATE_SPOT: {
+        //     let newState = Object.assign({}, state)
+        //     let newCurrentSpot = {...newState.CurrentUsersSpots}
+        //     newCurrentSpot[action.spot.id] = action.spot
+        //     newState.CurrentUsersSpots = newCurrentSpot
+        //     return newState
+        // }
+
         case UPDATE_SPOT: {
             let newState = Object.assign({}, state)
             newState[action.spot.id] = action.spot
             return newState
         }
+
         case READ_SPOTS: {
             let newState = Object.assign({}, state)
             for (let spot of action.spots.Spots) {

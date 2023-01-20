@@ -72,7 +72,7 @@ function SpotDetails () {
                 
                 <div className="spot-card"> 
                 {spot.SpotImages.map(image => (
-                    <img src={image.url} className="spot-image"/>
+                    <img src={image.url} className="spot-image" key={`image-${image.id}`}/>
                 ))}
                         <div className="spot-info"> 
                             <div>{spot.address}</div>
@@ -83,7 +83,7 @@ function SpotDetails () {
                 <h2>Reviews</h2>
                 {reviewsObj && Object.values(reviewsObj).map(review => (
                     
-                    <div className={"reviewInfo"} key={review.id}>
+                   sessionUser && ( <div className={"reviewInfo"} key={`review-${review.id}`}>
                     
                         {console.log('reviewwwww -->', review)}
                         {review.User.firstName} {review.User.lastName} {review.stars}
@@ -95,7 +95,7 @@ function SpotDetails () {
                         </button> 
                         )}
                     </div>
-                ))}
+                )))}
 
 <           form onSubmit={handleSubmit}>
             <ul className="errors">
