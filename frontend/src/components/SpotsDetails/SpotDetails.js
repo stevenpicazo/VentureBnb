@@ -13,7 +13,9 @@ function SpotDetails () {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
     const [isLoaded, setIsLoaded] = useState(false)
+    const [hasLoaded, setHasLoaded] = useState(false)
     const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
 
     const { spotId } = useParams()
@@ -21,7 +23,6 @@ function SpotDetails () {
     const spot = useSelector((state) => state.spots[spotId])
     console.log('spotDetails -->', spot)
 
-    
     const reviewsObj = useSelector((state) => state.reviews.Reviews)
     
     useEffect(() => {
@@ -33,36 +34,36 @@ function SpotDetails () {
             const spotData = await res.json()
             if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
         })
-    }, [dispatch, spotId])
+    }, [dispatch, hasSubmitted ,spotId])
 
     if (!isLoaded) {
         return <div>loading...</div>
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setValidationErrors([]);
-        dispatch(reviewsActions.createThunk(
-            {review, stars}, 
-            spot.id
-            ))
-            .catch(async (res) => {
-                const reviewData = await res.json()
-                if (reviewData && reviewData.validationErrors) setValidationErrors(reviewData.validationErrors);
-            })
-    }
-
-    const deleteReview  = async (e, reviewId) => {
+    
+    const deleteReview = async (e, reviewId) => {
         e.preventDefault()
         await dispatch(reviewsActions.deleteThunk(reviewId))
+        setHasSubmitted(!hasSubmitted)
         // setHasSubmitted(!hasSubmitted)
         // await history.push('/reviewId')
     }
     
-    function currentUser() {
-        // if (sessionUser.id === review.userId)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setValidationErrors([]);
+        return dispatch(
+            reviewsActions.createThunk(
+                {review, stars}, 
+                spot.id))
+            .catch(async (res) => {
+                const reviewData = await res.json()
+                if (reviewData && reviewData.validationErrors) {
+                    setValidationErrors(reviewData.validationErrors);
+                }
+            })
     }
-    
+
     return (
         <div className="spot-details-container">
             
@@ -91,13 +92,14 @@ function SpotDetails () {
                             className="delete-review-button"
                             onClick={(e) => deleteReview(e, review.id)}>
                             Delete
-                        </button> )}
+                        </button> 
+                        )}
                     </div>
                 ))}
 
 <           form onSubmit={handleSubmit}>
             <ul className="errors">
-            {hasSubmitted && validationErrors.length && (
+            {isSubmitted && validationErrors.length && (
                 <ul className="errors">
                     {validationErrors.map(error => (
                         <li key={error}>{error}</li>

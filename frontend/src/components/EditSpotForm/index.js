@@ -19,11 +19,11 @@ function EditSpotForm() {
     // const [newSpotId, setNewSpotId] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
-    // const [loaded, setLoading] = useState(false)
-    
+    const [loaded, setLoading] = useState(false)
+    const spotById = useSelector(state => state.CurrentUsersSpots)
     const {spotId} = useParams()
-    // const spot = useSelector(state => state.spots)
-    // console.log('spots from the selector -->', spot) 
+    // const spot = useSelector(state => state.spots[spotId])
+    // console.log('spots from the selector -->', spot)
 
     useEffect(() => {
         dispatch(spotsActions.thunkGetSpotById(spotId))
@@ -34,8 +34,8 @@ function EditSpotForm() {
     // }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        setValidationErrors([]);
+        e.preventDefault()
+        setValidationErrors([])
         return dispatch(
           spotsActions.editThunk(
             {
@@ -48,14 +48,27 @@ function EditSpotForm() {
               price,
             //   previewImage
             },
-            // spot.id
             spotId
           )
-        ).catch(async (res) => {
+
+        )
+      .then(() => {
+        history.push(`/edit/listing/${spotId}`);
+      })
+        .catch(async (res) => {
             const spotData = await res.json();
             if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
-          });
-      };
+          })
+        //   .then(()=> {
+        //     setAddress('')
+        //     setCity('')
+        //     setState('')
+        //     setCountry('')
+        //     setName('')
+        //     setDescription('')
+        //     setPrice(e)
+        //   })
+      }
 
     return (
         <div>

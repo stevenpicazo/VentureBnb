@@ -24,8 +24,7 @@ function Profile() {
     e.preventDefault()
     await dispatch(spotsActions.deleteThunk(spotId))
     setHasSubmitted(!hasSubmitted)
-    await history.push('/listings')
-    
+    // await history.push('/listings') 
   }
 
   return (

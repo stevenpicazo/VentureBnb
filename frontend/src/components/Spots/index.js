@@ -8,11 +8,15 @@ const Spots = () => {
     const dispatch = useDispatch()
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)
-
+    console.log('spots', spotsArr)
+    
     useEffect(() => {
         dispatch(readThunk())
     }, [dispatch])
-
+    
+    // if (!spots.length) {
+    //     return null
+    // }
     return (
         <div className="spot-list">
             {spotsArr.map(spot => (
