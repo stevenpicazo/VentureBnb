@@ -59,8 +59,8 @@ export const createThunk = (review, spotId) => async (dispatch) => {
     })
     if (res.ok) {
         const review = await res.json()
-        console.log('create review thunk -->', review)
-        dispatch(actionCreateReview(review))
+        // console.log('create review thunk -->', review)
+        // dispatch(actionCreateReview(review))
         dispatch(reviewBySpotIdThunk(spotId));
         return review
     }
@@ -92,7 +92,7 @@ export const deleteThunk = (reviewId) => async (dispatch) => {
 const initialState = {}
 
 export const reviewsReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         // case LOAD_REVIEW: {
         //     let newState = Object.assign({}, state)
         //     const reviews = normalizeData(action.reviews.Reviews) 
@@ -100,14 +100,14 @@ export const reviewsReducer = (state = initialState, action) => {
         //     return newState
         // }
         case LOAD_REVIEW: {
-        let newState = Object.assign({}, state)
-        const reviews = normalizeData(action.reviews) 
-        newState = reviews
-        return newState
-    }
+            let newState = Object.assign({}, state)
+            const reviews = normalizeData(action.reviews)
+            newState = reviews
+            return newState
+        }
         case CREATE_REVIEW: {
             let newState = Object.assign({}, state)
-            newState[action.review.id] = action.spot
+            // newState[action.review.id] = action.spot
             return newState
         }
         case DELETE_REVIEW: {
@@ -115,7 +115,7 @@ export const reviewsReducer = (state = initialState, action) => {
             delete newState[action.review.id]
             return newState
         }
-        default: 
+        default:
             return state
     }
 }

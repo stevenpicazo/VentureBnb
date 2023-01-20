@@ -12,6 +12,30 @@ module.exports = {
     options.tableName = 'Spots';
     return queryInterface.bulkInsert(options, [
       {
+        ownerId: 3,
+        address: '123 Tropican Ct.',
+        city: 'San Diego',
+        state: 'CA',
+        country: 'United States of America',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Nebula Estate',
+        description: 'Great scenery. Very secluded.',
+        price: 540
+      },
+      {
+        ownerId: 3,
+        address: '444 Lian Rd.',
+        city: 'Orlando',
+        state: 'FL',
+        country: 'United States of America',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Hacienda Mansion',
+        description: 'Expansive 15acre lot, perfect for outdoor activities.',
+        price: 750
+      },
+      {
         ownerId: 1,
         address: '405 Heavenly Ave',
         city: 'Miami',
@@ -49,41 +73,40 @@ module.exports = {
       },
       {
         ownerId: 1,
-        address: '405 Heavenly Ave',
-        city: 'Miami',
-        state: 'FL',
+        address: '312 Jubilee St',
+        city: 'Santa Rosa',
+        state: 'CA',
         country: 'United States of America',
         lat: 37.7645358,
         lng: -122.4730327,
-        name: 'Miller Private Mansion',
+        name: 'Rosa Estate',
         description: 'Party hard',
         price: 1000
       },
       {
         ownerId: 2,
-        address: '821 Beverly Way',
+        address: '9854 Laurel Ct.',
         city: 'San Francisco',
         state: 'CA',
         country: 'United States of America',
         lat: 47.7645358,
         lng: -223.4730327,
-        name: 'West Hills Mansion',
+        name: 'Frisco Herald Mansion',
         description: 'Dream Land2',
-        price: 550
+        price: 230
       },
       {
         ownerId: 3,
-        address: '123 Tropican Ct.',
-        city: 'San Diego',
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
         state: 'CA',
         country: 'United States of America',
         lat: 57.7645358,
         lng: -334.4730327,
-        name: 'Potter Mansion',
+        name: 'Noble Estate',
         description: 'Amazing view. Very close to the city.',
-        price: 450
-      }
-
+        price: 300
+      },
     ], {});
   },
 

@@ -40,6 +40,18 @@ module.exports = {
         url: 'https://a0.muscache.com/im/pictures/48333c7b-3959-4822-b643-11053a481e91.jpg?im_w=1200',
         preview: true
       },
+
+      {
+        spotId: 7,
+        url: 'https://a0.muscache.com/im/pictures/9da6dfb6-9bbc-4f97-bf60-f8502814de69.jpg?im_w=720',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: 'https://a0.muscache.com/im/pictures/ebed8a20-8a46-455d-881e-63ab8fcaabcc.jpg?im_w=1200',
+        preview: true
+      },
+
     ], {});
   },
 

@@ -27,6 +27,36 @@ module.exports = {
         userId: 3,
         review: 'Beautiful house. Enjoyed my stay.',
         stars: 5
+      },
+      {
+        spotId: 4,
+        userId: 1,
+        review: 'Beautiful house. Enjoyed my stay.',
+        stars: 5
+      },
+      {
+        spotId: 5,
+        userId: 2,
+        review: 'Never experienced anything like this. The lights were so pretty.',
+        stars: 4
+      },
+      {
+        spotId: 6,
+        userId: 2,
+        review: 'Loved it here.',
+        stars: 4
+      },
+      {
+        spotId: 7,
+        userId: 2,
+        review: 'Such surreal spot.',
+        stars: 4
+      },
+      {
+        spotId: 8,
+        userId: 2,
+        review: 'Amazing scenery, will reccomend to others.',
+        stars: 4
       }
     ], {});
   },
