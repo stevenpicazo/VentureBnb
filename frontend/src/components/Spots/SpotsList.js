@@ -1,21 +1,26 @@
 import { NavLink } from "react-router-dom"
 
-function SpotsList ({spot}) {
+function SpotsList({ spot }) {
     return (
-        <NavLink 
+        <NavLink
             className="nav-link"
             to={`/spots/${spot.id}`}
             activeClassName="active"
         >
             <div className="spot-card">
-                <img src={spot.previewImage} className="spot-image"/>
+                <img src={spot.previewImage} className="spot-image" />
                 <div className="spot-info">
-                    {/* {console.log(spot)} */}
-                    <div className="avg-rating">{spot.avgRating}</div>
-                    <div className="spot-city-state">{spot.city}, {spot.state}</div>
-                    <div className="spot-name">{spot.name}</div>
-                    <div className="spot-price">${spot.price}</div>
-                    <div className="night">night</div>
+                    <div className="spot-location-rating">
+                        <div className="spot-city-state"> {spot.city}, {spot.state} </div>
+                        <div className="avg-rating">⭑{spot.avgRating}</div>
+                    </div>
+
+
+
+                    <div>
+                        <div className="spot-price">${spot.price}</div>
+                        <div className="night">night</div>
+                    </div>
                 </div>
             </div>
         </NavLink>

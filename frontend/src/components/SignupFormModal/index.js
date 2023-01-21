@@ -29,6 +29,7 @@ function SignupFormModal() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+
   return (
     <>
       <h1>Sign Up</h1>

@@ -1,4 +1,44 @@
 .spot-details-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
+
+.spot-title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 350;
+}
+
+.reviews-location {
+    font-family: 'Roboto', sans-serif;
+    padding-bottom: 18px;
+}
+
+.spot-details-img {
+    height: 550px;
+    width: 650px;
+    object-fit: cover;
+    border-radius: 12px;   
+}
+
+.listing-info-container {
+    border-bottom: 1px solid #c0bbbb;
+    padding-bottom: 20px;
+}
+ 
+
+.hosting-info {
+    padding-top: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 23px;
+}
+
+.listing-info {
+    padding-top: 8px;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+

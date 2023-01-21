@@ -25,9 +25,6 @@ function LoginFormModal() {
       );
   };
 
-  useEffect(() => {
-    
-  }, [])
 
   return (
     <div className="login-container">

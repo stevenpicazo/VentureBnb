@@ -77,25 +77,35 @@ function SpotDetails() {
         <div className="spot-details-container">
 
             <div>
-                <h1>{spot.name}</h1>
+                {console.log(spot)}
+                <h2 className="spot-title">{spot.name}</h2>
+                <div className="reviews-location">
+                    {!spot.numReviews ? 'No Reviews' : `★${spot.avgStarRating} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
+                </div>
 
-                <div className="spot-card">
-                    {spot.SpotImages.map(image => (
-                        <img src={image.url} className="spot-image" key={`image-${image.id}`} />
-                    ))}
-                    <div className="spot-info">
-                        <div>{spot.address}</div>
-                        <div>{spot.description}</div>
+                {spot.SpotImages.map(image => (
+                    <img src={image.url} className="spot-details-img" key={`image-${image.id}`} />
+                ))}
+
+                <div className="listing-info-container">
+                    <div className="hosting-info">
+                        Entire home hosted by {spot.Owner.firstName}
+                    </div>
+                    <div className="listing-info">
+                        6 guests · 4 bedrooms · 7 beds · 2 baths
                     </div>
                 </div>
+
+                <div className="avgReviews-numReviews">
+                    <div>⭑{spot.avgStarRating} · {spot.numReviews} reviews</div>
+                </div>
                 <div className="reviews-list">
-                    <h2>Reviews</h2>
+                    {/* <h2>Reviews</h2> */}
                     {reviewsObj && Object.values(reviewsObj).map(review => (
                         sessionUser && (
                             <div className={"reviewInfo"} key={`review-${review.id}`}>
                                 {/* {console.log('review -->', review)} */}
-                                <span>{review.User.firstName} ★{review.stars} </span>
-                                <span>{review.review} </span>
+                                <div>{review.User.firstName} ★{review.stars} </div>
                                 {sessionUser.id === review.userId && (
                                     <button
                                         className="delete-review-button"
@@ -106,47 +116,47 @@ function SpotDetails() {
                             </div>
                         )))}
                     <div>
-                        {!booleanFlag && <button onClick={() => setIsFormOpen(!isFormOpen)}>Create Review</button>}
+                        {sessionUser && !booleanFlag && <button onClick={() => setIsFormOpen(!isFormOpen)}>Create Review</button>}
                         {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
-                             <form className="reviews-form" onSubmit={handleSubmit}>
-                            {isSubmitted && (
-                                <ul className="errors">
-                                    {validationErrors.map(error => (
-                                        <>
-                                            {console.log('validation errors -->', validationErrors)}
-                                            <li key={error}>{error}</li>
-                                            {console.log('error -->', error)}
-                                        </>
+                            <form className="reviews-form" onSubmit={handleSubmit}>
+                                {isSubmitted && (
+                                    <ul className="errors">
+                                        {validationErrors.map(error => (
+                                            <>
+                                                {console.log('validation errors -->', validationErrors)}
+                                                <li key={error}>{error}</li>
+                                                {console.log('error -->', error)}
+                                            </>
 
-                                    ))}
-                                </ul>
-                            )}
-                            <div>
-                                <label htmlFor='reviews'>Review:</label>
-                                <input
-                                    id='reviews'
-                                    type='text'
-                                    onChange={e => setReview(e.target.value)}
-                                    value={review}
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor='stars'>Stars:</label>
-                                <input
-                                    id='stars'
-                                    type='number'
-                                    min={1}
-                                    max={5}
-                                    onChange={e => setStars(e.target.value)}
-                                    value={stars}
-                                    required
-                                />
-                            </div>
-                            <button >Submit</button>
-                        </form>) : (
-                        (null))}
-                    </div>                       
+                                        ))}
+                                    </ul>
+                                )}
+                                <div>
+                                    <label htmlFor='reviews'>Review:</label>
+                                    <input
+                                        id='reviews'
+                                        type='text'
+                                        onChange={e => setReview(e.target.value)}
+                                        value={review}
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor='stars'>Stars:</label>
+                                    <input
+                                        id='stars'
+                                        type='number'
+                                        min={1}
+                                        max={5}
+                                        onChange={e => setStars(e.target.value)}
+                                        value={stars}
+                                        required
+                                    />
+                                </div>
+                                <button >Submit</button>
+                            </form>) : (
+                            (null))}
+                    </div>
                 </div>
             </div>
         </div>
