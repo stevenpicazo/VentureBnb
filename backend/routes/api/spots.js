@@ -31,11 +31,10 @@ router.post('/:spotId/reviews', reviewValidator, requireAuth, async (req, res, n
 
     // if there is already a review in place
     if (singleReview) {
-        res.status(403)
-        return res.json({
-            "message": "User already has a review for this spot",
-            "statusCode": 403
-          })
+        const error = new Error('Review already exists')
+        error.errors = ['Review already exists']
+        error.status = 403
+        return next(error);
     } 
     // otherwise create a new review
     else {

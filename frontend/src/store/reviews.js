@@ -63,7 +63,7 @@ export const createThunk = (review, spotId) => async (dispatch) => {
         // dispatch(actionCreateReview(review))
         dispatch(reviewBySpotIdThunk(spotId));
         return review
-    }
+    } else throw res
 }
 
 
