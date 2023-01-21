@@ -1,5 +1,5 @@
 // frontend/src/components/LoginFormPage/index.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -24,6 +24,10 @@ function LoginFormModal() {
         }
       );
   };
+
+  useEffect(() => {
+    
+  }, [])
 
   return (
     <div className="login-container">

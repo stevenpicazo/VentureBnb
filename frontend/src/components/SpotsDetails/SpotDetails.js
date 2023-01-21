@@ -16,7 +16,8 @@ function SpotDetails() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [errors, setErrors] = useState([])
+    const [isFormOpen, setIsFormOpen] = useState(false);
+
 
     const sessionUser = useSelector(state => state.session.user);
     const { spotId } = useParams()
@@ -65,12 +66,12 @@ function SpotDetails() {
             })
     }
 
-    let booleanFlag = false 
+    let booleanFlag = false
     if (reviewArr.length && sessionUser) {
         for (let review of reviewArr) {
             if (review.userId === sessionUser.id) booleanFlag = true
         }
-    } 
+    }
 
     return (
         <div className="spot-details-container">
@@ -104,20 +105,21 @@ function SpotDetails() {
                                 )}
                             </div>
                         )))}
-
-                    {sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
-                        <form className="reviews-form" onSubmit={handleSubmit}>
-                            {isSubmitted && (                        
-                                    <ul className="errors">
-                                        {validationErrors.map(error => (
-                                            <>
-                                            { console.log('validation errors -->', validationErrors)}
+                    <div>
+                        {!booleanFlag && <button onClick={() => setIsFormOpen(!isFormOpen)}>Create Review</button>}
+                        {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
+                             <form className="reviews-form" onSubmit={handleSubmit}>
+                            {isSubmitted && (
+                                <ul className="errors">
+                                    {validationErrors.map(error => (
+                                        <>
+                                            {console.log('validation errors -->', validationErrors)}
                                             <li key={error}>{error}</li>
-                                           { console.log('error -->', error)}
-                                            </>
+                                            {console.log('error -->', error)}
+                                        </>
 
-                                        ))}
-                                    </ul>
+                                    ))}
+                                </ul>
                             )}
                             <div>
                                 <label htmlFor='reviews'>Review:</label>
@@ -143,7 +145,8 @@ function SpotDetails() {
                             </div>
                             <button >Submit</button>
                         </form>) : (
-                        null)}
+                        (null))}
+                    </div>                       
                 </div>
             </div>
         </div>
