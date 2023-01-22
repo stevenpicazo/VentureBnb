@@ -18,25 +18,25 @@ module.exports = {
       },
       {
         spotId: 2,
-        userId: 5,
+        userId: 4,
         review: 'Such a great spot, owner left everything nice and ready for us.',
         stars: 3
       },
       {
         spotId: 3,
-        userId: 5,
+        userId: 3,
         review: 'Beautiful house. Enjoyed my stay.',
         stars: 5
       },
       {
         spotId: 4,
-        userId: 5,
+        userId: 2,
         review: 'Beautiful house. Enjoyed my stay.',
         stars: 5
       },
       {
         spotId: 5,
-        userId: 5,
+        userId: 1,
         review: 'Never experienced anything like this. The lights were so pretty.',
         stars: 4
       },
@@ -48,16 +48,14 @@ module.exports = {
       },
       {
         spotId: 7,
-        userId: 5,
+        userId: 4,
         review: 'Such surreal spot.',
         stars: 4
       },
-      {
-        spotId: 8,
-        userId: 5,
-        review: 'Amazing scenery, will reccomend to others.',
-        stars: 4
-      }
+    
+      
+      
+      
     ], {});
   },
 

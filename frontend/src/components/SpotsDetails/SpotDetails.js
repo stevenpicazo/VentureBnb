@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { thunkGetSpotById } from "../../store/spots";
 import './SpotDetails.css'
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { reviewBySpotIdThunk } from "../../store/reviews";
 import * as reviewsActions from "../../store/reviews";
 
@@ -18,11 +18,11 @@ function SpotDetails() {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [isFormOpen, setIsFormOpen] = useState(false);
 
+    const { spotId } = useParams()
 
     const sessionUser = useSelector(state => state.session.user);
-    const { spotId } = useParams()
     const spot = useSelector((state) => state.spots[spotId])
-    // const spot = Object.values(spotObj)
+
     console.log('spot', spot)
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewArr = Object.values(reviewsObj)
@@ -38,7 +38,7 @@ function SpotDetails() {
             })
     }, [dispatch, hasSubmitted])
 
-    const reviewRefresh = async (e) => {
+    const reviewRefresh = async () => {
         await dispatch[reviewsActions.actionLoadReview(spotId)]
     }
 
@@ -86,7 +86,7 @@ function SpotDetails() {
             <div>
                 <h2 className="spot-title">{spot.name}</h2>
                 <div className="reviews-location">
-                    {!spot.numReviews ? 'No Reviews' : `★${spot.avgStarRating} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
+                    {!spot.numReviews ? 'No Reviews' : `★${spot.avgStarRating.toFixed(2)} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
                 </div>
 
                 {spot.SpotImages.map(image => (
@@ -104,12 +104,12 @@ function SpotDetails() {
                 {/* <i class="fa-regular fa-calendar"></i> */}
                 <div className="hosting-info-container">
                     <div className="check-in">
-                        <i class="fa-regular fa-calendar"></i>Self check-in
+                        <i className="fa-regular fa-calendar"></i>Self check-in
 
                     </div>
                     <span className="check-in-info">Check in yourself through key pad.</span>
                     <div className="super-host">
-                        <i class="fa-regular fa-circle-user"></i>
+                        <i className="fa-regular fa-circle-user"></i>
                         {spot.Owner.firstName} is a Superhost
                     </div>
                     <span className="super-host-info">
@@ -117,33 +117,55 @@ function SpotDetails() {
                     </span>
 
                     <div className="work-space">
-                        <i class="fa-regular fa-pen-to-square"></i>Designated work space
+                        <i className="fa-regular fa-pen-to-square"></i>Designated work space
                     </div>
                 </div>
 
-                <div className="avgReviews-numReviews">
-                    <div>⭑{spot.avgStarRating} · {spot.numReviews} reviews</div>
+                <div className="num-reviews">
+                    {!spot.numReviews ? 'No Reviews' : `★ ${spot.avgStarRating.toFixed(2)} · ${spot.numReviews} reviews`}
+
                 </div>
                 <div className="reviews-list">
-                    {/* <h2>Reviews</h2> */}
-                    {reviewsObj && Object.values(reviewsObj).map(review => (
-                        sessionUser && (
-                            <div className={"reviewInfo"} key={`review-${review.id}`}>
-                                {/* {console.log('review -->', review)} */}
-                                <div>{review.User.firstName} ★{review.stars} </div>
-                                {sessionUser.id === review.userId && (
-                                    <button
-                                        className="delete-review-button"
-                                        onClick={(e) => deleteReview(e, review.id)}>
-                                        Delete
-                                    </button>
-                                )}
-                            </div>
-                        )))}
+                    <>
+                        {reviewsObj && Object.values(reviewsObj).map(review => (
+                            sessionUser && (
+                                <div review={review} className={"reviewInfo"} key={`review-${review.id}`}>
+                                    {/* {console.log('review -->', review)} */}
+                                    {/* <div>{review.User.firstName} ★{review.stars} </div> */}
+                                    {sessionUser.id === review.userId && (
+                                        <button
+                                            className="delete-review-button"
+                                            onClick={(e) => deleteReview(e, review.id)}>
+                                            Delete review
+                                        </button>
+                                    )}
+                                </div>
+                            )
+                            )
+                            )
+                        }
+                        {/* < div > { review.User.firstName } ★{review.stars} </div> */}
+                </>
+                <div>
+
                     <div>
-                        {sessionUser && !booleanFlag && sessionUser.id !== spot.ownerId &&
-                            <button onClick={() => setIsFormOpen(!isFormOpen)}>Create Review</button>}
-                        {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
+                        {sessionUser && !booleanFlag && sessionUser.id !== spot.ownerId ?
+                            <>
+                                <button
+                                    className="create-review-button"
+                                    onClick={() => { setIsFormOpen(!isFormOpen) }}>
+                                    Create Review
+                                </button>
+
+                            </>
+                            : null
+
+                        }
+                    </div>
+
+                    {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
+                        <>
+
                             <form className="reviews-form" onSubmit={handleSubmit}>
                                 {isSubmitted && (
                                     <ul className="errors">
@@ -158,32 +180,36 @@ function SpotDetails() {
                                 <div>
                                     <label htmlFor='reviews'>Review:</label>
                                     <input
-                                        id='reviews'
+                                        className='reviews'
                                         type='text'
                                         onChange={e => setReview(e.target.value)}
                                         value={review}
+                                        placeholder='Share your thoughts about your stay!'
                                         required
                                     />
                                 </div>
                                 <div>
                                     <label htmlFor='stars'>Stars:</label>
                                     <input
-                                        id='stars'
+                                        className='stars'
                                         type='number'
                                         min={1}
                                         max={5}
                                         onChange={e => setStars(e.target.value)}
                                         value={stars}
+                                        placeholder='Rate your stay!'
                                         required
                                     />
                                 </div>
                                 <button >Submit</button>
-                            </form>) : (
-                            (null))}
-                    </div>
+                            </form>
+                        </>
+                    ) : (
+                        (null))}
                 </div>
             </div>
         </div>
+        </div >
     )
 }
 
