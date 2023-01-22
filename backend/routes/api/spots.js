@@ -369,8 +369,7 @@ router.get('/:spotId', async (req, res, next) => {
     })
     avgRating = avgRating.toJSON()
     const avgStars = avgRating.avgStarRating
-    console.log(spotById.Owner)
-
+    
     const spotIdInfo = {
         id: spotById.id,
         ownerId: spotById.ownerId,
