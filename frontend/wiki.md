@@ -1,4 +1,4 @@
-VentureBnb wiki!
+VentureBnb Wiki (Meant to be viewed raw)
 
 store = {
     session: {},
