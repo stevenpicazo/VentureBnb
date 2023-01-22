@@ -23,7 +23,7 @@
 
 .listing-info-container {
     border-bottom: 1px solid #c0bbbb;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
 }
  
 
@@ -36,9 +36,53 @@
 
 .listing-info {
     padding-top: 8px;
-    font-size: 13px;
+    font-size: 17px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
 
+.hosting-info-container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    border-bottom: 1px solid #c0bbbb;
+    padding-bottom: 25px;
+}
+
+.fa-calendar {
+    /* display: flex; */
+    /* justify-content: space-between; */
+    font-size: 25px;
+    padding-right: 10px;
+    padding-bottom: 11px;
+}
+.fa-pen-to-square {
+    font-size: 25px;
+    padding-right: 8px;
+    padding-bottom: 11px;
+
+    /* padding-bottom: 16px; */
+}
+.fa-circle-user {
+    font-size: 25px;
+    padding-right: 8px;
+    padding-bottom: 11px;
+
+}
+
+.check-in, .work-space, .super-host  {
+    /* display: flex; */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+.check-in-info, .super-host-info{
+    /* display: flex; */
+    /* padding-top: 5px; */
+    padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+    padding-top: 6px;
+    /* justify-content: ; */
+    /* align-items: flex-start; */
+}
 

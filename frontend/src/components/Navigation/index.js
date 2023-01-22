@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import CreateSpot from '../CreateSpot/CreateSpot';
 import './Navigation.css';
 
+
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
@@ -12,7 +13,11 @@ function Navigation({ isLoaded }){
     <div className='nav-container'>
       <div className='home-button'>
       {/* <i class="fa-brands fa-gg-circle"> */}
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/">
+        <img 
+        className='logo'
+        src={require('./logo.png')} alt="Home" />
+        </NavLink>
       </div>
       
       <div className='create-spot-button'>

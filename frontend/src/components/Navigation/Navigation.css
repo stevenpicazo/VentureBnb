@@ -2,6 +2,11 @@
     display: none;
 }
 
+.logo {
+    /* width: 50px; */
+    max-height: 19px;
+}
+
 .nav-container {
     display: flex;
     align-items: center;
@@ -17,7 +22,7 @@
   
   
 .home-button {
-    padding-left: 20px;
+    padding-left: 35px;
     flex-grow: 1;
     float: left;
 }

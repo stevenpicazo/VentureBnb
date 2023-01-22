@@ -45,8 +45,8 @@ function ProfileButton({ user }) {
 
   const demoUser = (e) => {
     e.preventDefault()
-    const password = 'password2'
-    const credential = "FakeUser1"
+    const password = 'password'
+    const credential = "Emiliana"
     dispatch(sessionActions.login({credential, password}))
     closeMenu()
   }
@@ -59,6 +59,7 @@ function ProfileButton({ user }) {
      <div className="profile-wrapper">
         <div className="profile-container">
           <button className="open-menu-button" onClick={openMenu}>
+            
             <i className="fa-solid fa-bars"></i>
             <i className="fas fa-user-circle" />
           </button>
@@ -73,8 +74,12 @@ function ProfileButton({ user }) {
                   <NavLink onClick={closeMenu} className="my-listings-navlink" to={'/listings'}>
                     My listings
                   </NavLink>
+                  
                 : null}
                 </div> 
+                <button>{user.username}</button>
+                <button>{user.firstName} {user.lastName}</button>
+                <button>{user.email}</button>
               </>
             ) : (
               <>

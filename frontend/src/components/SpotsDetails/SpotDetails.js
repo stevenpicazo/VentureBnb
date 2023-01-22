@@ -22,7 +22,8 @@ function SpotDetails() {
     const sessionUser = useSelector(state => state.session.user);
     const { spotId } = useParams()
     const spot = useSelector((state) => state.spots[spotId])
-
+    // const spot = Object.values(spotObj)
+    console.log('spot', spot)
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewArr = Object.values(reviewsObj)
 
@@ -35,12 +36,16 @@ function SpotDetails() {
                 const spotData = await res.json()
                 if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
             })
-    }, [dispatch, hasSubmitted, spotId, history, sessionUser])
+    }, [dispatch, hasSubmitted])
 
+    const reviewRefresh = async (e) => {
+        await dispatch[reviewsActions.actionLoadReview(spotId)]
+    }
 
     if (!isLoaded) {
         return null
     }
+
     const deleteReview = async (e, reviewId) => {
         e.preventDefault()
         await dispatch(reviewsActions.deleteThunk(reviewId))
@@ -54,12 +59,11 @@ function SpotDetails() {
             reviewsActions.createThunk(
                 { review, stars },
                 spotId))
-            // .then(() => {
-            //     setHasSubmitted(!hasSubmitted)
-            // })
+            .then(() => {
+                setHasSubmitted(!hasSubmitted)
+            })
             .catch(async (res) => {
                 const data = await res.json()
-                console.log('data -->', data)
                 if (data.validationErrors) {
                     setValidationErrors(data.validationErrors);
                 }
@@ -73,11 +77,13 @@ function SpotDetails() {
         }
     }
 
+    if (handleSubmit) reviewRefresh()
+
+
     return (
         <div className="spot-details-container">
 
             <div>
-                {console.log(spot)}
                 <h2 className="spot-title">{spot.name}</h2>
                 <div className="reviews-location">
                     {!spot.numReviews ? 'No Reviews' : `★${spot.avgStarRating} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
@@ -93,6 +99,25 @@ function SpotDetails() {
                     </div>
                     <div className="listing-info">
                         6 guests · 4 bedrooms · 7 beds · 2 baths
+                    </div>
+                </div>
+                {/* <i class="fa-regular fa-calendar"></i> */}
+                <div className="hosting-info-container">
+                    <div className="check-in">
+                        <i class="fa-regular fa-calendar"></i>Self check-in
+
+                    </div>
+                    <span className="check-in-info">Check in yourself through key pad.</span>
+                    <div className="super-host">
+                        <i class="fa-regular fa-circle-user"></i>
+                        {spot.Owner.firstName} is a Superhost
+                    </div>
+                    <span className="super-host-info">
+                        Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.
+                    </span>
+
+                    <div className="work-space">
+                        <i class="fa-regular fa-pen-to-square"></i>Designated work space
                     </div>
                 </div>
 
@@ -116,16 +141,15 @@ function SpotDetails() {
                             </div>
                         )))}
                     <div>
-                        {sessionUser && !booleanFlag && <button onClick={() => setIsFormOpen(!isFormOpen)}>Create Review</button>}
+                        {sessionUser && !booleanFlag && sessionUser.id !== spot.ownerId &&
+                            <button onClick={() => setIsFormOpen(!isFormOpen)}>Create Review</button>}
                         {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
                             <form className="reviews-form" onSubmit={handleSubmit}>
                                 {isSubmitted && (
                                     <ul className="errors">
                                         {validationErrors.map(error => (
                                             <>
-                                                {console.log('validation errors -->', validationErrors)}
                                                 <li key={error}>{error}</li>
-                                                {console.log('error -->', error)}
                                             </>
 
                                         ))}

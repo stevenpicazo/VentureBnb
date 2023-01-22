@@ -165,6 +165,7 @@ export const spotReducer = (state = initialState, action) => {
             // let SpotDetails = Object.assign({}, state)
             let newState = Object.assign({}, state)
             newState[action.spotById.id] = action.spotById
+            console.log('newState -->', newState)
             return newState
         } 
         case LOAD_CURRENT_USER_SPOTS: {
@@ -172,7 +173,7 @@ export const spotReducer = (state = initialState, action) => {
             // const usersSpots = normalizeData(action.usersSpotById.Spots)
             // newState.CurrentUsersSpots = usersSpots
             const usersSpots = normalizeData(action.usersSpotById)
-            newState= usersSpots
+            newState = usersSpots
             console.log('currentUsersNewState-->', newState)
             return newState
         }
