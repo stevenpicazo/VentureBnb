@@ -23,7 +23,6 @@ function SpotDetails() {
     const sessionUser = useSelector(state => state.session.user);
     const spot = useSelector((state) => state.spots[spotId])
 
-    console.log('spot', spot)
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewArr = Object.values(reviewsObj)
 
@@ -86,7 +85,7 @@ function SpotDetails() {
             <div>
                 <h2 className="spot-title">{spot.name}</h2>
                 <div className="reviews-location">
-                    {!spot.numReviews ? 'No Reviews' : `★${spot.avgStarRating.toFixed(2)} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
+                    {!spot.numReviews ? 'No Reviews' : `★ ${spot.avgStarRating} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
                 </div>
 
                 {spot.SpotImages.map(image => (
@@ -122,16 +121,26 @@ function SpotDetails() {
                 </div>
 
                 <div className="num-reviews">
-                    {!spot.numReviews ? 'No Reviews' : `★ ${spot.avgStarRating.toFixed(2)} · ${spot.numReviews} reviews`}
+                    {!spot.numReviews ? 'No Reviews' : `★ ${spot.avgStarRating} · ${spot.numReviews} reviews`}
 
                 </div>
                 <div className="reviews-list">
                     <>
                         {reviewsObj && Object.values(reviewsObj).map(review => (
+                            <div className="user-reviews-container">
+                                <div className="user-ratings">
+                                    <i className="fa-regular fa-circle-user"></i>
+                                    {review.User.firstName}
+                                </div>
+                                <div className="user-reviews">
+                                    {review.review}
+                                </div>
+                            </div>
+
+                        ))}
+                        {reviewsObj && Object.values(reviewsObj).map(review => (
                             sessionUser && (
                                 <div review={review} className={"reviewInfo"} key={`review-${review.id}`}>
-                                    {/* {console.log('review -->', review)} */}
-                                    {/* <div>{review.User.firstName} ★{review.stars} </div> */}
                                     {sessionUser.id === review.userId && (
                                         <button
                                             className="delete-review-button"
@@ -140,75 +149,71 @@ function SpotDetails() {
                                         </button>
                                     )}
                                 </div>
-                            )
-                            )
-                            )
-                        }
-                        {/* < div > { review.User.firstName } ★{review.stars} </div> */}
-                </>
-                <div>
-
+                            )))}
+                    </>
                     <div>
-                        {sessionUser && !booleanFlag && sessionUser.id !== spot.ownerId ?
+
+                        <div>
+                            {sessionUser && !booleanFlag && sessionUser.id !== spot.ownerId ?
+                                <>
+                                    <button
+                                        className="create-review-button"
+                                        onClick={() => { setIsFormOpen(!isFormOpen) }}>
+                                        Create Review
+                                    </button>
+
+                                </>
+                                : null
+
+                            }
+                        </div>
+
+                        {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
                             <>
-                                <button
-                                    className="create-review-button"
-                                    onClick={() => { setIsFormOpen(!isFormOpen) }}>
-                                    Create Review
-                                </button>
 
+                                <form className="reviews-form" onSubmit={handleSubmit}>
+                                    {isSubmitted && (
+                                        <ul className="errors">
+                                            {validationErrors.map(error => (
+                                                <>
+                                                    <li key={error}>{error}</li>
+                                                </>
+
+                                            ))}
+                                        </ul>
+                                    )}
+                                    <div>
+                                        <label htmlFor='reviews'>Review:</label>
+                                        <input
+                                            className='reviews'
+                                            type='text'
+                                            onChange={e => setReview(e.target.value)}
+                                            value={review}
+                                            placeholder='Share your thoughts about your stay!'
+                                            required
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor='stars'>Stars:</label>
+                                        <input
+                                            className='stars'
+                                            type='number'
+                                            min={1}
+                                            max={5}
+                                            onChange={e => setStars(e.target.value)}
+                                            value={stars}
+                                            placeholder='Rate your stay!'
+                                            required
+                                        />
+                                    </div>
+                                    <button className='submit-review-button'>Submit</button>
+                                </form>
                             </>
-                            : null
-
-                        }
+                        ) : (
+                            (null))}
                     </div>
-
-                    {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
-                        <>
-
-                            <form className="reviews-form" onSubmit={handleSubmit}>
-                                {isSubmitted && (
-                                    <ul className="errors">
-                                        {validationErrors.map(error => (
-                                            <>
-                                                <li key={error}>{error}</li>
-                                            </>
-
-                                        ))}
-                                    </ul>
-                                )}
-                                <div>
-                                    <label htmlFor='reviews'>Review:</label>
-                                    <input
-                                        className='reviews'
-                                        type='text'
-                                        onChange={e => setReview(e.target.value)}
-                                        value={review}
-                                        placeholder='Share your thoughts about your stay!'
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor='stars'>Stars:</label>
-                                    <input
-                                        className='stars'
-                                        type='number'
-                                        min={1}
-                                        max={5}
-                                        onChange={e => setStars(e.target.value)}
-                                        value={stars}
-                                        placeholder='Rate your stay!'
-                                        required
-                                    />
-                                </div>
-                                <button >Submit</button>
-                            </form>
-                        </>
-                    ) : (
-                        (null))}
                 </div>
             </div>
-        </div>
         </div >
     )
 }

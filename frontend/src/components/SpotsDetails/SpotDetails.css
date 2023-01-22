@@ -82,12 +82,26 @@
     padding-top: 6px;
 }
 
-.num-reviews {
-    padding-top: 25px;
+.listing-info-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
 }
 
-.reviews-list {
+.num-reviews {
+    padding-top: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+}
 
+.user-ratings {
+    padding-top: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+}
+.user-reviews {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
 }
 
 .create-review-button {
@@ -100,6 +114,7 @@
     padding-bottom: 17px;
     background-color: #FF385C;
     color: rgb(243, 243, 243);
+    margin-bottom: 50px;
 }
 
 .delete-review-button {
@@ -133,4 +148,18 @@
     padding: 10px 0 10px;
     border: 1px solid rgba(3, 3, 3, .6);
     border-radius: 8px;
+}
+
+.submit-review-button {
+    width: 100%;
+    margin: 15px 0 9px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    background-color: #FF385C;
+    color: rgb(243, 243, 243);
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
