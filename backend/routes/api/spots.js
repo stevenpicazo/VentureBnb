@@ -342,7 +342,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
 //! Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
-    const spotById = await Spot.findByPk(req.params.spotId)
+    const spotById = await Spot.findByPk(req.params.spotId, {
+        include: [
+          {  model: User, attributes: ['id', 'firstName', 'lastName'], as: 'Owner'} 
+        ]
+    })
     if (!spotById) {
         res.status(404)
         return res.json({
@@ -355,9 +359,9 @@ router.get('/:spotId', async (req, res, next) => {
         where: { spotId: spotById.id },
         attributes: ['id', 'url', 'preview']
     })
-    const user = await User.findOne({
-        attributes: ['id', 'firstName', 'lastName']
-    })
+    // const user = await User.findOne({
+    //     attributes: ['id', 'firstName', 'lastName']
+    // })
 
     let avgRating = await Review.findOne({
         attributes: [[sequelize.fn('AVG', sequelize.col('stars')), 'avgStarRating']],
@@ -365,6 +369,7 @@ router.get('/:spotId', async (req, res, next) => {
     })
     avgRating = avgRating.toJSON()
     const avgStars = avgRating.avgStarRating
+    console.log(spotById.Owner)
 
     const spotIdInfo = {
         id: spotById.id,
@@ -383,7 +388,7 @@ router.get('/:spotId', async (req, res, next) => {
         numReviews: reviewCount,
         avgStarRating: avgStars,
         SpotImages: spotImage,
-        Owner: user
+        Owner: spotById.Owner
     }
     return res.json(spotIdInfo)
 })
