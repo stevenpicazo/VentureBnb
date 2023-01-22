@@ -18,14 +18,14 @@
     height: 550px;
     width: 100%;
     object-fit: cover;
-    border-radius: 12px;   
+    border-radius: 12px;
 }
 
 .listing-info-container {
     border-bottom: 1px solid #c0bbbb;
     padding-bottom: 25px;
 }
- 
+
 
 .hosting-info {
     padding-top: 30px;
@@ -41,7 +41,7 @@
     font-weight: 300;
 }
 
-.hosting-info-container{
+.hosting-info-container {
     display: flex;
     flex-direction: column;
     padding-top: 20px;
@@ -56,6 +56,7 @@
     padding-right: 10px;
     padding-bottom: 11px;
 }
+
 .fa-pen-to-square {
     font-size: 25px;
     padding-right: 8px;
@@ -63,6 +64,7 @@
 
     /* padding-bottom: 16px; */
 }
+
 .fa-circle-user {
     font-size: 25px;
     padding-right: 8px;
@@ -70,11 +72,15 @@
 
 }
 
-.check-in, .work-space, .super-host  {
+.check-in,
+.work-space,
+.super-host {
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
 }
-.check-in-info, .super-host-info{
+
+.check-in-info,
+.super-host-info {
 
     padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
@@ -121,6 +127,9 @@
     color: rgb(243, 243, 243);
     margin-bottom: 50px;
 }
+.create-review-button:hover {
+    background-color: #fa4e6d;
+}
 
 .delete-review-button {
     width: 100%;
@@ -133,7 +142,9 @@
     background-color: #FF385C;
     color: rgb(243, 243, 243);
 }
-
+.delete-review-button:hover {
+    background-color: #fa5674;
+}
 
 .reviews-form-container {
     padding-top: 30px;
@@ -146,7 +157,8 @@
     color: black;
 }
 
-.reviews, .stars {
+.reviews,
+.stars {
     margin-top: 7px;
     margin-bottom: 10px;
     width: 100%;
@@ -167,4 +179,8 @@
     color: rgb(243, 243, 243);
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.submit-review-button:hover {
+    background-color: #fa5674;
 }

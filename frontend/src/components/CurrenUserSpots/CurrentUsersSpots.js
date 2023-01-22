@@ -31,8 +31,9 @@ const [loaded, setLoaded] = useState('')
   }
 
   return (
-    <div>
+    <>
         <h1 className="userspots-h1">My Listings</h1>
+    <div className="listings-container">
         {Object.values(spotsObj).map((userspot) => (
           <div key={userspot.id}>
             {/* <UserSpotDetails key={userspot.id} userspot={userspot}/> */}
@@ -46,7 +47,9 @@ const [loaded, setLoaded] = useState('')
                   onClick={(e) => deleteSpot(e, userspot.id)}>
                       Delete Listing
                   </button>
-                  <button onClick={(e) => {
+                  <button 
+                  className="userspot-edit-button"
+                  onClick={(e) => {
                     e.preventDefault()
                     history.push(`/edit/listing/${userspot.id}`)
                   }}>Edit</button> 
@@ -55,6 +58,7 @@ const [loaded, setLoaded] = useState('')
           </div>
         ))}
     </div>
+    </>
   );
 }
 

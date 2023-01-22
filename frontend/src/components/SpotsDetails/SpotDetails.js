@@ -78,6 +78,7 @@ function SpotDetails() {
 
     if (handleSubmit) reviewRefresh()
 
+    const rating = parseFloat(spot.avgStarRating).toFixed(2)
 
     return (
         <div className="spot-details-container">
@@ -85,7 +86,7 @@ function SpotDetails() {
             <div>
                 <h2 className="spot-title">{spot.name}</h2>
                 <div className="reviews-location">
-                    {!spot.numReviews ? 'No Reviews' : `★ ${spot.avgStarRating} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
+                    {!spot.numReviews ? 'No Reviews' : `★ ${rating} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
                 </div>
 
                 {spot.SpotImages.map(image => (
@@ -121,7 +122,7 @@ function SpotDetails() {
                 </div>
 
                 <div className="num-reviews">
-                    {!spot.numReviews ? 'No Reviews' : `★ ${spot.avgStarRating} · ${spot.numReviews} reviews`}
+                    {!spot.numReviews ? 'No Reviews' : `★ ${rating} · ${spot.numReviews} reviews`}
 
                 </div>
                 <div className="reviews-list">
