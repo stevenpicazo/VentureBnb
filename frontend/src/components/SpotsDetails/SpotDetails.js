@@ -126,8 +126,9 @@ function SpotDetails() {
                 </div>
                 <div className="reviews-list">
                     <>
+                    <div className="user-reviews-container">
                         {reviewsObj && Object.values(reviewsObj).map(review => (
-                            <div className="user-reviews-container">
+                            <div>
                                 <div className="user-ratings">
                                     <i className="fa-regular fa-circle-user"></i>
                                     {review.User.firstName}
@@ -138,6 +139,7 @@ function SpotDetails() {
                             </div>
 
                         ))}
+                        </div>
                         {reviewsObj && Object.values(reviewsObj).map(review => (
                             sessionUser && (
                                 <div review={review} className={"reviewInfo"} key={`review-${review.id}`}>

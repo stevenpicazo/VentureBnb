@@ -99,6 +99,11 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
 }
+
+.user-reviews-container {
+    padding-bottom: 50px;
+}
+
 .user-reviews {
     font-family: 'Roboto', sans-serif;
     font-weight: 200;

@@ -32,7 +32,7 @@ function SignupFormModal() {
 
   return (
     <div className="signup-container">
-      <div className="signup-title">Sign Up</div>
+      <div className="signup-title">Welcome to VentureBnb</div>
       <form className="signup-form" onSubmit={handleSubmit}>
         <ul className="ul-errors">
           {errors.map((error, idx) => <div className="errors" key={idx}>{error}</div>)}
