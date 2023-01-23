@@ -7,7 +7,12 @@ const { requireAuth } = require('../../utils/auth')
 const router = express.Router();
 
 const reviewsValidate = [
-    check('review').not().isEmpty().withMessage('Review text is required'),
+    check('review')
+    .not().isEmpty()
+    .withMessage('Review text is required')
+    .isLength({ min: 0 })
+    .isLength({ max: 100 })
+    .withMessage("Max character limit off 100 reached"),
     check('stars').isInt({ min: 1, max: 5 }).withMessage('Stars must be an integer from 1 to 5'),
     handleValidationErrors
 ]

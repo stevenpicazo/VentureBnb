@@ -11,10 +11,14 @@ const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Email or username is required"),
+    .withMessage("Email or username is required")
+    .isLength({ max: 12 })
+    .withMessage("Username must be less than 12 characters"),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage("Password is required"),
+    .withMessage("Password is required")
+    .isLength({ max: 255 })
+    .withMessage("Password must be less than 255 characters"),
   handleValidationErrors
 ];
 
