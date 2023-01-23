@@ -107,6 +107,104 @@ module.exports = {
         description: 'Amazing view. Very close to the city.',
         price: 300
       },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
+        state: 'CA',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Amazing view. Very close to the city.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
+        state: 'CA',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Amazing view. Very close to the city.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
+        state: 'CA',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Amazing view. Very close to the city.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
+        state: 'CA',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Amazing view. Very close to the city.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
+        state: 'CA',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Amazing view. Very close to the city.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
+        state: 'CA',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Amazing view. Very close to the city.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
+        state: 'CA',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Amazing view. Very close to the city.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'San Dimas',
+        state: 'CA',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Amazing view. Very close to the city.',
+        price: 300
+      },
+
+
     ], {});
   },
 
@@ -114,7 +212,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      ownerId: { [Op.in]: [1, 2, 3, 4, 5, 6] }
+      ownerId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8] }
     }, {});
   }
 };

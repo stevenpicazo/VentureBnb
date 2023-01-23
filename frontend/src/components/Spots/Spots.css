@@ -1,4 +1,4 @@
-.spot-list {
+.spot-list-container {
     display: flex;
     margin-top: 45px;
     padding-left: 35px;
@@ -9,6 +9,10 @@
     gap: 25px;
     justify-content: center;
     /* align-items: center; */
+    /* margin-bottom: 80px; */
+    border-bottom: 1px solid #b4b0b0;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
     flex-wrap: wrap;
 }
 

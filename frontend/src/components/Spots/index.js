@@ -19,7 +19,7 @@ const Spots = () => {
     if (!spotsArr.length) return null
     
     return (
-        <div className="spot-list">
+        <div className="spot-list-container">
             {spotsArr.map(spot => (
                 <SpotsList key={`spot-${spot.id}`} spot={spot}/>
             ))}

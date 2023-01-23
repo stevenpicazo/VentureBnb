@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom"
 
 function SpotsList({ spot }) {
+
+
+    const rating = parseFloat(spot.avgRating).toFixed(2)
+
     return (
         <NavLink
             className="nav-link"
@@ -12,7 +16,7 @@ function SpotsList({ spot }) {
                 <div className="spot-info">
                     <div className="spot-location-rating">
                         <div className="spot-city-state"> {spot.city}, {spot.state} </div>
-                        <div className="avg-rating">⭑{spot.avgRating}</div>
+                        <div className="avg-rating">★ {rating}</div>
                     </div>
 
 
