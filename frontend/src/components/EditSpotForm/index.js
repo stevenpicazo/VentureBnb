@@ -6,7 +6,7 @@ import * as spotsActions from "../../store/spots";
 import './EditSpot.css'
 
 function EditSpotForm() {
-    
+
     const history = useHistory()
     const dispatch = useDispatch()
     const [address, setAddress] = useState('');
@@ -25,12 +25,12 @@ function EditSpotForm() {
     // const spot = useSelector(state => state.spots[spotId])
     // const spot = useSelector(state => state.spots)
     // console.log('spots from the selector -->', spot)
-    const {spotId} = useParams()
+    const { spotId } = useParams()
 
     useEffect(() => {
         dispatch(spotsActions.thunkGetSpotById(spotId))
-    },[dispatch, spotId])
- 
+    }, [dispatch, spotId])
+
     // if (!loaded) {
     //     return null
     // }
@@ -39,121 +39,122 @@ function EditSpotForm() {
         e.preventDefault()
         setValidationErrors([])
         return dispatch(
-          spotsActions.editThunk(
-            {
-              address,
-              city,
-              state,
-              country,
-              name,
-              description,
-              price,
-            //   previewImage
-            },
-            spotId
-          )
+            spotsActions.editThunk(
+                {
+                    address,
+                    city,
+                    state,
+                    country,
+                    name,
+                    description,
+                    price,
+                    //   previewImage
+                },
+                spotId
+            )
         )
-      .then(() => {
-        history.push(`/spots/${spotId}`);
-      })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.validationErrors) setValidationErrors(data.validationErrors);
-      });
-  };
+            .then(() => {
+                history.push(`/spots/${spotId}`);
+            })
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setValidationErrors(data.errors);
+            });
+    };
 
     return (
         <div className="form-container">
 
-        <form className="edit-spot-form" onSubmit={handleSubmit}>
-        <h2 className="edit-h2">Edit Listing</h2>
-            <ul className="errors">
-            {hasSubmitted && validationErrors.length && (
+            <form className="edit-spot-form" onSubmit={handleSubmit}>
+                <h2 className="edit-h2">Edit Listing</h2>
                 <ul className="errors">
+
                     {validationErrors.map(error => (
-                        <li key={error}>{error}</li>
+                        <div
+                            className="errors"
+                            key={error}>{error}
+                        </div>
                     ))}
+
                 </ul>
-            )}
-            </ul>
-            <div>
-            <label htmlFor='address'></label>
-            <input
-                className='address'
-                type='text'
-                onChange={e => setAddress(e.target.value)}
-                value={address}
-                placeholder='Address'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='city'></label>
-            <input
-                className='city'
-                type='text'
-                onChange={e => setCity(e.target.value)}
-                value={city}
-                placeholder='City'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='state'></label>
-            <input
-                className='state'
-                type='text'
-                onChange={e => setState(e.target.value)}
-                value={state}
-                placeholder='State'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='country'></label>
-            <input
-                className='country'
-                type='text'
-                onChange={e => setCountry(e.target.value)}
-                value={country}
-                placeholder='Country'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='name'></label>
-            <input
-                className='name'
-                type='text'
-                onChange={e => setName(e.target.value)}
-                value={name}
-                placeholder='Name'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='description'></label>
-            <input
-                className='description'
-                type='text'
-                onChange={e => setDescription(e.target.value)}
-                value={description}
-                placeholder='Description'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='price'></label>
-            <input
-                className='price'
-                type='number'
-                onChange={e => setPrice(e.target.value)}
-                value={price}
-                placeholder='Price'
-                required
-            />
-            </div>
-            {/* <div>
+                <div>
+                    <label htmlFor='address'></label>
+                    <input
+                        className='address'
+                        type='text'
+                        onChange={e => setAddress(e.target.value)}
+                        value={address}
+                        placeholder='Address'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='city'></label>
+                    <input
+                        className='city'
+                        type='text'
+                        onChange={e => setCity(e.target.value)}
+                        value={city}
+                        placeholder='City'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='state'></label>
+                    <input
+                        className='state'
+                        type='text'
+                        onChange={e => setState(e.target.value)}
+                        value={state}
+                        placeholder='State'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='country'></label>
+                    <input
+                        className='country'
+                        type='text'
+                        onChange={e => setCountry(e.target.value)}
+                        value={country}
+                        placeholder='Country'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='name'></label>
+                    <input
+                        className='name'
+                        type='text'
+                        onChange={e => setName(e.target.value)}
+                        value={name}
+                        placeholder='Name'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='description'></label>
+                    <input
+                        className='description'
+                        type='text'
+                        onChange={e => setDescription(e.target.value)}
+                        value={description}
+                        placeholder='Description'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='price'></label>
+                    <input
+                        className='price'
+                        type='number'
+                        onChange={e => setPrice(e.target.value)}
+                        value={price}
+                        placeholder='Price'
+                        required
+                    />
+                </div>
+                {/* <div>
             <label htmlFor='previewImage'>Image URL:</label>
             <input
                 type="url"
@@ -162,9 +163,9 @@ function EditSpotForm() {
                 required
             />
             </div> */}
-            <button className='listings-button'
-             >Submit</button>
-        </form>
+                <button className='listings-button'
+                >Submit</button>
+            </form>
         </div>
     );
 }

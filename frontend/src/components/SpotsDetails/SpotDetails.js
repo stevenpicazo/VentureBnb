@@ -61,10 +61,14 @@ function SpotDetails() {
             .then(() => {
                 setHasSubmitted(!hasSubmitted)
             })
+            .then(() => {
+                setStars('')
+                setReview('')
+            })
             .catch(async (res) => {
                 const data = await res.json()
-                if (data.validationErrors) {
-                    setValidationErrors(data.validationErrors);
+                if (data.errors) {
+                    setValidationErrors(data.errors);
                 }
             })
     }
@@ -127,19 +131,19 @@ function SpotDetails() {
                 </div>
                 <div className="reviews-list">
                     <>
-                    <div className="user-reviews-container">
-                        {reviewsObj && Object.values(reviewsObj).map(review => (
-                            <div>
-                                <div className="user-ratings">
-                                    <i className="fa-regular fa-circle-user"></i>
-                                    {review.User.firstName}
+                        <div className="user-reviews-container">
+                            {reviewsObj && Object.values(reviewsObj).map(review => (
+                                <div>
+                                    <div className="user-ratings">
+                                        <i className="fa-regular fa-circle-user"></i>
+                                        {review.User.firstName}
+                                    </div>
+                                    <div className="user-reviews">
+                                        {review.review}
+                                    </div>
                                 </div>
-                                <div className="user-reviews">
-                                    {review.review}
-                                </div>
-                            </div>
 
-                        ))}
+                            ))}
                         </div>
                         {reviewsObj && Object.values(reviewsObj).map(review => (
                             sessionUser && (
@@ -173,18 +177,15 @@ function SpotDetails() {
 
                         {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
                             <>
-
                                 <form className="reviews-form" onSubmit={handleSubmit}>
-                                    {isSubmitted && (
-                                        <ul className="errors">
-                                            {validationErrors.map(error => (
-                                                <>
-                                                    <li key={error}>{error}</li>
-                                                </>
-
-                                            ))}
-                                        </ul>
-                                    )}
+                                    <ul className="ul-errors">
+                                        {validationErrors.map(error => (
+                                            <div
+                                                className="errors"
+                                                key={error}>{error}
+                                            </div>
+                                        ))}
+                                    </ul>
                                     <div>
                                         <label htmlFor='reviews'>Review:</label>
                                         <input

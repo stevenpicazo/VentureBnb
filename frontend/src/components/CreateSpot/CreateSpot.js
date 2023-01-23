@@ -24,132 +24,133 @@ function CreateSpot() {
         e.preventDefault();
         setValidationErrors([]);
         return dispatch(
-          spotsActions.creatThunk(
-            {
-              address,
-              city,
-              state,
-              country,
-              name,
-              description,
-              price,
-            },
-            { url: previewImage, preview: true }
-          )
+            spotsActions.creatThunk(
+                {
+                    address,
+                    city,
+                    state,
+                    country,
+                    name,
+                    description,
+                    price,
+                },
+                { url: previewImage, preview: true }
+            )
         )
-          .then(() => {
-            history.push(`/listings`);
-          })
-          .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.validationErrors) setValidationErrors(data.validationErrors);
-          });
-      };
+            .then(() => {
+                history.push(`/listings`);
+            })
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setValidationErrors(data.errors)
+            })
+    }
 
     return (
         <div className='form-container'>
 
-        <form className='create-listing-form' onSubmit={handleSubmit}>
+            <form className='create-listing-form' onSubmit={handleSubmit}>
                 <h2 className='listings-h2'>Venture your home</h2>
-            <ul className="errors">
-            {hasSubmitted && validationErrors.length && (
-                <ul className="errors">
+
+                <ul className="ul-errors">
                     {validationErrors.map(error => (
-                        <li key={error}>{error}</li>
+                        <div
+                            className="errors"
+                            key={error}>{error}
+                        </div>
                     ))}
                 </ul>
-            )}
-            </ul>
-            <div>
-            <label htmlFor='address'></label>
-            <input
-                className='address'
-                type='text'
-                onChange={e => setAddress(e.target.value)}
-                value={address}
-                placeholder='Address'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='city'></label>
-            <input
-                className='city'
-                type='text'
-                onChange={e => setCity(e.target.value)}
-                value={city}
-                placeholder='City'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='state'></label>
-            <input
-                className='state'
-                type='text'
-                onChange={e => setState(e.target.value)}
-                value={state}
-                placeholder='State'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='country'></label>
-            <input
-                className='country'
-                type='text'
-                onChange={e => setCountry(e.target.value)}
-                value={country}
-                placeholder='Country'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='name'></label>
-            <input
-                className='name'
-                type='text'
-                onChange={e => setName(e.target.value)}
-                value={name}
-                placeholder='Name of location'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='description'></label>
-            <input
-                className='description'
-                type='text'
-                onChange={e => setDescription(e.target.value)}
-                value={description}
-                placeholder='Description'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='price'></label>
-            <input
-                className='price'
-                type='number'
-                onChange={e => setPrice(e.target.value)}
-                value={price}
-                placeholder='Price'
-                required
-            />
-            </div>
-            <div>
-            <label htmlFor='previewImage'></label>
-            <input
-                className='previewImage'
-                type="url"
-                value={previewImage}
-                onChange={(e) => setPreviewImage(e.target.value)}
-                placeholder='Preview image url'
-                required
-            />
-            </div>
-            <button className='listings-button'>Submit</button>
-        </form>
+
+                <div>
+                    <label htmlFor='address'></label>
+                    <input
+                        className='address'
+                        type='text'
+                        onChange={e => setAddress(e.target.value)}
+                        value={address}
+                        placeholder='Address'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='city'></label>
+                    <input
+                        className='city'
+                        type='text'
+                        onChange={e => setCity(e.target.value)}
+                        value={city}
+                        placeholder='City'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='state'></label>
+                    <input
+                        className='state'
+                        type='text'
+                        onChange={e => setState(e.target.value)}
+                        value={state}
+                        placeholder='State'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='country'></label>
+                    <input
+                        className='country'
+                        type='text'
+                        onChange={e => setCountry(e.target.value)}
+                        value={country}
+                        placeholder='Country'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='name'></label>
+                    <input
+                        className='name'
+                        type='text'
+                        onChange={e => setName(e.target.value)}
+                        value={name}
+                        placeholder='Name of location'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='description'></label>
+                    <input
+                        className='description'
+                        type='text'
+                        onChange={e => setDescription(e.target.value)}
+                        value={description}
+                        placeholder='Description'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='price'></label>
+                    <input
+                        className='price'
+                        type='number'
+                        onChange={e => setPrice(e.target.value)}
+                        value={price}
+                        placeholder='Price'
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor='previewImage'></label>
+                    <input
+                        className='previewImage'
+                        type="url"
+                        value={previewImage}
+                        onChange={(e) => setPreviewImage(e.target.value)}
+                        placeholder='Preview image url'
+                        required
+                    />
+                </div>
+                <button className='listings-button'>Submit</button>
+            </form>
         </div>
     );
 }
