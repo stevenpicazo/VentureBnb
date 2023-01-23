@@ -61,6 +61,7 @@
     font-family: 'Roboto', sans-serif;
     width: 377px;
     border: none;
+    
 }
 
 
@@ -69,7 +70,7 @@
     color: white;
     border-radius: 7px;
     border: none;
-    padding: 15px;
+    padding: 30px;
     cursor: pointer;
     padding: left 20px; 
     margin-top: 20px;

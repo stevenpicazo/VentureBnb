@@ -49,8 +49,9 @@
     align-items: center;
     flex-direction: column;
     padding: 10px;
+    padding-bottom: 15px;
     border: none;
-    margin-bottom: 20px;
+    /* margin-bottom: 50px; */
     font-family: 'Roboto', sans-serif;
     
 }
@@ -64,7 +65,7 @@
     color: white;
     border-radius: 7px;
     border: none;
-    padding: 15px;
+    padding: 30px;
     cursor: pointer;
     padding: left 20px; 
     margin-top: 20px;

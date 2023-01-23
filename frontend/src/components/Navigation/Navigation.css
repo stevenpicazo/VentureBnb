@@ -36,7 +36,7 @@
 .creat-spot-navlink {
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    font-weight: 200;
     color: black;
 }
 
@@ -45,6 +45,11 @@
     box-sizing: border-box;    
     border-radius: 20px;
     float: right;
+}
+.creat-spot-navlink:hover {
+    background-color: rgb(240, 239, 239);
+    padding: 5px;
+    border-radius: 10px;
 }
 
 
