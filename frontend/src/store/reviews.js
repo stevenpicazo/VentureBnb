@@ -34,20 +34,10 @@ export const actionDeleteReview = (review) => {
 }
 
 //! THUNKS
-// export const reviewBySpotIdThunk = (spotId) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
-//     if (res.ok) {
-//         const review = await res.json()
-//         // console.log('reviews in the thunk -->', review)
-//         dispatch((actionLoadReview(review)))
-//     }
-// }
-
 export const reviewBySpotIdThunk = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
     if (res.ok) {
         const review = await res.json()
-        // console.log('reviews in the thunk -->', review)
         dispatch((actionLoadReview(review.Reviews)))
     }
 }
@@ -59,22 +49,11 @@ export const createThunk = (review, spotId) => async (dispatch) => {
     })
     if (res.ok) {
         const review = await res.json()
-        // console.log('create review thunk -->', review)
         // dispatch(actionCreateReview(review))
         dispatch(reviewBySpotIdThunk(spotId));
         return review
     } else throw res
 }
-
-
-// export const reviewBySpotIdThunk = (spotId) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
-//     if (res.ok) {
-//         const review = await res.json()
-//         // console.log('reviews in the thunk -->', review)
-//         dispatch((actionLoadReview(review.Reviews)))
-//     }
-// }
 
 export const deleteThunk = (reviewId) => async (dispatch) => {
     const res = await csrfFetch(`/api/reviews/${reviewId}`, {
@@ -82,7 +61,6 @@ export const deleteThunk = (reviewId) => async (dispatch) => {
     })
     if (res.ok) {
         const review = await res.json()
-        // console.log('review in the thunk -->', review)
         dispatch(actionDeleteReview(review))
         return review
     }
@@ -119,18 +97,3 @@ export const reviewsReducer = (state = initialState, action) => {
             return state
     }
 }
-
-// case LOAD_REVIEW: {
-//     let newState = Object.assign({}, state)
-//     const reviews = normalizeData(action.reviews) 
-//     newState = reviews
-//     return newState
-// }
-// export const reviewBySpotIdThunk = (spotId) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
-//     if (res.ok) {
-//         const review = await res.json()
-//         // console.log('reviews in the thunk -->', review)
-//         dispatch((actionLoadReview(review.Reviews)))
-//     }
-// }

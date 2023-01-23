@@ -8,7 +8,6 @@ const Spots = () => {
     const dispatch = useDispatch()
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)
-    // console.log('spots', spotsArr)
     const [loaded, setLoaded] = useState('')
 
     

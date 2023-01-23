@@ -53,7 +53,6 @@ export const actionDeleteSpot = (spot) => {
 }
 
 export const actionGetCurrentUsersSpots = (usersSpotById) => {
-    // console.log('user spots in the action -->', usersSpotById)
     return {
         type: LOAD_CURRENT_USER_SPOTS,
         usersSpotById
@@ -74,7 +73,6 @@ export const thunkGetSpotById = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
     if (res.ok) {
         const spotById = await res.json()
-        console.log('spotbyid thunk -->', spotById)
         dispatch((actionGetSpotById(spotById)))
     }
 }
@@ -83,7 +81,6 @@ export const thunkCurrentUsersSpots = () => async (dispatch) => {
     const res = await csrfFetch('/api/spots/current')
     if (res.ok) {
         const spots = await res.json()
-        console.log('currentuser spots in da thunk -->', spots.Spots)
         dispatch(actionGetCurrentUsersSpots(spots.Spots))
         return spots
     }
@@ -116,7 +113,6 @@ export const editThunk = (spot, spotId) => async (dispatch) => {
   
     if (res.ok) {
       const spot = await res.json();
-    //   console.log('spot in the edit thunk --> ', spot)
       dispatch(actionEditSpot(spot));
       return spot
   };
@@ -128,7 +124,6 @@ export const deleteThunk = (spotId) => async (dispatch) => {
     })
     if (res.ok) {
         const spot = await res.json()
-        console.log('delete spotThunk -->', spot)
         dispatch(actionDeleteSpot(spot))
         
         return spot
@@ -165,7 +160,6 @@ export const spotReducer = (state = initialState, action) => {
             // let SpotDetails = Object.assign({}, state)
             let newState = Object.assign({}, state)
             newState[action.spotById.id] = action.spotById
-            console.log('newState -->', newState)
             return newState
         } 
         case LOAD_CURRENT_USER_SPOTS: {
@@ -174,7 +168,6 @@ export const spotReducer = (state = initialState, action) => {
             // newState.CurrentUsersSpots = usersSpots
             const usersSpots = normalizeData(action.usersSpotById)
             newState = usersSpots
-            console.log('currentUsersNewState-->', newState)
             return newState
         }
         case CREATE_SPOT: {

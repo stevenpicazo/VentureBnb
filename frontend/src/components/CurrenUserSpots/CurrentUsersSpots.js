@@ -9,7 +9,6 @@ function Profile() {
   const dispatch = useDispatch();
   const { ownerId }= useParams()
   const spotsObj = useSelector(state => state.spots);
-  console.log('spotobj -->,', spotsObj)
   const history = useHistory()
   const [hasSubmitted, setHasSubmitted] = useState(false)
 

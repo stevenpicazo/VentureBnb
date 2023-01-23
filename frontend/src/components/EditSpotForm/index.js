@@ -24,7 +24,6 @@ function EditSpotForm() {
     // const spotById = useSelector(state => state.CurrentUsersSpots)
     // const spot = useSelector(state => state.spots[spotId])
     // const spot = useSelector(state => state.spots)
-    // console.log('spots from the selector -->', spot)
     const { spotId } = useParams()
 
     useEffect(() => {
