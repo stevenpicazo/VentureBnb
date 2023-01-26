@@ -12,11 +12,11 @@
     cursor: pointer;
     border-radius: 23px;
     box-shadow: none;
-    border: 1px solid rgba(76, 76, 76, 0.494);
-    padding-right: 17px;
-    padding-left: 17px;
-    padding-top: 9px;
-    padding-bottom: 9px;
+    border: 1px solid rgba(223, 223, 223, 1);
+    padding-right: 13px;
+    padding-left: 13px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     background-color: white;
 }
 
@@ -116,6 +116,7 @@
 .fa-solid.fa-bars {
     padding-right: 7px;
     padding-bottom: 4px;
+    font-size: 15px;
 }
 
 .fa-solid {

@@ -84,6 +84,9 @@ function SpotDetails() {
 
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
 
+
+    
+
     return (
         <div className="spot-details-container">
 
@@ -122,6 +125,14 @@ function SpotDetails() {
 
                     <div className="work-space">
                         <i className="fa-regular fa-pen-to-square"></i>Designated work space
+                    </div>
+                </div>
+                <div className="air-cover-container">
+                    <div className="air-cover-title">
+                        <h2 className="cover-air"></h2>
+                    </div>
+                    <div className="air-cover-desc">
+                        Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
                     </div>
                 </div>
 

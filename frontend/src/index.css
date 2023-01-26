@@ -1,16 +1,24 @@
 /* TODO Add site wide styles */
 
 .ul-errors {
-    /* list-style-type: none; */
     padding: 0;
 }
 
 .errors {
-    /* display: flex; */
-    /* justify-content: center; */
-    /* padding-bottom: 13px; */
     color: red;
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
+}
 
+body {
+    font-family: 'Roboto', sans-serif;
+    /* cursor: default; */
+    /* margin: 0 100px; */
+
+}
+
+@media (max-width: 1300px) {
+    body {
+        margin: 0 200px;
+    }
 }
