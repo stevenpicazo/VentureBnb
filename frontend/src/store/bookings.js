@@ -83,6 +83,21 @@ const initialState = {}
 
 const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case LOAD_BOOKING: {
+            const newState = Object.assign({}, state)
+            const bookings = normalizeData(action.payload)
+            newState = bookings
+            return newState
+        }
+        case CREATE_BOOKING: {
+            const newState = Object.assign({}, state)
+            return newState
+        }
+        case DELETE_BOOKING: {
+            const newState = Object.assign({}, state)
+            delete newState[action.payload.id]
+            return newState
+        }
 
         default:
             return state
