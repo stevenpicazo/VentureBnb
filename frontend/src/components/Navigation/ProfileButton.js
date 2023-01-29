@@ -80,12 +80,12 @@ function ProfileButton({ user }) {
                   <button className="email-button">{user.email}</button>
                   {sessionUser ?
                     <button
-                    className="linkedin-button"
+                      className="linkedin-button"
                       onClick={() => window.open("https://www.linkedin.com/in/steven-picazo-994042225", "_blank")} >LinkedIn
                     </button>
                     : null}
 
-                    <div className="linkedin-border"></div>
+                  <div className="linkedin-border"></div>
 
                   {sessionUser ?
                     <button
@@ -110,32 +110,32 @@ function ProfileButton({ user }) {
             ) : (
               <>
                 <div className="modal-container">
-                  <div className="modal-background">
 
-                    {/* <button className='userlogin-button'> */}
-                    {/* Log In */}
-                    <OpenModalButton
-                      buttonText="Login"
-                      onButtonClick={closeMenu}
-                      modalComponent={<LoginFormModal />}
-                    />
-                    {/* </button> */}
+                  {/* <button className='userlogin-button'> */}
+                  {/* Log In */}
+                  <OpenModalButton
+                    buttonText="Log in"
+                    onButtonClick={closeMenu}
+                    modalComponent={<LoginFormModal />}
+                  />
+                  {/* </button> */}
 
-                    {/* <button className='usersignup-button'> */}
-                    <OpenModalButton
-                      buttonText="Signup"
-                      onButtonClick={closeMenu}
-                      modalComponent={<SignupFormModal />}
-                    />
-                    {/* </button> */}
+                  {/* <button className='usersignup-button'> */}
+                  <OpenModalButton
+                    buttonText="Sign up"
+                    onButtonClick={closeMenu}
+                    modalComponent={<SignupFormModal />}
+                  />
+                  {/* </button> */}
+                  <div className="linkedin-border"></div>
 
-                    <button
-                      className="demo-user-button"
-                      onClick={demoUser}
-                      type='submit'
-                    >Demo User
-                    </button>
-                  </div>
+                  <button
+                    className="demo-user-button"
+                    onClick={demoUser}
+                    type='submit'
+                  >Demo user
+                  </button>
+
                 </div>
               </>
             )}
