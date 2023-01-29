@@ -1,4 +1,4 @@
-.login-title {
+.modal-title {
     text-align: center;
     display: flex;
     justify-content: center;
@@ -71,7 +71,7 @@
     cursor: pointer;
     font-size: 16px;
     height: 48px;
-    margin-top: 20px;
+    margin-top: 25px;
     touch-action: manipulation;
 }
 
@@ -116,18 +116,18 @@
     touch-action: manipulation;
 }
 
-.open-modal-menu{
+.signup-modal-menu{
     margin-top: 52px;
     display: flex;
     justify-content: center;
 }
 
-.open-modal-menu::before {
+.signup-modal-menu::before {
     content: "Don't have an account yet?";
     font-weight: 200;
 }
 
-.open-modal-menu::after {
+.signup-modal-menu::after {
     margin-left: 10px;
     content: "Sign up";
     color: red;

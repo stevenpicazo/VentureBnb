@@ -3,15 +3,11 @@
     font-family: 'Roboto', sans-serif
 }
 .signup-container {
-    justify-content: center;
-    flex-direction: column;
-    width: 400px;
-    font-weight: 40;
-    padding: 30px;
+    height: 590px;
+    width: 560px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    margin: auto;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
     top: 50%;
     left: 50%;
     position: absolute;
@@ -19,19 +15,18 @@
 }
 
 .signup-form {
+    margin-left: 25px;
+    margin-right: 25px;
     display: flex;
     flex-direction: column;
 }
 
-.signup-label-container {
-    justify-content: center;
-    flex-direction: column;
+.signup-label-container { 
     border: 1px solid #9d9d9d;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
-.signup-label {
-    font-family: 'Roboto', sans-serif;
+.sign-up-label {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -39,54 +34,23 @@
 }
 
 .signup-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10px;
+    font-size: 16px;
+    padding: 20px;
     padding-bottom: 15px;
-    /* margin-bottom: 20px; */
-    font-family: 'Roboto', sans-serif;
-    width: 377px;
     border: none;
-    border-bottom: 1px solid #c3c3c3;
+    /* width: 467px; */
+    border-radius: 8px;
 }
-.password-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10px;
-    /* margin-bottom: 20px; */
-    font-family: 'Roboto', sans-serif;
-    width: 377px;
-    border: none;
-    
-}
-
 
 .signup-button {
-    background-color: #ff385c;
-    color: white;
-    border-radius: 7px;
+    background: linear-gradient(to left, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
     border: none;
-    padding: 30px;
+    border-radius: 8px;
+    color: #fff;
     cursor: pointer;
-    padding: left 20px; 
-    margin-top: 20px;
-    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    height: 48px;
+    margin-top: 25px;
+    touch-action: manipulation;
 }
 
-.ul-errors {
-    /* list-style-type: none; */
-    padding: 0;
-}
-
-.errors {
-    /* display: flex; */
-    /* justify-content: center; */
-    /* padding-bottom: 13px; */
-    color: red;
-    font-size: 14px;
-    font-family: 'Roboto', sans-serif;
-}

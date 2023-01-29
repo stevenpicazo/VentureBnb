@@ -39,7 +39,7 @@ function LoginFormModal() {
 
   return (
     <div className="login-container">
-      <div className="login-title">Log in</div>
+      <div className="modal-title">Log in</div>
       <div className="venturebnb-title">Welcome to Venturebnb</div>
       <div className="login-form-container">
         <form className="login-form" onSubmit={handleSubmit}>

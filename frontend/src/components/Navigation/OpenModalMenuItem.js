@@ -15,11 +15,12 @@ function OpenModalMenuItem({
     if (onItemClick) onItemClick();
   };
 
+
   return (
     <div
-    className='open-modal-menu'
+    className='signup-modal-menu'
     onClick={onClick}>{itemText}
-    </div>
+    </div>    
   );
 }
 

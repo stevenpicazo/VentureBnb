@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
+import LoginFormModal from "../LoginFormModal";
+import LoginModalMenu from "../Navigation/OpenModalMenuItem";
 import './SignupForm.css';
 
 function SignupFormModal() {
@@ -32,7 +34,8 @@ function SignupFormModal() {
 
   return (
     <div className="signup-container">
-      <div className="signup-title">Welcome to VentureBnb</div>
+      <div className="modal-title">Sign up</div>
+      <div className="venturebnb-title">Welcome to Venturebnb</div>
       <form className="signup-form" onSubmit={handleSubmit}>
         <ul className="ul-errors">
           {errors.map((error, idx) => <div className="errors" key={idx}>{error}</div>)}
@@ -48,6 +51,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          <div className="border"></div>
           <label className="sign-up-label">
             <input className="signup-input"
               type="text"
@@ -57,6 +61,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          <div className="border"></div>
           <label className="sign-up-label">
             <input className="signup-input"
               type="text"
@@ -67,6 +72,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          <div className="border"></div>
           <label className="sign-up-label">
             <input className="signup-input"
               type="text"
@@ -76,6 +82,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          <div className="border"></div>
           <label className="sign-up-label">
             <input className="signup-input"
               type="password"
@@ -86,8 +93,8 @@ function SignupFormModal() {
             />
           </label>
           <label className="sign-up-label">
-
-            <input className="password-input"
+            <div className="border"></div>
+            <input className="signup-input"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -99,6 +106,9 @@ function SignupFormModal() {
         <button
           className="signup-button"
           type="submit">Sign Up</button>
+
+
+
       </form>
     </div>
   );
