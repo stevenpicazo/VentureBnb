@@ -37,76 +37,89 @@
 }
 
 .user-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
     border: 1px solid rgb(255, 255, 255);
     border-radius: 10px;
+    background-color: white;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.15);
-}
-
-
-.logout-button,
-.my-listings-button {
-    cursor: pointer;
+    text-align: left;
 
 }
 
-.username-button,
+
 .logout-button,
 .my-listings-button,
-.name-button,
-.email-button {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    border: none;
-    width: 100%;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background-color: white;
-    height: 2rem;
+.trips-button,
+.linkedin-button {
+    cursor: pointer;
+
 }
 
 .modal-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
     border: 1px solid rgb(255, 255, 255);
     border-radius: 10px;
+    background-color: white;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.15);
+    text-align: left;
+
 }
 
-#modal-content {
-    background-color: bisque;
+.email-button,
+.linkedin-button,
+.my-listings-button,
+.trips-button,
+.logout-button {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border: none;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 120px;
+    background-color: transparent;
+    height: 40px;
 }
 
-.profile-dropdown button {
+.email-button,
+.linkedin-button {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.my-listings-button,
+.trips-button,
+.logout-button {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.linkedin-border {
+    border-bottom: 1px solid #dbd6d6;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-button,
+.demo-user-button {
     cursor: pointer;
     display: flex;
     justify-content: start;
     align-items: center;
     border: none;
     width: 100%;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    background-color: white;
-    height: 3rem;
-    text-align: left;
+    padding-left: 20px;
+    padding-right: 120px;
+    background-color: transparent;
+    height: 40px;
 }
-
 
 .profile-dropdown button:hover {
     background-color: #eaeaea;
 
 }
-
-.login-button:hover,
-.signup-button:hover,
-.demo-user-button:hover,
-.logout-button:hover,
-.my-listings-button:hover {
-    background-color: #eaeaea;
-}
-
 
 .fa-user-circle {
     color: rgba(6, 5, 5, 0.587);

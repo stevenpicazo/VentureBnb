@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { thunkGetSpotById } from "../../store/spots";
-import './SpotDetails.css'
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { reviewBySpotIdThunk } from "../../store/reviews";
+import CreateBooking from "../CreateBooking";
 import * as reviewsActions from "../../store/reviews";
+import './SpotDetails.css'
 
 function SpotDetails() {
     const history = useHistory()
@@ -112,7 +113,6 @@ function SpotDetails() {
                 <div className="hosting-info-container">
                     <div className="check-in">
                         <i className="fa-regular fa-calendar"></i>Self check-in
-
                     </div>
                     <span className="check-in-info">Check in yourself through key pad.</span>
                     <div className="super-host">
@@ -184,6 +184,10 @@ function SpotDetails() {
                                 : null
 
                             }
+                        </div>
+
+                        <div className="bookings">
+                            {/* <CreateBooking /> */}
                         </div>
 
                         {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (

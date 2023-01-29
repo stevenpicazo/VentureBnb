@@ -8,6 +8,7 @@ import SpotDetails from "./components/SpotsDetails/SpotDetails";
 import CreateSpot from "./components/CreateSpot/CreateSpot";
 import CurrentUserSpots from "./components/CurrenUserSpots/CurrentUsersSpots";
 import EditSpotForm from "./components/EditSpotForm";
+import Trips from "./components/Trips";
 // import MySpots from "./components/MySpots"
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path={"/host"}>
             <CreateSpot />
+          </Route>
+          <Route path={"/trips"}>
+            <Trips />
           </Route>
           <Route exact path={"/spots/:spotId"}>
             <SpotDetails />

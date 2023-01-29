@@ -16,7 +16,10 @@ function OpenModalButton({
   };
 
   return (
-    <button onClick={onClick}>{buttonText}</button>
+    <button 
+    className='modal-button'
+    onClick={onClick}>{buttonText}
+    </button>
   );
 }
 

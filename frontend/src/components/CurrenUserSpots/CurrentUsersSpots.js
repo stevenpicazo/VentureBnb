@@ -7,17 +7,17 @@ import './CurrentUserSpots.css'
 
 function Profile() {
   const dispatch = useDispatch();
-  const { ownerId }= useParams()
   const spotsObj = useSelector(state => state.spots);
+  console.log('spot -->', spotsObj)
   const history = useHistory()
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
   // const spots = Object.values(spotsObj)
   // const { spotId } = useParams() 
-const [loaded, setLoaded] = useState('')
-    useEffect(() => {
-      dispatch(spotsActions.thunkCurrentUsersSpots()).then(() => setLoaded(true))
-    }, [dispatch, hasSubmitted]);
+  const [loaded, setLoaded] = useState('')
+  useEffect(() => {
+    dispatch(spotsActions.thunkCurrentUsersSpots()).then(() => setLoaded(true))
+  }, [dispatch, hasSubmitted]);
 
   if (!spotsObj) return null
   if (!loaded) return null
@@ -31,32 +31,32 @@ const [loaded, setLoaded] = useState('')
 
   return (
     <>
-        <h1 className="userspots-h1">My Listings</h1>
-    <div className="listings-container">
+      <h1 className="userspots-h1">My Listings</h1>
+      <div className="listings-container">
         {Object.values(spotsObj).map((userspot) => (
           <div key={userspot.id}>
             {/* <UserSpotDetails key={userspot.id} userspot={userspot}/> */}
-              <div className="userspot-card">
-              <img src={userspot.previewImage} alt="preview" className="userspot-image"/>
+            <div className="userspot-card">
+              <img src={userspot.previewImage} alt="preview" className="userspot-image" />
               <div className="userspot-info">
-                  <div className="userspot-address">{userspot.address},</div>
-                  <div className="userspot-city-state">{userspot.city}, {userspot.state}</div>
-                  <button 
+                <div className="userspot-address">{userspot.address},</div>
+                <div className="userspot-city-state">{userspot.city}, {userspot.state}</div>
+                <button
                   className="userspot-delete-button"
                   onClick={(e) => deleteSpot(e, userspot.id)}>
-                      Delete Listing
-                  </button>
-                  <button 
+                  Delete Listing
+                </button>
+                <button
                   className="userspot-edit-button"
                   onClick={(e) => {
                     e.preventDefault()
                     history.push(`/edit/listing/${userspot.id}`)
-                  }}>Edit</button> 
+                  }}>Edit</button>
               </div>
             </div>
           </div>
         ))}
-    </div>
+      </div>
     </>
   );
 }

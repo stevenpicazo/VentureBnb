@@ -9,6 +9,7 @@ const normalizeData = (data) => {
 }
 
 const LOAD_BOOKING = 'bookings/READ'
+const USER_BOOKING = 'bookings/USER'
 const CREATE_BOOKING = 'bookings/CREATE'
 const DELETE_BOOKING = 'bookings/DELETE'
 // const UPDATE_BOOKING = 'bookings/UPDATE'
@@ -17,6 +18,13 @@ const DELETE_BOOKING = 'bookings/DELETE'
 export const actionLoadBooking = (payload) => {
     return {
         type: LOAD_BOOKING,
+        payload
+    }
+}
+
+export const actionUserBookings = (payload) => {
+    return {
+        type: USER_BOOKING,
         payload
     }
 }
@@ -55,6 +63,15 @@ export const loadBookings = (spotId) => async (dispatch) => {
     }
 }
 
+export const userBookings = () => async (dispatch) => {
+    const res = await csrfFetch (`/api/bookings/current`)
+    if (res.ok) {
+        const bookings = await res.json()
+        dispatch(actionUserBookings(bookings.Bookings))
+        return bookings
+    }
+}
+
 export const createBooking = (booking, spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/bookings`, {
         method: 'POST',
@@ -84,7 +101,13 @@ const initialState = {}
 const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_BOOKING: {
-            const newState = Object.assign({}, state)
+            let newState = Object.assign({}, state)
+            const bookings = normalizeData(action.payload)
+            newState = bookings
+            return newState
+        }
+        case USER_BOOKING: {
+            let newState = Object.assign({}, state)
             const bookings = normalizeData(action.payload)
             newState = bookings
             return newState

@@ -135,14 +135,6 @@ const initialState = {}
 
 export const spotReducer = (state = initialState, action) => {
     switch(action.type) {
-        // case UPDATE_SPOT: {
-        //     let newState = Object.assign({}, state)
-        //     let newCurrentSpot = {...newState.CurrentUsersSpots}
-        //     newCurrentSpot[action.spot.id] = action.spot
-        //     newState.CurrentUsersSpots = newCurrentSpot
-        //     return newState
-        // }
-
         case UPDATE_SPOT: {
             let newState = Object.assign({}, state)
             newState[action.spot.id] = action.spot
@@ -157,15 +149,13 @@ export const spotReducer = (state = initialState, action) => {
             return newState
         }
         case LOAD_SPOTBYID: {
-            // let SpotDetails = Object.assign({}, state)
             let newState = Object.assign({}, state)
             newState[action.spotById.id] = action.spotById
             return newState
         } 
         case LOAD_CURRENT_USER_SPOTS: {
             let newState = Object.assign({}, state)
-            // const usersSpots = normalizeData(action.usersSpotById.Spots)
-            // newState.CurrentUsersSpots = usersSpots
+
             const usersSpots = normalizeData(action.usersSpotById)
             newState = usersSpots
             return newState

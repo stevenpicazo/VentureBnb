@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
@@ -56,6 +56,11 @@ function ProfileButton({ user }) {
     history.push('/listings');
   }
 
+  const tripsClick = () => {
+    closeMenu();
+    history.push('/trips');
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? " show" : " hidden");
 
   return (
@@ -71,23 +76,35 @@ function ProfileButton({ user }) {
             {user ? (
               <>
                 <div className="user-container">
-                  <button className="username-button">
-                    {user.username}
-                  </button>
-                  <button
-                    className="logout-button"
-                    onClick={logout}>Log Out
-                  </button>
+
+                  <button className="email-button">{user.email}</button>
+                  {sessionUser ?
+                    <button
+                    className="linkedin-button"
+                      onClick={() => window.open("https://www.linkedin.com/in/steven-picazo-994042225", "_blank")} >LinkedIn
+                    </button>
+                    : null}
+
+                    <div className="linkedin-border"></div>
+
                   {sessionUser ?
                     <button
                       onClick={handleClick}
                       className="my-listings-button">
-                      My listings
+                      My Listings
                     </button>
                     : null}
-
-                  <button className="name-button">{user.firstName} {user.lastName}</button>
-                  <button className="email-button">{user.email}</button>
+                  {sessionUser ?
+                    <button
+                      onClick={tripsClick}
+                      className="trips-button">
+                      Trips
+                    </button>
+                    : null}
+                  <button
+                    className="logout-button"
+                    onClick={logout}>Log Out
+                  </button>
                 </div>
               </>
             ) : (
@@ -96,28 +113,28 @@ function ProfileButton({ user }) {
                   <div className="modal-background">
 
                     {/* <button className='userlogin-button'> */}
-                      {/* Log In */}
-                      <OpenModalButton
+                    {/* Log In */}
+                    <OpenModalButton
                       buttonText="Login"
-                        onButtonClick={closeMenu}
-                        modalComponent={<LoginFormModal />}
-                      />
+                      onButtonClick={closeMenu}
+                      modalComponent={<LoginFormModal />}
+                    />
                     {/* </button> */}
 
                     {/* <button className='usersignup-button'> */}
-                      <OpenModalButton
-                        buttonText="Signup"
-                        onButtonClick={closeMenu}
-                        modalComponent={<SignupFormModal />}
-                      />
+                    <OpenModalButton
+                      buttonText="Signup"
+                      onButtonClick={closeMenu}
+                      modalComponent={<SignupFormModal />}
+                    />
                     {/* </button> */}
 
-                      <button
-                        className="demo-user-button"
-                        onClick={demoUser}
-                        type='submit'
-                      >Demo User
-                      </button>
+                    <button
+                      className="demo-user-button"
+                      onClick={demoUser}
+                      type='submit'
+                    >Demo User
+                    </button>
                   </div>
                 </div>
               </>
