@@ -21,12 +21,10 @@
     right: 0;
     height: 70px;
     background-color: #fdfdfd;
-    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
     flex-wrap: wrap;
-    /* padding-bottom: 10px; */
-  }
-  
-  
+}
+
 .home-button {
     padding-left: 35px;
     flex-grow: 1;
@@ -35,10 +33,11 @@
 
 .create-spot-button {
     padding-right: 10px;
-    box-sizing: border-box;    
-    border-radius: 20px; 
+    box-sizing: border-box;
+    border-radius: 20px;
     float: right;
 }
+
 .creat-spot-navlink {
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
@@ -48,17 +47,13 @@
 
 .profile-button {
     padding-right: 35px;
-    box-sizing: border-box;    
+    box-sizing: border-box;
     border-radius: 20px;
     float: right;
 }
+
 .creat-spot-navlink:hover {
     background-color: rgb(240, 239, 239);
     padding: 5px;
     border-radius: 10px;
 }
-
-
-
-  
-

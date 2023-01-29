@@ -111,29 +111,24 @@ function ProfileButton({ user }) {
               <>
                 <div className="modal-container">
 
-                  {/* <button className='userlogin-button'> */}
-                  {/* Log In */}
                   <OpenModalButton
                     buttonText="Log in"
                     onButtonClick={closeMenu}
                     modalComponent={<LoginFormModal />}
                   />
-                  {/* </button> */}
 
-                  {/* <button className='usersignup-button'> */}
                   <OpenModalButton
                     buttonText="Sign up"
                     onButtonClick={closeMenu}
                     modalComponent={<SignupFormModal />}
                   />
-                  {/* </button> */}
                   <div className="linkedin-border"></div>
 
                   <button
                     className="demo-user-button"
                     onClick={demoUser}
                     type='submit'
-                  >Demo user
+                  >Demo User
                   </button>
 
                 </div>

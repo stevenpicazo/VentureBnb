@@ -30,6 +30,7 @@
 
 .profile-dropdown.show {
     display: block;
+    z-index: 1;
 }
 
 .user-container {
