@@ -11,8 +11,10 @@
 }
 
 body {
+    margin-top: 100px;
     font-family: 'Roboto', sans-serif;
-    /* cursor: default; */
+    cursor: default;
     /* margin: 0 100px; */
+
 
 }

@@ -38,7 +38,7 @@
     flex-direction: column;
 }
 
-.login-label-container { 
+.login-label-container {
     border: 1px solid #9d9d9d;
     border-radius: 8px;
 }
@@ -75,6 +75,10 @@
     touch-action: manipulation;
 }
 
+.login-button:hover {
+    background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+}
+
 .alternate-logins {
     display: flex;
     justify-content: center;
@@ -87,7 +91,6 @@
 
 .alternate-logins::before {
     content: "";
-    /* display: block; */
     width: 100%;
     height: 1px;
     background-color: rgb(221, 221, 221);
@@ -116,7 +119,11 @@
     touch-action: manipulation;
 }
 
-.signup-modal-menu{
+.modal-demo-button:hover {
+    background-color: rgb(246, 246, 246);
+}
+
+.signup-modal-menu {
     margin-top: 52px;
     display: flex;
     justify-content: center;
@@ -132,4 +139,8 @@
     content: "Sign up";
     color: red;
     cursor: pointer;
+}
+
+.signup-modal-menu:hover::after {
+    text-decoration: underline;
 }
