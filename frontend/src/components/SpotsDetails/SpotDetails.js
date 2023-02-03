@@ -83,7 +83,7 @@ function SpotDetails() {
     if (handleSubmit) reviewRefresh()
 
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
-    
+
 
 
 
@@ -121,7 +121,7 @@ function SpotDetails() {
                                 </div>
                             </div>
 
-                            {/* <i class="fa-regular fa-calendar"></i> */}
+                            {/* <i className="fa-regular fa-calendar"></i> */}
                             <div className="hosting-info-container">
                                 <div className="check-in">
                                     <i className="fa-regular fa-calendar"></i>Self check-in
@@ -152,25 +152,69 @@ function SpotDetails() {
                             </div>
 
                             <div className="offers-container">
-                                <div className="offer-column">
+                                <div className="offer-column1">
                                     <div className="offer-item">
-                                        <div className="offer-symbol">✔</div>
-                                        <div className="offer-description">Fully equipped kitchen</div>
+                                        <div className="offer-description">
+                                            <i className="fa-solid fa-utensils"></i>
+                                            Fully equipped kitchen
+                                        </div>
                                     </div>
                                     <div className="offer-item">
-                                        <div className="offer-symbol">✔</div>
-                                        <div className="offer-description">Free parking on premises</div>
+                                        <div className="offer-symbol"></div>
+                                        <div className="offer-description">
+                                            <i className="fa-solid fa-tv"></i>
+                                            TV with standard cable
+                                        </div>
                                     </div>
+                                    <div className="offer-item">
+                                        <div className="offer-symbol"></div>
+                                        <div className="offer-description">
+                                            <i className="fa-solid fa-car-side"></i>
+                                            Free on site parking
+                                        </div>
+                                    </div>
+                                    <div className="offer-item">
+                                        <div className="offer-symbol"></div>
+                                        <div className="offer-description">
+                                            <i className="fa-solid fa-wind"></i>
+                                            Air conditioning
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div className="offer-column">
+                                <div className="offer-column2">
+              
                                     <div className="offer-item">
-                                        <div className="offer-symbol">✔</div>
-                                        <div className="offer-description">Wifi available</div>
+                                        <div className="offer-symbol"></div>
+                                        <div className="offer-description">
+                                            <i class="fa-solid fa-shower"></i>
+                                            Shower
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="offer-item">
+                                        <div className="offer-symbol"></div>
+                                        <div className="offer-description">
+                                            <i class="fa-solid fa-suitcase-medical"></i>
+                                            Medical-suitcase
+                                        </div>
                                     </div>
                                     <div className="offer-item">
-                                        <div className="offer-symbol">✔</div>
-                                        <div className="offer-description">Laundry facilities available</div>
+                                        <div className="offer-symbol"></div>
+                                        <div className="offer-description">
+                                            <i class="fa-solid fa-soap"></i>
+                                            Shampoo
+                                        </div>
                                     </div>
+                                    <div className="offer-item">
+                                        <div className="offer-symbol"></div>
+                                        <div className="offer-description">
+                                            <i className="fa-solid fa-wifi"></i>
+                                            Wifi available
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
 
