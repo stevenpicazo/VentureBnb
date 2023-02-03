@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { thunkGetSpotById } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { reviewBySpotIdThunk } from "../../store/reviews";
-import CreateBooking from "../CreateBooking";
 import * as reviewsActions from "../../store/reviews";
 import './SpotDetails.css'
 
@@ -84,7 +83,7 @@ function SpotDetails() {
     if (handleSubmit) reviewRefresh()
 
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
-
+    
 
 
 
@@ -106,7 +105,7 @@ function SpotDetails() {
                         </div>
                     </div>
                 ))}
-                
+
                 <div className="description-bookings">
 
                     <div className="spot-description-container">
@@ -146,18 +145,45 @@ function SpotDetails() {
                                 </div>
                                 <div className="air-cover-desc">
                                     Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
-
                                 </div>
                             </div>
+                            <div className="spot-description">
+                                {spot.description}
+                            </div>
+
+                            <div className="offers-container">
+                                <div className="offer-column">
+                                    <div className="offer-item">
+                                        <div className="offer-symbol">✔</div>
+                                        <div className="offer-description">Fully equipped kitchen</div>
+                                    </div>
+                                    <div className="offer-item">
+                                        <div className="offer-symbol">✔</div>
+                                        <div className="offer-description">Free parking on premises</div>
+                                    </div>
+                                </div>
+                                <div className="offer-column">
+                                    <div className="offer-item">
+                                        <div className="offer-symbol">✔</div>
+                                        <div className="offer-description">Wifi available</div>
+                                    </div>
+                                    <div className="offer-item">
+                                        <div className="offer-symbol">✔</div>
+                                        <div className="offer-description">Laundry facilities available</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
                     <section className="bookings-section">
+                        {/* <div className="bookings-container"> */}
                         <div className="bookings-container">
-                            <div className="bookings-wrapper">
-                                <div className="bookings">
-                                    TEST
-                                </div>
+                            <div className="bookings">
+                                TEST
+                                {/* </div> */}
                             </div>
                         </div>
 
@@ -174,6 +200,7 @@ function SpotDetails() {
                         <div className="user-reviews-container">
                             {reviewsObj && Object.values(reviewsObj).map(review => (
                                 <div className="reviews-wrap">
+                                    {console.log(review)}
                                     <div className="user-ratings">
                                         <i className="fa-regular fa-circle-user"></i>
                                         {review.User.firstName}
@@ -182,9 +209,9 @@ function SpotDetails() {
                                         {review.review}
                                     </div>
                                 </div>
-
                             ))}
                         </div>
+
                         {reviewsObj && Object.values(reviewsObj).map(review => (
                             sessionUser && (
                                 <div review={review} className={"reviewInfo"} key={`review-${review.id}`}>

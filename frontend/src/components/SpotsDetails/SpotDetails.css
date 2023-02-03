@@ -83,10 +83,10 @@
     /* margin-top: 200px; */
     /* flex-wrap: wrap-reverse; */
     /* justify-content: end; */
-    /* margin-left: 700px; */   
+    /* margin-left: 700px; */
 }
 
-.bookings-wrapper {
+.bookings-container {
     display: flex;
     position: sticky;
     top: 120px;
@@ -95,9 +95,9 @@
     padding: 25px;
     max-width: 300px;
     box-shadow: rgb(0 0 0 / 10%) 0px 6px 16px;
-    z-index: 11;
     background: white;
     flex-flow: column wrap;
+    z-index: 12;
 }
 
 .bookings {
@@ -127,7 +127,7 @@
 
 .listing-info-container {
     border-bottom: 1px solid #dcdcdc;
-    padding-bottom: 25px;    
+    padding-bottom: 25px;
 }
 
 .hosting-info {
@@ -164,9 +164,11 @@
 }
 
 .fa-circle-user {
+    /* display: flex; */
+    /* align-items: center; */
     font-size: 25px;
     padding-right: 8px;
-    padding-bottom: 11px;
+    padding-bottom:3px;
 
 }
 
@@ -213,31 +215,83 @@
     padding-bottom: 20px;
     font-weight: 200;
     padding-top: 12px;
+    
 }
 
-.num-reviews {
-    padding-top: 25px;
-    font-family: 'Roboto', sans-serif;
+.spot-description {
     font-weight: 200;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.offers-container {
+    display: flex;
+    padding-top: 25px;
     padding-bottom: 25px;
 }
 
-.user-ratings {
-    padding-top: 15px;
-    font-family: 'Roboto', sans-serif;
+.offer-column {
+    width: 50%;
+    text-align: left;
+    padding: 10px;
+}
+
+.offer-item {
+    margin-bottom: 10px;
+}
+
+.offer-symbol {
     font-weight: 200;
+    margin-right: 10px;
+}
+
+.offer-description {
+    font-weight: 200;
+}
+
+
+.num-reviews {
+    padding-top: 50px;
+    border-top: 1px solid #dcdcdc;
+    font-size: 1em;
+    font-weight: inherit;
+    line-height: inherit;
+    padding-bottom: 25px;
+    font-size: 21px;
 }
 
 .user-reviews-container {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    max-height: 500px;
+    flex-wrap: wrap;
+    padding-bottom: 30px;
+}
+
+.reviews-wrap {
+    width: 50%;
+    /* text-align: center; */
+    box-sizing: border-box;
+    
 }
 
 .user-reviews {
+    padding-right: 8rem;
+    box-sizing: border-box;
     font-weight: 200;
+    width: 100%;
+    word-wrap: break-word;
+    line-height: 1.5;
+    white-space: pre-line;
+    text-align: left;
+
 }
+
+.user-ratings {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
 
 .create-review-button {
     width: 100%;
@@ -309,6 +363,3 @@
 .submit-review-button:hover {
     background-color: #fa5674;
 }
-
-
-

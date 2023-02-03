@@ -8,14 +8,17 @@ const Spots = () => {
     const dispatch = useDispatch()
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)
-    const [loaded, setLoaded] = useState('')
+    const [loaded, setLoaded] = useState(false)
 
     
     useEffect(() => {
         dispatch(readThunk())
-    }, [dispatch])
+        .then(() => setLoaded(true))
+    }, [dispatch, loaded])
     
-    if (!spotsArr.length) return null
+    if (!spotsArr.length) return;
+    if (!loaded) return;
+    
     
     return (
         <div className="spot-list-container">
