@@ -43,7 +43,7 @@ module.exports = {
 
       {
         spotId: 7,
-        url: 'https://a0.muscache.com/im/pictures/9da6dfb6-9bbc-4f97-bf60-f8502814de69.jpg?im_w=720',
+        url: 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-649102501321427344/original/8d04e37d-deb4-462c-b5c7-a4b0b3ececcf.jpeg?im_w=1200',
         preview: true
       },
       {

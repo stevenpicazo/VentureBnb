@@ -81,31 +81,31 @@ module.exports = {
         lng: -122.4730327,
         name: 'Rosa Estate',
         description: 'A charming cottage in the heart of the city, perfect for couples or small families. This lovely home features a comfortable living room with a plush sofa and a flat-screen TV, a fully equipped kitchen with all the essentials. The cottage also boasts a small private garden where guests can relax and enjoy the beautiful city views.',
-        price: 1000
+        price: 300
       },
       {
         ownerId: 2,
         address: '9854 Laurel Ct.',
-        city: 'San Francisco',
-        state: 'CA',
+        city: 'Pequot Lakes',
+        state: 'MN',
         country: 'United States',
         lat: 47.7645358,
         lng: -223.4730327,
-        name: 'Frisco Herald Mansion',
-        description: 'Dream Land2',
-        price: 230
+        name: 'Luxury Lodge',
+        description: 'Indulge in the ultimate luxury getaway at this stunning lodge, surrounded by breathtaking natural scenery. The spacious and elegantly designed living area features high ceilings, comfortable furnishings, and an abundance of natural light, creating a warm and inviting atmosphere.',
+        price: 680
       },
       {
         ownerId: 3,
         address: '563 McKinney Rd.',
-        city: 'San Dimas',
-        state: 'CA',
-        country: 'United States',
+        city: 'Santa Maria',
+        state: 'CT',
+        country: 'Spain',
         lat: 57.7645358,
         lng: -334.4730327,
-        name: 'Noble Estate',
-        description: 'Amazing view. Very close to the city.',
-        price: 300
+        name: 'Luxurious Spanish Villa',
+        description: 'Escape to this enchanting Spanish villa, nestled amidst lush greenery and breathtaking natural scenery. The fully equipped gourmet kitchen is perfect for entertaining guests, while the comfortable bedrooms and stylish bathrooms provide a restful retreat. Take a dip in the pool, lounge on the terrace, and explore the nearby nature trails in this tranquil and serene Spanish villa escape.',
+        price: 735
       },
       {
         ownerId: 6,

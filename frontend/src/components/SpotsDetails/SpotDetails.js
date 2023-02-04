@@ -222,7 +222,7 @@ function SpotDetails() {
                         </div>
                     </div>
 
-                    <section className="bookings-section">
+                    <section className="bookings-column">
                         {/* <div className="bookings-container"> */}
                         <div className="bookings-container">
                             <div className="bookings">
