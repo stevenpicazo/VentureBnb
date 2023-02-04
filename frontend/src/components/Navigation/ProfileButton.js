@@ -43,14 +43,6 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
-  const demoUser = (e) => {
-    e.preventDefault()
-    const password = 'password'
-    const credential = "Demo-lition"
-    dispatch(sessionActions.login({ credential, password }))
-    closeMenu()
-  }
-
   const handleClick = () => {
     closeMenu();
     history.push('/listings');
@@ -123,13 +115,6 @@ function ProfileButton({ user }) {
                     modalComponent={<SignupFormModal />}
                   />
                   <div className="linkedin-border"></div>
-
-                  <button
-                    className="demo-user-button"
-                    onClick={demoUser}
-                    type='submit'
-                  >Demo User
-                  </button>
 
                 </div>
               </>
