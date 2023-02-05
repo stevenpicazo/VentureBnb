@@ -94,17 +94,22 @@ function SpotDetails() {
                 <div className="reviews-location">
                     {!spot.numReviews ? 'No Reviews' : `★ ${rating} · ${spot.numReviews} reviews`} · {spot.city}, {spot.state}, {spot.country}
                 </div>
-                {spot.SpotImages.map(image => (
-                    <div className="images-wrapper">
-                        <div className="image-details-grid">
-                            <img className="image-grid-col-2 image-grid-row-2" src={image.url} key={`image-${image.id}`} alt="image" />
-                            <img src={image.url} alt="image" />
-                            <img id="top-right-img" src={image.url} alt="image" />
-                            <img src={image.url} alt="image" />
-                            <img id="bottom-right-img" src={image.url} alt="image" />
-                        </div>
+                <div className="images-wrapper">
+                    <div className="image-details-grid">
+                        {spot.SpotImages.map((image, i) => {
+
+                            return (
+                                !image.preview ? <img src={image.url} alt="image" /> :
+                                    <img
+                                        className="image-grid-col-2 image-grid-row-2"
+                                        src={image.url}
+                                        key={`image - ${image.id}`}
+                                        alt="image"
+                                    />
+                            );
+                        })}
                     </div>
-                ))}
+                </div>
 
                 <div className="description-bookings">
 
@@ -183,7 +188,7 @@ function SpotDetails() {
 
                                 </div>
                                 <div className="offer-column2">
-              
+
                                     <div className="offer-item">
                                         <div className="offer-symbol"></div>
                                         <div className="offer-description">
@@ -191,7 +196,7 @@ function SpotDetails() {
                                             Shower
                                         </div>
                                     </div>
-                                    
+
                                     <div className="offer-item">
                                         <div className="offer-symbol"></div>
                                         <div className="offer-description">
@@ -226,7 +231,7 @@ function SpotDetails() {
                         {/* <div className="bookings-container"> */}
                         <div className="bookings-container">
                             <div className="bookings">
-                                TEST
+
                                 {/* </div> */}
                             </div>
                         </div>
