@@ -26,8 +26,8 @@ module.exports = {
       {
         ownerId: 3,
         address: '444 Lian Rd.',
-        city: 'Running Springs',
-        state: 'CA',
+        city: 'Miami',
+        state: 'FL',
         country: 'United States',
         lat: 57.7645358,
         lng: -334.4730327,
