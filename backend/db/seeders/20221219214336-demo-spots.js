@@ -14,14 +14,14 @@ module.exports = {
       {
         ownerId: 3,
         address: '123 Tropican Ct.',
-        city: 'San Diego',
+        city: 'Lake Arrowhead',
         state: 'CA',
         country: 'United States',
         lat: 57.7645358,
         lng: -334.4730327,
-        name: 'Nebula Estate',
-        description: 'A spacious country house surrounded by lush green gardens, ideal for groups of friends or large families. This stunning home features a large living room with a fireplace and plenty of seating, a fully equipped kitchen with all the latest appliances. The house also has a large private pool, a hot tub, and plenty of outdoor seating areas, perfect for relaxing and enjoying the beautiful countryside views.',
-        price: 540
+        name: 'One Mile High Home',
+        description: 'A spacious country house surrounded by lush green gardens, ideal for groups of friends or large families. The house also has a large private pool, a hot tub, and plenty of outdoor seating areas, perfect for relaxing and enjoying the beautiful countryside views.',
+        price: 268
       },
       {
         ownerId: 3,

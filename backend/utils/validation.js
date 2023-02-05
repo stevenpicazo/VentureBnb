@@ -52,8 +52,8 @@ const spotValidator = [
   check('description').exists({ checkFalsy: true })
   .withMessage("Description is required")
   .isLength({ min: 0 })
-  .isLength({ max: 100 })
-  .withMessage("Max character limit off 100 reached"),
+  .isLength({ max: 300 })
+  .withMessage("Max character limit off 300 reached"),
 
   check('price').exists({ checkFalsy: true })
   .withMessage("Price per day is required!")
