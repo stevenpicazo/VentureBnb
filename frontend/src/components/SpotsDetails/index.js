@@ -3,6 +3,7 @@ import { thunkGetSpotById } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { reviewBySpotIdThunk } from "../../store/reviews";
+import { createBooking } from "../../store/bookings";
 import * as reviewsActions from "../../store/reviews";
 import './SpotDetails.css'
 
@@ -15,7 +16,6 @@ function SpotDetails() {
     const [validationErrors, setValidationErrors] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false)
     const [hasSubmitted, setHasSubmitted] = useState(false)
-    const [isSubmitted, setIsSubmitted] = useState(false)
     const [isFormOpen, setIsFormOpen] = useState(false);
 
     const { spotId } = useParams()

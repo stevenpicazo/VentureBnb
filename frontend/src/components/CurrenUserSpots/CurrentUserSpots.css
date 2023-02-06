@@ -92,8 +92,8 @@
 }
 
 .userspot-edit-button {
-    background-color: #FF385C;
+    background: linear-gradient(to left, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
 }
 .userspot-edit-button:hover {
-    background-color: #fa4e6d;
+    background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
 }

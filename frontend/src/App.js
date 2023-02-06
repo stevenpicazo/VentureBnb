@@ -4,12 +4,12 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Spots from "./components/Spots";
-import SpotDetails from "./components/SpotsDetails/SpotDetails";
+// import SpotDetails from "./components/SpotsDetails/SpotDetails";
 import CreateSpot from "./components/CreateSpot/CreateSpot";
 import CurrentUserSpots from "./components/CurrenUserSpots/CurrentUsersSpots";
 import EditSpotForm from "./components/EditSpotForm";
 import Trips from "./components/Trips";
-// import MySpots from "./components/MySpots"
+import SpotDetails from "./components/SpotsDetails";
 
 function App() {
   const dispatch = useDispatch();
