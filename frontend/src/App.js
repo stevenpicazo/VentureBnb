@@ -35,9 +35,9 @@ function App() {
           <Route path={"/host"}>
             <CreateSpot />
           </Route>
-          <Route path={"/trips"}>
+          {/* <Route path={"/trips"}>
             <Trips />
-          </Route>
+          </Route> */}
           <Route exact path={"/spots/:spotId"}>
             <SpotDetails />
           </Route>
