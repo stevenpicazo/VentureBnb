@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { thunkGetSpotById } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import { reviewBySpotIdThunk } from "../../store/reviews";
-import { createBooking } from "../../store/bookings";
 import * as reviewsActions from "../../store/reviews";
+import * as bookingsActions from "../../store/bookings"
 import './SpotDetails.css'
+
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 
 function SpotDetails() {
     const history = useHistory()
@@ -13,10 +16,15 @@ function SpotDetails() {
 
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+
     const [validationErrors, setValidationErrors] = useState([]);
+
     const [isLoaded, setIsLoaded] = useState(false)
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [selected, setSelected] = useState(new Date());
 
     const { spotId } = useParams()
 
@@ -25,23 +33,28 @@ function SpotDetails() {
 
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewArr = Object.values(reviewsObj)
-
+    
+    const bookingsObj = useSelector((state) => state.bookings)
+    const bookingsArr = Object.values(bookingsObj)
+    
     useEffect(() => {
         dispatch(thunkGetSpotById(spotId))
-            .then(() => {
-                setIsLoaded(true)
-                dispatch(reviewBySpotIdThunk(spotId))
-            }).catch(async (res) => {
-                const spotData = await res.json()
-                if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
-            })
+        .then(() => {
+            setIsLoaded(true)
+            dispatch(reviewsActions.reviewBySpotIdThunk(spotId))
+            dispatch(bookingsActions.loadBookings(spotId))
+        }).catch(async (res) => {
+            const spotData = await res.json()
+            if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
+        })
     }, [dispatch, hasSubmitted])
-
+    console.log('booking --->', bookingsObj)
+    
     const reviewRefresh = async () => {
         await dispatch[reviewsActions.actionLoadReview(spotId)]
     }
 
-    if (!isLoaded) {
+    if (!isLoaded || !bookingsObj) {
         return null
     }
 
@@ -73,6 +86,28 @@ function SpotDetails() {
             })
     }
 
+    const handleBookings = (e) => {
+        // e.preventDefault();
+        // setValidationErrors([]);
+        // return dispatch(
+        //     bookingsActions.createBooking(
+        //         { startDate, endDate },
+        //         spotId))
+        //     .then(() => {
+        //         setHasSubmitted(!hasSubmitted)
+        //     })
+        //     .then(() => {
+        //         setStartDate('')
+        //         setEndDate('')
+        //     })
+        //     .catch(async (res) => {
+        //         const data = await res.json()
+        //         if (data.errors) {
+        //             setValidationErrors(data.errors);
+        //         }
+        //     })
+    }
+
     let booleanFlag = false
     if (reviewArr.length && sessionUser) {
         for (let review of reviewArr) {
@@ -84,8 +119,10 @@ function SpotDetails() {
 
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
 
-
-
+    let footer = <p>Please pick a day.</p>;
+    if (selected) {
+        footer = <p>You picked {format(selected, 'PP')}.</p>;
+    }
 
     return (
         <div className="body">
@@ -192,7 +229,7 @@ function SpotDetails() {
                                     <div className="offer-item">
                                         <div className="offer-symbol"></div>
                                         <div className="offer-description">
-                                            <i class="fa-solid fa-shower"></i>
+                                            <i className="fa-solid fa-shower"></i>
                                             Shower
                                         </div>
                                     </div>
@@ -200,14 +237,14 @@ function SpotDetails() {
                                     <div className="offer-item">
                                         <div className="offer-symbol"></div>
                                         <div className="offer-description">
-                                            <i class="fa-solid fa-suitcase-medical"></i>
+                                            <i className="fa-solid fa-suitcase-medical"></i>
                                             Medical-suitcase
                                         </div>
                                     </div>
                                     <div className="offer-item">
                                         <div className="offer-symbol"></div>
                                         <div className="offer-description">
-                                            <i class="fa-solid fa-soap"></i>
+                                            <i className="fa-solid fa-soap"></i>
                                             Shampoo
                                         </div>
                                     </div>
@@ -231,6 +268,12 @@ function SpotDetails() {
                         {/* <div className="bookings-container"> */}
                         <div className="bookings-container">
                             <div className="bookings">
+                                <DayPicker
+                                    mode="single"
+                                    selected={selected}
+                                    onSelect={setSelected}
+                                    footer={footer}
+                                />
 
                                 {/* </div> */}
                             </div>
@@ -249,7 +292,7 @@ function SpotDetails() {
                         <div className="user-reviews-container">
                             {reviewsObj && Object.values(reviewsObj).map(review => (
                                 <div className="reviews-wrap">
-                                    {console.log(review)}
+                                    {/* {console.log(review)} */}
                                     <div className="user-ratings">
                                         <i className="fa-regular fa-circle-user"></i>
                                         {review.User.firstName}
@@ -288,12 +331,9 @@ function SpotDetails() {
 
                         </>
                         : null
-
                     }
                 </div>
-
-
-
+Ï
                 {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
                     <>
                         <form className="reviews-form" onSubmit={handleSubmit}>
@@ -335,7 +375,6 @@ function SpotDetails() {
                 ) : (
                     (null))}
             </div>
-
         </div >
     )
 }

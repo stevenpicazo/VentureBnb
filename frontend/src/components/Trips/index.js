@@ -30,7 +30,7 @@ function Trips() {
             TESTING PLS LOAD
             {Object.values(bookings).map((booking) => (
                 <div key={booking.id}>
-                    {console.log('booking -->', booking)}
+                    {/* {console.log('booking -->', booking)} */}
                     {/* <bookingDetails key={booking.id} booking={booking}/> */}
                     <div className="booking-card">
 

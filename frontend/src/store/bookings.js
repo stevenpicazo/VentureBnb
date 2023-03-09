@@ -53,18 +53,16 @@ export const actionDeleteBooking = (payload) => {
 
 //! THUNKS
 export const loadBookings = (spotId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${spotId}/bookings`, {
-        method: 'GET',
-    })
+    const res = await csrfFetch(`/api/spots/${spotId}/bookings`)
     if (res.ok) {
-        const booking = await res.json()
-        dispatch((actionLoadBooking(booking.Bookings)))
-        return booking
+        const bookings = await res.json()
+        dispatch(actionLoadBooking(bookings.Bookings))
+        return bookings
     }
 }
 
 export const userBookings = () => async (dispatch) => {
-    const res = await csrfFetch (`/api/bookings/current`)
+    const res = await csrfFetch(`/api/bookings/current`)
     if (res.ok) {
         const bookings = await res.json()
         dispatch(actionUserBookings(bookings.Bookings))
@@ -79,9 +77,10 @@ export const createBooking = (booking, spotId) => async (dispatch) => {
     })
     if (res.ok) {
         const booking = await res.json()
-        dispatch((actionCreateBooking(spotId)))
+        // console.log('booking thunk --->', booking)
+        // dispatch(loadBookings(spotId))
         return booking
-    }
+    } 
 }
 
 export const deleteBooking = (bookingId) => async (dispatch) => {
@@ -112,10 +111,11 @@ const bookingsReducer = (state = initialState, action) => {
             newState = bookings
             return newState
         }
-        case CREATE_BOOKING: {
-            const newState = Object.assign({}, state)
-            return newState
-        }
+        // case CREATE_BOOKING: {
+        //     const newState = Object.assign({}, state)
+
+        //     return newState
+        // }
         case DELETE_BOOKING: {
             const newState = Object.assign({}, state)
             delete newState[action.payload.id]

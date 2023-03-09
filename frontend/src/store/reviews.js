@@ -69,14 +69,8 @@ export const deleteThunk = (reviewId) => async (dispatch) => {
 //! REDUCER
 const initialState = {}
 
-export const reviewsReducer = (state = initialState, action) => {
+const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
-        // case LOAD_REVIEW: {
-        //     let newState = Object.assign({}, state)
-        //     const reviews = normalizeData(action.reviews.Reviews) 
-        //     newState.Reviews = reviews
-        //     return newState
-        // }
         case LOAD_REVIEW: {
             let newState = Object.assign({}, state)
             const reviews = normalizeData(action.reviews)
@@ -85,7 +79,6 @@ export const reviewsReducer = (state = initialState, action) => {
         }
         case CREATE_REVIEW: {
             let newState = Object.assign({}, state)
-            // newState[action.review.id] = action.spot
             return newState
         }
         case DELETE_REVIEW: {
@@ -97,3 +90,5 @@ export const reviewsReducer = (state = initialState, action) => {
             return state
     }
 }
+
+export default reviewsReducer
