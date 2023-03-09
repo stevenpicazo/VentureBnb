@@ -264,8 +264,7 @@ function SpotDetails() {
                         </div>
                     </div>
 
-                    <section className="bookings-column">
-                        {/* <div className="bookings-container"> */}
+                    {/* <section className="bookings-column">
                         <div className="bookings-container">
                             <div className="bookings">
                                 <DayPicker
@@ -275,11 +274,10 @@ function SpotDetails() {
                                     footer={footer}
                                 />
 
-                                {/* </div> */}
                             </div>
                         </div>
 
-                    </section>
+                    </section> */}
 
                 </div>
 
