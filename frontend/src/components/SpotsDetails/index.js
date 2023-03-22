@@ -331,7 +331,7 @@ function SpotDetails() {
                         : null
                     }
                 </div>
-Ï
+
                 {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
                     <>
                         <form className="reviews-form" onSubmit={handleSubmit}>

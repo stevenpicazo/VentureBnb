@@ -6,35 +6,35 @@ import CreateSpot from '../CreateSpot/CreateSpot';
 import './Navigation.css';
 
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
   return (
     <div className='nav-container'>
       <div className='home-button'>
-      {/* <i class="fa-brands fa-gg-circle"> */}
+        {/* <i class="fa-brands fa-gg-circle"> */}
         <NavLink exact to="/">
-        <img 
-        className='logo'
-        src={require('./logo.png')} alt="Home" />
+          <img
+            className='nav-logo'
+            src={require('./logo.png')} alt="Home" />
         </NavLink>
       </div>
-      
+
       <div className='create-spot-button'>
-      {sessionUser ? 
-        <NavLink className="creat-spot-navlink" to={'/host'}>
-          Venture your home
-        </NavLink>
-      : null}
-      </div> 
+        {sessionUser ?
+          <NavLink className="create-spot-navlink" to={'/host'}>
+            Venture your home
+          </NavLink>
+          : null}
+      </div>
 
       <div className='profile-button'>
-      {isLoaded && (
+        {isLoaded && (
           <ProfileButton user={sessionUser} />
-      )}
+        )}
       </div>
 
-     
+
     </div>
 
   );

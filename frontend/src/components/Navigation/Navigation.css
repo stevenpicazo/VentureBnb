@@ -2,9 +2,8 @@
     display: none;
 }
 
-.logo {
-    /* width: 50px; */
-    max-height: 20px;
+.nav-logo {
+    max-height: 25px;
 }
 
 .nav-container {
@@ -38,22 +37,21 @@
     float: right;
 }
 
-.creat-spot-navlink {
+.create-spot-navlink {
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
+    padding: 12px;
     color: black;
 }
 
+.create-spot-navlink:hover {
+    background-color: rgb(240, 239, 239);
+    border-radius: 30px;
+}
 .profile-button {
     padding-right: 35px;
     box-sizing: border-box;
     border-radius: 20px;
     float: right;
-}
-
-.creat-spot-navlink:hover {
-    background-color: rgb(240, 239, 239);
-    padding: 5px;
-    border-radius: 10px;
 }

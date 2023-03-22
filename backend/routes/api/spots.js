@@ -344,7 +344,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 router.get('/:spotId', async (req, res, next) => {
     const spotById = await Spot.findByPk(req.params.spotId, {
         include: [
-          {  model: User, attributes: ['id', 'firstName', 'lastName'], as: 'Owner'} 
+            { model: User, attributes: ['id', 'firstName', 'lastName'], as: 'Owner' }
         ]
     })
     if (!spotById) {
@@ -369,7 +369,7 @@ router.get('/:spotId', async (req, res, next) => {
     })
     avgRating = avgRating.toJSON()
     const avgStars = avgRating.avgStarRating
-    
+
     const spotIdInfo = {
         id: spotById.id,
         ownerId: spotById.ownerId,
