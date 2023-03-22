@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { thunkGetSpotById } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import OpenModalButton from '../OpenModalButton'
 import * as reviewsActions from "../../store/reviews";
 import * as bookingsActions from "../../store/bookings"
 import './SpotDetails.css'
 
-import { format } from 'date-fns';
-import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import AllReviews from "../Reviews/AllReviews";
+import DeleteReview from "../Reviews/DeleteReview";
+import ReviewForm from "../Reviews/CreateReview";
 
 function SpotDetails() {
-    const history = useHistory()
     const dispatch = useDispatch()
 
-    const [review, setReview] = useState('')
-    const [stars, setStars] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
 
@@ -33,57 +32,25 @@ function SpotDetails() {
 
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewArr = Object.values(reviewsObj)
-    
+
     const bookingsObj = useSelector((state) => state.bookings)
     const bookingsArr = Object.values(bookingsObj)
-    
+
     useEffect(() => {
         dispatch(thunkGetSpotById(spotId))
-        .then(() => {
-            setIsLoaded(true)
-            dispatch(reviewsActions.reviewBySpotIdThunk(spotId))
-            dispatch(bookingsActions.loadBookings(spotId))
-        }).catch(async (res) => {
-            const spotData = await res.json()
-            if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
-        })
+            .then(() => {
+                setIsLoaded(true)
+                dispatch(reviewsActions.reviewBySpotIdThunk(spotId))
+                dispatch(bookingsActions.loadBookings(spotId))
+            }).catch(async (res) => {
+                const spotData = await res.json()
+                if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
+            })
     }, [dispatch, hasSubmitted])
     console.log('booking --->', bookingsObj)
-    
-    const reviewRefresh = async () => {
-        await dispatch[reviewsActions.actionLoadReview(spotId)]
-    }
 
     if (!isLoaded || !bookingsObj) {
         return null
-    }
-
-    const deleteReview = async (e, reviewId) => {
-        e.preventDefault()
-        await dispatch(reviewsActions.deleteThunk(reviewId))
-        setHasSubmitted(!hasSubmitted)
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setValidationErrors([]);
-        return dispatch(
-            reviewsActions.createThunk(
-                { review, stars },
-                spotId))
-            .then(() => {
-                setHasSubmitted(!hasSubmitted)
-            })
-            .then(() => {
-                setStars('')
-                setReview('')
-            })
-            .catch(async (res) => {
-                const data = await res.json()
-                if (data.errors) {
-                    setValidationErrors(data.errors);
-                }
-            })
     }
 
     const handleBookings = (e) => {
@@ -115,14 +82,7 @@ function SpotDetails() {
         }
     }
 
-    if (handleSubmit) reviewRefresh()
-
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
-
-    let footer = <p>Please pick a day.</p>;
-    if (selected) {
-        footer = <p>You picked {format(selected, 'PP')}.</p>;
-    }
 
     return (
         <div className="body">
@@ -149,7 +109,6 @@ function SpotDetails() {
                 </div>
 
                 <div className="description-bookings">
-
                     <div className="spot-description-container">
                         <div className="info">
 
@@ -280,100 +239,31 @@ function SpotDetails() {
                     </section> */}
 
                 </div>
-
                 <main className="reviews-wrapper">
-                    <div className="num-reviews">
-                        {!spot.numReviews ? 'No Reviews' : `★ ${rating} · ${spot.numReviews} reviews`}
-
-                    </div>
-                    <>
-                        <div className="user-reviews-container">
-                            {reviewsObj && Object.values(reviewsObj).map(review => (
-                                <div className="reviews-wrap">
-                                    {/* {console.log(review)} */}
-                                    <div className="user-ratings">
-                                        <i className="fa-regular fa-circle-user"></i>
-                                        {review.User.firstName}
-                                    </div>
-                                    <div className="user-reviews">
-                                        {review.review}
-                                    </div>
-                                </div>
-                            ))}
+                    <div className="rating-button-container">
+                        <div className="num-reviews">
+                            {!spot.numReviews ? 'No Reviews' : `★ ${rating} · ${spot.numReviews} reviews`}
                         </div>
-
+                        <OpenModalButton
+                            modalComponent={<ReviewForm spot={spot} spotId={spotId} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />}
+                            buttonText="Write a review"
+                            className="review-button"
+                        />
+                    </div>
+                    <div className="user-reviews-container">
                         {reviewsObj && Object.values(reviewsObj).map(review => (
-                            sessionUser && (
-                                <div review={review} className={"reviewInfo"} key={`review-${review.id}`}>
-                                    {sessionUser.id === review.userId && (
-                                        <button
-                                            className="delete-review-button"
-                                            onClick={(e) => deleteReview(e, review.id)}>
-                                            Delete review
-                                        </button>
-                                    )}
-                                </div>
-                            )))}
-                    </>
+                            <AllReviews review={review} />
+                        ))}
+                    </div>
+                    {reviewsObj && Object.values(reviewsObj).map(review => (
+                        sessionUser && (
+                            <div review={review} className={"reviewInfo"} key={`review-${review.id}`}>
+                                <DeleteReview review={review} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />
+                            </div>
+                        )))}
                 </main>
-
-
-                <div>
-                    {sessionUser && !booleanFlag && sessionUser.id !== spot.ownerId ?
-                        <>
-                            <button
-                                className="create-review-button"
-                                onClick={() => { setIsFormOpen(!isFormOpen) }}>
-                                Create Review
-                            </button>
-
-                        </>
-                        : null
-                    }
-                </div>
-
-                {isFormOpen && sessionUser?.id !== spot.ownerId && booleanFlag === false ? (
-                    <>
-                        <form className="reviews-form" onSubmit={handleSubmit}>
-                            <ul className="ul-errors">
-                                {validationErrors.map(error => (
-                                    <div
-                                        className="errors"
-                                        key={error}>{error}
-                                    </div>
-                                ))}
-                            </ul>
-                            <div>
-                                <label htmlFor='reviews'>Review:</label>
-                                <input
-                                    className='reviews'
-                                    type='text'
-                                    onChange={e => setReview(e.target.value)}
-                                    value={review}
-                                    placeholder='Share your thoughts about your stay!'
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor='stars'>Stars:</label>
-                                <input
-                                    className='stars'
-                                    type='number'
-                                    min={1}
-                                    max={5}
-                                    onChange={e => setStars(e.target.value)}
-                                    value={stars}
-                                    placeholder='Rate your stay!'
-                                    required
-                                />
-                            </div>
-                            <button className='submit-review-button'>Submit</button>
-                        </form>
-                    </>
-                ) : (
-                    (null))}
             </div>
-        </div >
+        </div>
     )
 }
 
