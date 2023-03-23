@@ -86,13 +86,13 @@ function ProfileButton({ user }) {
                       My Listings
                     </button>
                     : null}
-                  {/* {sessionUser ?
+                  {sessionUser ?
                     <button
                       onClick={tripsClick}
                       className="trips-button">
                       Trips
                     </button>
-                    : null} */}
+                    : null}
                   <button
                     className="logout-button"
                     onClick={logout}>Log Out
@@ -110,6 +110,7 @@ function ProfileButton({ user }) {
                   />
 
                   <OpenModalButton
+                  
                     buttonText="Sign up"
                     onButtonClick={closeMenu}
                     modalComponent={<SignupFormModal />}

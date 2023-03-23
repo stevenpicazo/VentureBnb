@@ -20,7 +20,7 @@
     padding-bottom: 30px;
     padding-left: 25px;
     padding-right: 25px;
-    width: 345px;
+    width: 330px;
     height: 430px;
     box-shadow: rgb(0 0 0 / 10%) 0px 6px 16px;
     background: white;
@@ -159,6 +159,17 @@
 
 .booking-submit-btn:hover {
     background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+}
+
+.booking-submit-btn.disabled {
+    background: #a0a0a0;
+    cursor: not-allowed;
+    pointer-events: auto;
+}
+
+.booking-errors {
+    color: red;
+    margin-top: 5px;
 }
 
 .booking-total {

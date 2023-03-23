@@ -6,6 +6,7 @@ const DeleteReview = ({review, hasSubmitted, setHasSubmitted}) => {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user);
 
+    
     const deleteReview = async (e, reviewId) => {
         e.preventDefault()
         await dispatch(reviewsActions.deleteThunk(reviewId))

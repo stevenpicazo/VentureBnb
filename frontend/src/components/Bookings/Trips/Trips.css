@@ -1,0 +1,161 @@
+.trips-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 820px; 
+    margin: 0 auto; 
+    align-items: flex-start; 
+}
+
+.trips-titles-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.trips-title {
+    font-size: 30px;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 550;
+    margin-bottom: 20px;
+}
+
+.trips-subtitle {
+    font-size: 30px;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.trips-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(194, 194, 194);
+    height: 225px;
+    width: 820px;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.trip-info-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.trips-info {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+.trips-img {
+    height: 225px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 50%;
+    filter: brightness(0.7);
+    transition: filter 0.2s ease;
+
+}
+
+.trips-img:hover {
+    filter: brightness(1);
+}
+
+.trips-city {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-bottom: 8px;
+}
+
+.trips-name {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgb(98, 98, 98);
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding-bottom: 28px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgb(194, 194, 194);
+    width: 330px;
+}
+
+.trips-address-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-date-address {
+    display: flex;
+    flex-direction: row;
+    line-height: 1.2;
+    width: 360px;
+}
+
+.trip-dates {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.trips-start-date {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-bottom: 15px;
+}
+
+.trips-end-date {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.trips-address-container {
+    width: 50%;
+    font-size: 16px;
+    font-weight: 400;
+    /* padding-left: 10px; */
+}
+
+.trips-country {
+    margin-top: 4px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(83, 83, 83);
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.no-trips-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 80px;
+    padding-top: 20px;
+}
+
+.no-trips-title {
+    font-size: 30px;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgb(194, 194, 194);
+    width: 90%;
+}
+
+.no-trips-subtitle {
+    font-size: 25px;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-bottom: 20px;
+}
+
+.no-trips-desc {
+    font-size: 18px;
+    font-weight: 300;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-bottom: 20px;
+}

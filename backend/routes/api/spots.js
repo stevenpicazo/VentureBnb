@@ -63,7 +63,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             "statusCode": 400,
             "errors": {
                 "startDate": "Start date and end date are required",
-                // "endDate": "End date is required"
             }
         });
     }

@@ -16,3 +16,7 @@ body {
     font-family: 'Roboto', sans-serif;
     cursor: default;
 }
+
+img {
+    object-fit: cover;
+}

@@ -128,7 +128,8 @@ const bookingsReducer = (state = initialState, action) => {
         }
         case DELETE_BOOKING: {
             const newState = Object.assign({}, state)
-            delete newState[action.payload.id]
+            delete newState[action.payload];
+            // delete newState[action.payload];
             return newState
         }
         default:
