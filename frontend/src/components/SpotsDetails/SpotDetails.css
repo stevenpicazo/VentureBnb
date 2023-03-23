@@ -71,44 +71,6 @@
     flex-direction: row;
 }
 
-.bookings-column {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: end;
-    width: 40%;
-    flex-basis: 40%;
-}
-
-.bookings-container {
-    display: flex;
-    position: sticky;
-    top: 120px;
-    bottom: 120px;
-    margin-top: 45px;
-    margin-bottom: 22px;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
-    padding: 25px;
-    width: 200px;
-    box-shadow: rgb(0 0 0 / 10%) 0px 6px 16px;
-    background: white;
-    flex-flow: column wrap;
-    z-index: 12;
-}
-
-.bookings {
-    display: flex;
-    /* justify-content: space-between; */
-    /* flex-flow: row wrap; */
-    width: 100%;
-    font-size: 14px;
-    font-weight: 200;
-    align-items: center;
-    justify-content: center;
-}
-
-
 .spot-description-container {
     display: flex;
     flex-direction: row;
@@ -300,8 +262,7 @@
     font-weight: 200;
 }
 
-.review-button:hover {
-}
+.review-button:hover {}
 
 .user-reviews-container {
     display: flex;

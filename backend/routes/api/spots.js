@@ -56,6 +56,18 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const spotById = await Spot.findByPk(req.params.spotId)
     const userId = req.user.id
 
+    if (!startDate || !endDate) {
+        res.status(400);
+        return res.json({
+            "message": "Start date and end date are required",
+            "statusCode": 400,
+            "errors": {
+                "startDate": "Start date and end date are required",
+                // "endDate": "End date is required"
+            }
+        });
+    }
+
     if (!spotById) {
         res.status(404)
         return res.json({
@@ -108,7 +120,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             message: "Validation error",
             statusCode: 400,
             errors: {
-                endDate: "endDate cannot be on or before startDate",
+                endDate: "End date cannot be on or before start date",
             }
         })
     } else {

@@ -6,17 +6,13 @@ import OpenModalButton from '../OpenModalButton'
 import * as reviewsActions from "../../store/reviews";
 import * as bookingsActions from "../../store/bookings"
 import './SpotDetails.css'
-
-import 'react-day-picker/dist/style.css';
 import AllReviews from "../Reviews/AllReviews";
 import DeleteReview from "../Reviews/DeleteReview";
-import ReviewForm from "../Reviews/CreateReview";
+import ReviewForm from "../Reviews/ReviewForm";
+import CreateBooking from "../Bookings/CreateBooking";
 
 function SpotDetails() {
     const dispatch = useDispatch()
-
-    const [startDate, setStartDate] = useState('')
-    const [endDate, setEndDate] = useState('')
 
     const [validationErrors, setValidationErrors] = useState([]);
 
@@ -36,6 +32,7 @@ function SpotDetails() {
     const bookingsObj = useSelector((state) => state.bookings)
     const bookingsArr = Object.values(bookingsObj)
 
+
     useEffect(() => {
         dispatch(thunkGetSpotById(spotId))
             .then(() => {
@@ -47,32 +44,9 @@ function SpotDetails() {
                 if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
             })
     }, [dispatch, hasSubmitted])
-    console.log('booking --->', bookingsObj)
 
     if (!isLoaded || !bookingsObj) {
         return null
-    }
-
-    const handleBookings = (e) => {
-        // e.preventDefault();
-        // setValidationErrors([]);
-        // return dispatch(
-        //     bookingsActions.createBooking(
-        //         { startDate, endDate },
-        //         spotId))
-        //     .then(() => {
-        //         setHasSubmitted(!hasSubmitted)
-        //     })
-        //     .then(() => {
-        //         setStartDate('')
-        //         setEndDate('')
-        //     })
-        //     .catch(async (res) => {
-        //         const data = await res.json()
-        //         if (data.errors) {
-        //             setValidationErrors(data.errors);
-        //         }
-        //     })
     }
 
     let booleanFlag = false
@@ -122,7 +96,6 @@ function SpotDetails() {
                                 </div>
                             </div>
 
-                            {/* <i className="fa-regular fa-calendar"></i> */}
                             <div className="hosting-info-container">
                                 <div className="check-in">
                                     <i className="fa-regular fa-calendar"></i>Self check-in
@@ -214,29 +187,12 @@ function SpotDetails() {
                                             Wifi available
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 
-                    {/* <section className="bookings-column">
-                        <div className="bookings-container">
-                            <div className="bookings">
-                                <DayPicker
-                                    mode="single"
-                                    selected={selected}
-                                    onSelect={setSelected}
-                                    footer={footer}
-                                />
-
-                            </div>
-                        </div>
-
-                    </section> */}
+                    <CreateBooking spot={spot} spotId={spotId} setHasSubmitted={setHasSubmitted} hasSubmitted={hasSubmitted} isLoaded={isLoaded} setIsLoaded={setIsLoaded}/>
 
                 </div>
                 <main className="reviews-wrapper">

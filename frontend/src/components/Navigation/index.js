@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import CreateSpot from '../CreateSpot/CreateSpot';
 import './Navigation.css';
+import OpenModalButton from '../OpenModalButton';
 
 
 function Navigation({ isLoaded }) {
@@ -22,9 +23,11 @@ function Navigation({ isLoaded }) {
 
       <div className='create-spot-button'>
         {sessionUser ?
-          <NavLink className="create-spot-navlink" to={'/host'}>
-            Venture your home
-          </NavLink>
+          <OpenModalButton
+            modalComponent={<CreateSpot />}
+            buttonText="Venture your home"
+            className="create-spot-navlink"
+          />
           : null}
       </div>
 

@@ -40,7 +40,7 @@ const ReviewForm = ({ spot, spotId, hasSubmitted, setHasSubmitted }) => {
     return (
         <div className="review-modal-container">
             <div className="review-title">Tell us about your stay!</div>
-            {sessionUser?.id !== spot?.ownerId ? (
+            {sessionUser.id !== spot?.ownerId ? (
                 <form className="reviews-form" onSubmit={handleSubmit}>
                     <ul className="ul-errors">
                         {validationErrors.map(error => (

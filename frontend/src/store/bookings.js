@@ -9,6 +9,7 @@ const normalizeData = (data) => {
 }
 
 const LOAD_BOOKING = 'bookings/READ'
+const LOAD_BOOKINGBYID = 'booking/LOAD'
 const USER_BOOKING = 'bookings/USER'
 const CREATE_BOOKING = 'bookings/CREATE'
 const DELETE_BOOKING = 'bookings/DELETE'
@@ -18,6 +19,13 @@ const DELETE_BOOKING = 'bookings/DELETE'
 export const actionLoadBooking = (payload) => {
     return {
         type: LOAD_BOOKING,
+        payload
+    }
+}
+
+export const actionLoadBookingById = (payload) => {
+    return {
+        type: LOAD_BOOKINGBYID,
         payload
     }
 }
@@ -56,7 +64,7 @@ export const loadBookings = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/bookings`)
     if (res.ok) {
         const bookings = await res.json()
-        dispatch(actionLoadBooking(bookings.Bookings))
+        dispatch(actionLoadBookingById(bookings.Bookings))
         return bookings
     }
 }
@@ -77,10 +85,9 @@ export const createBooking = (booking, spotId) => async (dispatch) => {
     })
     if (res.ok) {
         const booking = await res.json()
-        // console.log('booking thunk --->', booking)
-        // dispatch(loadBookings(spotId))
+        dispatch(actionCreateBooking(booking))
         return booking
-    } 
+    }
 }
 
 export const deleteBooking = (bookingId) => async (dispatch) => {
@@ -105,23 +112,25 @@ const bookingsReducer = (state = initialState, action) => {
             newState = bookings
             return newState
         }
+        case LOAD_BOOKINGBYID: {
+            return { ...state, ...action.payload }
+        }
         case USER_BOOKING: {
             let newState = Object.assign({}, state)
             const bookings = normalizeData(action.payload)
             newState = bookings
             return newState
         }
-        // case CREATE_BOOKING: {
-        //     const newState = Object.assign({}, state)
-
-        //     return newState
-        // }
+        case CREATE_BOOKING: {
+            const newState = Object.assign({}, state)
+            newState[action.payload.id] = action.payload
+            return newState
+        }
         case DELETE_BOOKING: {
             const newState = Object.assign({}, state)
             delete newState[action.payload.id]
             return newState
         }
-
         default:
             return state
     }

@@ -1,0 +1,213 @@
+.bookings-column {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: end;
+    width: 40%;
+    flex-basis: 40%;
+    margin-left: 40px;
+}
+
+.bookings-container {
+    display: flex;
+    position: sticky;
+    top: 120px;
+    bottom: 120px;
+    margin-top: 45px;
+    margin-bottom: 22px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 345px;
+    height: 430px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 6px 16px;
+    background: white;
+    flex-flow: column wrap;
+    z-index: 12;
+}
+
+.bookings {
+    display: flex;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 200;
+    align-items: center;
+    justify-content: center;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.booking-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.booking-price {
+    margin-right: 20px;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.booking-price::after {
+    content: 'night';
+    margin-left: 4px;
+    font-weight: 200;
+    font-size: 18px;
+}
+
+.bullet-point {
+    margin-left: 4px;
+    margin-right: 4px;
+    font-weight: bolder;
+    font-size: 18px;
+
+}
+
+.bold {
+    font-weight: 450;
+    font-size: 16px;
+}
+
+.booking-reviews {
+    font-weight: normal;
+    font-size: 16px;
+    color: gray;
+}
+
+.booking-dates-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    border: 1px solid #000000;
+    border-radius: 7px;
+    height: 60px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.booking-label-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    height: 100%;
+    margin-top: 14px;
+    margin-left: 8px;
+}
+
+.booking-date-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.booking-label-text {
+    font-family: Figtree, sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.booking-border {
+    border-left: 1px solid #b7b7b7;
+    margin-right: 5px;
+}
+
+.booking-input {
+    border: none;
+    font-family: Figtree, sans-serif;
+    font-size: 15px;
+    width: 120px;
+}
+
+.booking-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking-submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16.5px;
+    border-radius: 7px;
+    background: linear-gradient(to left, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+.booking-submit-btn:hover {
+    background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+}
+
+.booking-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 26px;
+    margin-bottom: 16px;
+    border-top: 1px solid #9e9e9e;
+    padding-top: 26px;
+}
+
+.booking-total-text {
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.booking-total-price {
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.booking-fees-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.cleaning-fee-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 19px;
+    font-weight: normal;
+}
+
+.cleaning-fee {
+    text-decoration: underline;
+}
+
+.service-fee-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 19px;
+    font-weight: normal;
+}
+
+.service-fee {
+    text-decoration: underline;
+}
