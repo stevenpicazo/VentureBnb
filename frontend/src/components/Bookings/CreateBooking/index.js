@@ -14,7 +14,7 @@ const CreateBooking = ({ spotId, hasSubmitted, setHasSubmitted, spot }) => {
     const sessionUser = useSelector(state => state.session.user)
 
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
-
+    console.log('spot', spot)
     const handleBookings = (e) => {
         e.preventDefault();
         setValidationErrors([]);
@@ -79,7 +79,7 @@ const CreateBooking = ({ spotId, hasSubmitted, setHasSubmitted, spot }) => {
                             </div>
                         </div>
                         <div className="booking-btn-container">
-                            {sessionUser.id !== spot.OwnerId ? (
+                            {sessionUser.id !== spot?.ownerId ? (
                                 <button type="submit" className="booking-submit-btn">
                                     Reserve
                                 </button>

@@ -192,7 +192,7 @@ function SpotDetails() {
                         </div>
                     </div>
 
-                    <CreateBooking spot={spot} spotId={spotId} setHasSubmitted={setHasSubmitted} hasSubmitted={hasSubmitted} isLoaded={isLoaded} setIsLoaded={setIsLoaded}/>
+                    <CreateBooking spot={spot} spotId={spotId} setHasSubmitted={setHasSubmitted} hasSubmitted={hasSubmitted} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
 
                 </div>
                 <main className="reviews-wrapper">
@@ -200,11 +200,14 @@ function SpotDetails() {
                         <div className="num-reviews">
                             {!spot.numReviews ? 'No Reviews' : `★ ${rating} · ${spot.numReviews} reviews`}
                         </div>
-                        <OpenModalButton
-                            modalComponent={<ReviewForm spot={spot} spotId={spotId} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />}
-                            buttonText="Write a review"
-                            className="review-button"
-                        />
+                        {sessionUser.id !== spot?.ownerId ?
+                            <OpenModalButton
+                                modalComponent={<ReviewForm spot={spot} spotId={spotId} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />}
+                                buttonText="Write a review"
+                                className="review-button"
+                            />
+                            : null
+                        }
                     </div>
                     <div className="user-reviews-container">
                         {reviewsObj && Object.values(reviewsObj).map(review => (

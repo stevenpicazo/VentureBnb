@@ -2,7 +2,6 @@ import * as reviewsActions from "../../../store/reviews";
 
 const AllReviews = ({ review }) => {
 
-
     return (
         <div className="reviews-wrap">
             <div className="user-ratings">

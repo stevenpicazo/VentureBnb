@@ -17,10 +17,10 @@ function CreateSpot() {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [previewImage, setPreviewImage] = useState('')
-    const [image2, setimage2] = useState("");
-    const [image3, setimage3] = useState("");
-    const [image4, setimage4] = useState("");
-    const [image5, setimage5] = useState("");
+    const [image2, setImage2] = useState("");
+    const [image3, setImage3] = useState("");
+    const [image4, setImage4] = useState("");
+    const [image5, setImage5] = useState("");
     const [newSpot, setNewSpotId] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
@@ -36,7 +36,7 @@ function CreateSpot() {
             { url: image3, preview: false },
             { url: image4, preview: false },
             { url: image5, preview: false },
-          ];
+        ];
 
         return dispatch(
             spotsActions.creatThunk(
@@ -183,6 +183,54 @@ function CreateSpot() {
                                     onChange={(e) => setPreviewImage(e.target.value)}
                                     placeholder='Preview image url'
                                     required
+                                />
+                            </label>
+                            <div className="border"></div>
+                        </div>
+                        <div>
+                            <label className="create-label">
+                                <input
+                                    className='previewImage'
+                                    type="url"
+                                    value={image2}
+                                    onChange={(e) => setImage2(e.target.value)}
+                                    placeholder='Image url'
+                                />
+                            </label>
+                            <div className="border"></div>
+                        </div>
+                        <div>
+                            <label className="create-label">
+                                <input
+                                    className='previewImage'
+                                    type="url"
+                                    value={image3}
+                                    onChange={(e) => setImage3(e.target.value)}
+                                    placeholder='Image url'
+                                />
+                            </label>
+                            <div className="border"></div>
+                        </div>
+                        <div>
+                            <label className="create-label">
+                                <input
+                                    className='previewImage'
+                                    type="url"
+                                    value={image4}
+                                    onChange={(e) => setImage4(e.target.value)}
+                                    placeholder='Image url'
+                                />
+                            </label>
+                            <div className="border"></div>
+                        </div>
+                        <div>
+                            <label className="create-label">
+                                <input
+                                    className='previewImage'
+                                    type="url"
+                                    value={image5}
+                                    onChange={(e) => setImage5(e.target.value)}
+                                    placeholder='Image url'
                                 />
                             </label>
                             <div className="border"></div>

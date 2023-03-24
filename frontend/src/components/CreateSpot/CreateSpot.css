@@ -28,12 +28,12 @@
 }
 
 .create-container {
-    height: 685px;
+    height: 885px;
     width: 560px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    top: 40%;
+    top: -4.2pc;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
