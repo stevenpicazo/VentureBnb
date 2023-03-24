@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom"
 
 function SpotsList({ spot }) {
 
-    const rating = parseFloat(spot.avgRating).toFixed(2)
+    const rating = spot.avgRating === 0 ? 'New' : parseFloat(spot.avgRating).toFixed(2);
 
     const truncateName = (name) => {
         const shortName = name?.slice(0, 20)
@@ -26,8 +26,6 @@ function SpotsList({ spot }) {
 
                         </div>
                     </div>
-
-
 
                     <div className="spot-city-price">
                         <div className="spot-name"> {truncateName(spot.name)} </div>
