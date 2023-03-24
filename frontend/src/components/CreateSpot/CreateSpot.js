@@ -21,8 +21,6 @@ function CreateSpot() {
     const [image3, setImage3] = useState("");
     const [image4, setImage4] = useState("");
     const [image5, setImage5] = useState("");
-    const [newSpot, setNewSpotId] = useState('')
-    const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
     const { closeModal } = useModal()
 

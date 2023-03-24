@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom"
 
 function SpotsList({ spot }) {
@@ -16,6 +17,7 @@ function SpotsList({ spot }) {
             activeClassName="active"
         >
             <div className="spot-card">
+                
                 <img src={spot.previewImage} className="spot-image" />
                 <div className="home-page-spot-info">
                     <div className="spot-location-rating">

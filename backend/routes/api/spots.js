@@ -461,7 +461,8 @@ router.get('/', queryValidator, async (req, res, next) => {
             createdAt: spot.createdAt,
             updatedAt: spot.updatedAt,
             avgRating,
-            previewImage
+            previewImage,
+            images: spot.SpotImages
         }
         allSpots.push(spotsInfo)
     }
