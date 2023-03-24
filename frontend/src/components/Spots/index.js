@@ -10,20 +10,22 @@ const Spots = () => {
     const spotsArr = Object.values(spots)
     const [loaded, setLoaded] = useState(false)
 
-    
+
     useEffect(() => {
         dispatch(readThunk())
-        .then(() => setLoaded(true))
+            .then(() => setLoaded(true))
     }, [dispatch, loaded])
-    
-    if (!spotsArr.length) return;
-    if (!loaded) return;
-    
-    
+
+    if (!spotsArr.length) return (
+        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>);
+    if (!loaded) return null
+
+
     return (
         <div className="spot-list-container">
+
             {spotsArr.map(spot => (
-                <SpotsList key={`spot-${spot.id}`} spot={spot}/>
+                <SpotsList key={`spot-${spot.id}`} spot={spot} />
             ))}
         </div>
     )
@@ -31,4 +33,3 @@ const Spots = () => {
 
 export default Spots
 
-        

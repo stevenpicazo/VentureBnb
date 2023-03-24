@@ -38,6 +38,7 @@ const CreateBooking = ({ spotId, hasSubmitted, setHasSubmitted, spot }) => {
 
     return (
         <section className="bookings-column">
+            
             <div className="bookings-container">
                 <div className="bookings">
                     <form className="booking-form" onSubmit={handleBookings}>

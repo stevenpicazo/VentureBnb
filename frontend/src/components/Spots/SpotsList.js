@@ -1,5 +1,11 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom"
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import './Spots.css'
 
 function SpotsList({ spot }) {
 
@@ -17,8 +23,22 @@ function SpotsList({ spot }) {
             activeClassName="active"
         >
             <div className="spot-card">
-                
-                <img src={spot.previewImage} className="spot-image" />
+                <Swiper
+                    slidesPerView={1}
+                    cssMode={true}
+                    navigation={true}
+                    pagination={true}
+                    mousewheel={true}
+                    keyboard={true}
+                    modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                    className="spot-image"
+                >
+                    {spot.images.map((img) => (
+                        <SwiperSlide>
+                            <img className="spot-image" src={img.url} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
                 <div className="home-page-spot-info">
                     <div className="spot-location-rating">
                         <div className="spot-city-state"> {spot.city}, {spot.state} </div>
