@@ -1,0 +1,19 @@
+.cancel-trip-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.cancel-trip-btn {
+    background: linear-gradient(to left, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+.cancel-trip-btn:hover {
+    background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+}

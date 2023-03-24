@@ -1,6 +1,30 @@
-.listings-h2 {
-    font-size: 24px;
-    margin-bottom: 25px;
+.create-spot-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    padding-left: 25px;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 30px;
+    /* margin-bottom: 10px; */
+}
+
+.spot-x {
+    position: absolute;
+    left: 25px;
+    top: 20px;
+    cursor: pointer;
+    color: #404040;
+}
+
+.spot-x:hover {
+    color: #e61e4d;
+}
+
+.create-spot-title {
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 400;
+    font-size: 22px;
 }
 
 .create-container {

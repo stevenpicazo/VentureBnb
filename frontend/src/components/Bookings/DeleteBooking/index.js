@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteBooking, userBookings } from "../../../store/bookings"
+import "./DeleteBooking.css"
 
 const DeleteBooking = ({ booking }) => {
     const dispatch = useDispatch()
@@ -21,7 +22,7 @@ const DeleteBooking = ({ booking }) => {
 
 
     return (
-        <div className="cancel-trip-btn">
+        <div className="cancel-trip-btn-container">
             <button onClick={(e) => handleSubmit(e, booking.id)} className="cancel-trip-btn">Cancel Reservation</button>
         </div>
     )

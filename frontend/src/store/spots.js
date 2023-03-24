@@ -86,36 +86,37 @@ export const thunkCurrentUsersSpots = () => async (dispatch) => {
     }
 }
 
-export const creatThunk = (spots, previewImage) => async (dispatch) => {
-    const res = await csrfFetch('/api/spots', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(spots)
-    });
-    if(res.ok){
+export const creatThunk = (spot, images) => async (dispatch) => {
+    const res = await csrfFetch("/api/spots", {
+        method: "POST",
+        body: JSON.stringify(spot),
+    })
+    if (res.ok) {
         const spot = await res.json()
         dispatch(actionCreateSpot(spot))
-        const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
-            method: "POST",
-            body: JSON.stringify(previewImage),
-        });
-        if (imageRes.ok) {
-            return spot;
+        for (let img of images) {
+            if (img.url) {
+                await csrfFetch(`/api/spots/${spot.id}/images`, {
+                    method: "POST",
+                    body: JSON.stringify(img),
+                })
+            }
         }
+        return spot.id
     }
 }
 
 export const editThunk = (spot, spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`, {
-      method: "PUT",
-      body: JSON.stringify(spot),
+        method: "PUT",
+        body: JSON.stringify(spot),
     });
-  
+
     if (res.ok) {
-      const spot = await res.json();
-      dispatch(actionEditSpot(spot));
-      return spot
-  };
+        const spot = await res.json();
+        dispatch(actionEditSpot(spot));
+        return spot
+    };
 }
 
 export const deleteThunk = (spotId) => async (dispatch) => {
@@ -125,7 +126,7 @@ export const deleteThunk = (spotId) => async (dispatch) => {
     if (res.ok) {
         const spot = await res.json()
         dispatch(actionDeleteSpot(spot))
-        
+
         return spot
     }
 }
@@ -134,7 +135,7 @@ export const deleteThunk = (spotId) => async (dispatch) => {
 const initialState = {}
 
 export const spotReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case UPDATE_SPOT: {
             let newState = Object.assign({}, state)
             newState[action.spot.id] = action.spot
@@ -152,7 +153,7 @@ export const spotReducer = (state = initialState, action) => {
             let newState = Object.assign({}, state)
             newState[action.spotById.id] = action.spotById
             return newState
-        } 
+        }
         case LOAD_CURRENT_USER_SPOTS: {
             let newState = Object.assign({}, state)
 
@@ -170,7 +171,7 @@ export const spotReducer = (state = initialState, action) => {
             // delete newState[action.spot.id]
             return newState
         }
-        default: 
+        default:
             return state
     }
 }

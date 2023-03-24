@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { userBookings } from "../../../store/bookings";
 import OpenModalButton from "../../OpenModalButton";
 import DeleteBooking from "../DeleteBooking";
@@ -9,8 +10,10 @@ function Trips() {
     const [loaded, setLoaded] = useState(false)
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
+    const history = useHistory()
     const dispatch = useDispatch()
     const bookings = useSelector((state) => state.bookings)
+    const spot = useSelector((state) => state.spots)
 
     useEffect(() => {
         dispatch(userBookings()).then(() => setLoaded(true))
@@ -76,7 +79,10 @@ function Trips() {
                                     </div>
                                 </div>
                             </div>
-                            <img className="trips-img" src={booking.Spot.previewImage} alt="listing" />
+                            <img
+                                onClick={() => history.push(`/spots/${booking.Spot?.id}`)}
+                                className="trips-img"
+                                src={booking.Spot.previewImage} alt="listing" />
                         </div>
                         <DeleteBooking booking={booking} />
                     </div>
