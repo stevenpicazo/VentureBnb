@@ -19,7 +19,10 @@ function Profile() {
     dispatch(spotsActions.thunkCurrentUsersSpots()).then(() => setLoaded(true))
   }, [dispatch, hasSubmitted]);
 
-  if (!spotsObj) return null
+  if (!Object.values(spotsObj).length) return (
+    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+  )
+
   if (!loaded) return null
 
   const deleteSpot = async (e, spotId) => {

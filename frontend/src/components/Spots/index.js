@@ -17,7 +17,8 @@ const Spots = () => {
     }, [dispatch, loaded])
 
     if (!spotsArr.length) return (
-        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>);
+        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    )
     if (!loaded) return null
 
 
