@@ -22,13 +22,15 @@ const Spots = () => {
 
 
     return (
-        <div className="spot-list-container">
-
-            {spotsArr.map(spot => (
-                <SpotsList key={`spot-${spot.id}`} spot={spot} />
-            ))}
+        <div className="spots-wrapper">
+            <div className="spot-list-container">
+                {spotsArr.map(spot => (
+                    <SpotsList key={`spot-${spot.id}`} spot={spot} />
+                ))}
+            </div>
         </div>
-    )
+    );
+
 }
 
 export default Spots

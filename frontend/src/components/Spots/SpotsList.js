@@ -35,7 +35,7 @@ function SpotsList({ spot }) {
                 >
                     {spot.images.map((img) => (
                         <SwiperSlide>
-                            <img className="spot-image" src={img.url} />
+                            <img src={img.url} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -45,10 +45,8 @@ function SpotsList({ spot }) {
                         <div className="home-rating-container">
                             <span className="home-star">★</span>
                             <div className="avg-rating"> {rating}</div>
-
                         </div>
                     </div>
-
                     <div className="spot-city-price">
                         <div className="spot-name"> {truncateName(spot.name)} </div>
                         <div className="spot-price">${spot.price}</div>
