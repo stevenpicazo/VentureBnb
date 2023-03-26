@@ -11,7 +11,7 @@ const DeleteBooking = ({ booking }) => {
 
     useEffect(() => {
         dispatch(userBookings(user.id))
-        .then(() => setIsLoaded(true))
+            .then(() => setIsLoaded(true))
     }, [dispatch, user, hasSubmitted])
 
     const handleSubmit = async () => {
@@ -22,8 +22,10 @@ const DeleteBooking = ({ booking }) => {
 
 
     return (
-        <div className="cancel-trip-btn-container">
-            <button onClick={(e) => handleSubmit(e, booking.id)} className="cancel-trip-btn">Cancel Reservation</button>
+        <div className="trips-buttons"> 
+            <div className="cancel-trip-btn-container">
+                <button onClick={(e) => handleSubmit(e, booking.id)} className="cancel-trip-btn">Cancel Reservation</button>
+            </div>
         </div>
     )
 }

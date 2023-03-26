@@ -30,8 +30,6 @@ function SpotDetails() {
     const reviewArr = Object.values(reviewsObj)
 
     const bookingsObj = useSelector((state) => state.bookings)
-    const bookingsArr = Object.values(bookingsObj)
-
 
     useEffect(() => {
         dispatch(thunkGetSpotById(spotId))
@@ -110,7 +108,7 @@ function SpotDetails() {
                                 </span>
 
                                 <div className="work-space">
-                                    <i className="fa-regular fa-pen-to-square"></i>Designated work space
+                                    <i className="fa-regular fa-pen-to-square info-workspace"></i>Designated work space
                                 </div>
                             </div>
                             <div className="air-cover-container">

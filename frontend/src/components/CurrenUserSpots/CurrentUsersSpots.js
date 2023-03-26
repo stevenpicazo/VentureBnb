@@ -8,7 +8,6 @@ import './CurrentUserSpots.css'
 function Profile() {
   const dispatch = useDispatch();
   const spotsObj = useSelector(state => state.spots);
-  console.log('spot -->', spotsObj)
   const history = useHistory()
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -32,40 +31,72 @@ function Profile() {
     // await history.push('/listings') 
   }
 
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  }
+
+
   return (
-    <>
-      <h1 className="userspots-h1">My Listings</h1>
-      <div className="listings-container">
-        {Object.values(spotsObj).map((userspot) => (
-          <div key={userspot.id}>
-            {/* <UserSpotDetails key={userspot.id} userspot={userspot}/> */}
-            <div className="userspot-card">
-              <img
-                key={`preview-${userspot.id}`}
-                src={userspot.previewImage}
-                alt="preview"
-                className="userspot-image"
-              />
-              <div className="userspot-info">
-                <div className="userspot-address">{userspot.address},</div>
-                <div className="userspot-city-state">{userspot.city}, {userspot.state}</div>
+    <div className="trips-container">
+      <div className="trips-titles-container">
+        <div className="trips-subtitle">My Listings</div>
+      </div>
+      {Object.values(spotsObj).map((userspot) => (
+        <div className="listings-card" key={userspot.id}>
+          <div className="trip-info-container">
+            <div className="trips-info">
+              <span className="trips-city">{userspot?.city}</span>
+              <span className="trips-name">{userspot?.name}</span>
+              <div className="trip-date-address">
+                <div className="trips-address-container">
+                  <span className="trips-address">{userspot.address}, {userspot.city}</span>
+                  <span className="trips-country">{userspot.country}</span>
+                </div>
+              </div>
+              <div className="listings-btns ">
                 <button
-                  className="userspot-delete-button"
-                  onClick={(e) => deleteSpot(e, userspot.id)}>
-                  Delete Listing
-                </button>
-                <button
-                  className="userspot-edit-button"
+                  className="edit-listing-btn"
                   onClick={(e) => {
                     e.preventDefault()
                     history.push(`/edit/listing/${userspot.id}`)
-                  }}>Edit</button>
+                  }}>
+                  <i class="fa-regular fa-pen-to-square edit-icon"></i>
+                  Update
+                </button>
+                <button
+                  className=" delete-listing-btn"
+                  onClick={(e) => deleteSpot(e, userspot.id)}>
+                  <i class="fa-regular fa-trash-can edit-icon"></i>
+                  Remove
+                </button>
               </div>
             </div>
+            <img
+              onClick={() => history.push(`/spots/${userspot?.id}`)}
+              className="listings-img"
+              src={userspot.previewImage} alt="listing" />
           </div>
-        ))}
-      </div>
-    </>
+          {/* <div className="cancel-trip-btn-container ">
+            <button
+              className=" delete-listing-btn"
+              onClick={(e) => deleteSpot(e, userspot.id)}>
+              Delete Listing
+            </button>
+            <button
+              className="edit-listing-btn"
+              onClick={(e) => {
+                e.preventDefault()
+                history.push(`/edit/listing/${userspot.id}`)
+              }}>Edit
+            </button>
+          </div> */}
+        </div>
+      ))}
+      {/* </div> */}
+    </div>
   );
 }
 

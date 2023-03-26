@@ -32,9 +32,6 @@ function App() {
           <Route exact path={'/edit/listing/:spotId'}>
             <EditSpotForm />
           </Route>
-          <Route path={"/host"}>
-            <CreateSpot />
-          </Route>
           <Route path={"/trips"}>
             <Trips />
           </Route>

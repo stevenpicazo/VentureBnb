@@ -102,20 +102,21 @@ function ProfileButton({ user }) {
             ) : (
               <>
                 <div className="modal-container">
-
+                  <div className="dropdown-title">Welcome to VentureBnb</div>
+                  <div className="linkedin-border"></div>
                   <OpenModalButton
+                    className="modal-button"
                     buttonText="Log in"
                     onButtonClick={closeMenu}
                     modalComponent={<LoginFormModal />}
                   />
 
                   <OpenModalButton
-                  
+                    className="modal-button"
                     buttonText="Sign up"
                     onButtonClick={closeMenu}
                     modalComponent={<SignupFormModal />}
                   />
-                  <div className="linkedin-border"></div>
 
                 </div>
               </>

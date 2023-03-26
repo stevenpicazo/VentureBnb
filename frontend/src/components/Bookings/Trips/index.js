@@ -63,7 +63,7 @@ function Trips() {
                 ) : null
                 }
                 {upcomingTrips.reverse().map((booking) => (
-                    <div className="trips-card" key={booking.id}>
+                    <div className="trips-card card-gap-1" key={booking.id}>
                         <div className="trip-info-container">
                             <div className="trips-info">
                                 <span className="trips-city">{booking?.Spot.city}</span>
@@ -94,7 +94,7 @@ function Trips() {
                 ) : null
                 }
                 {currentTrips.reverse().map((booking) => (
-                    <div className="trips-card" key={booking.id}>
+                    <div className="trips-card" card-gap-2 key={booking.id}>
                         <div className="trip-info-container">
                             <div className="trips-info">
                                 <span className="trips-city">{booking?.Spot.city}</span>

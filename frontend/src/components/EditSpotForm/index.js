@@ -6,7 +6,6 @@ import * as spotsActions from "../../store/spots";
 import './EditSpot.css'
 
 function EditSpotForm() {
-
     const history = useHistory()
     const dispatch = useDispatch()
     const [address, setAddress] = useState('');

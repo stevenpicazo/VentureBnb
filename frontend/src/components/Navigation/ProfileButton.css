@@ -71,7 +71,6 @@
     padding-right: 120px;
     background-color: transparent;
     height: 40px;
-
 }
 
 .email-button,
@@ -95,6 +94,8 @@
 
 .modal-button,
 .demo-user-button {
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 350;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -104,6 +105,17 @@
     padding-right: 120px;
     background-color: transparent;
     height: 40px;
+}
+
+.dropdown-title {
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    font-weight: 350;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+
 }
 
 .logout-button,

@@ -14,7 +14,6 @@ const CreateBooking = ({ spotId, hasSubmitted, setHasSubmitted, spot }) => {
     const sessionUser = useSelector(state => state.session.user)
 
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
-    console.log('spot', spot)
     const handleBookings = (e) => {
         e.preventDefault();
         setValidationErrors([]);
