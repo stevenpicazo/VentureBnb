@@ -44,7 +44,9 @@ function SpotDetails() {
     }, [dispatch, hasSubmitted])
 
     if (!isLoaded || !bookingsObj) {
-        return null
+        return (
+            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        )
     }
 
     let booleanFlag = false
@@ -53,6 +55,8 @@ function SpotDetails() {
             if (review.userId === sessionUser.id) booleanFlag = true
         }
     }
+
+
 
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
 

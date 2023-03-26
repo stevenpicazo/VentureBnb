@@ -13,7 +13,6 @@ function Trips() {
     const history = useHistory()
     const dispatch = useDispatch()
     const bookings = useSelector((state) => state.bookings)
-    const spot = useSelector((state) => state.spots)
 
     useEffect(() => {
         dispatch(userBookings()).then(() => setLoaded(true))
