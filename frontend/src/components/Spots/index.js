@@ -23,11 +23,13 @@ const Spots = () => {
 
 
     return (
-        <div className="spots-wrapper">
-            <div className="spot-list-container">
-                {spotsArr.map(spot => (
-                    <SpotsList key={`spot-${spot.id}`} spot={spot} />
-                ))}
+        <div className="spots-home">
+            <div className="spots-wrapper">
+                <div className="spot-list-container">
+                    {spotsArr.map(spot => (
+                        <SpotsList key={`spot-${spot.id}`} spot={spot} />
+                    ))}
+                </div>
             </div>
         </div>
     );
