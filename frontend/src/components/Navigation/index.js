@@ -20,24 +20,27 @@ function Navigation({ isLoaded }) {
             src={require('./logo.png')} alt="Home" />
         </NavLink>
       </div>
+      <div className='nav-bar-right-section'>
+        <i onClick={() => window.open("https://github.com/stevenpicazo", "_blank")} class="fa-brands fa-github nav-icons"></i>
+        <i onClick={() => window.open("https://www.linkedin.com/in/steven-picazo-994042225", "_blank")} class="fa-brands fa-linkedin nav-icons"></i>
+        <i onClick={() => window.open("https://wellfound.com/u/steven-picazo", "_blank")} class="fa-brands fa-angellist nav-icons"></i>
+        <i onClick={() => window.open("https://stevenpicazo.com", "_blank")} class="fa-solid fa-folder-open"></i>
+        <div className='create-spot-button'>
 
-      <div className='create-spot-button'>
-        {sessionUser ?
-          <OpenModalButton
-            modalComponent={<CreateSpot />}
-            buttonText="Venture your home"
-            className="create-spot-navlink"
-          />
-          : null}
+          {sessionUser ?
+            <OpenModalButton
+              modalComponent={<CreateSpot />}
+              buttonText="Venture your home"
+              className="create-spot-navlink"
+            />
+            : null}
+        </div>
       </div>
-
       <div className='profile-button'>
         {isLoaded && (
           <ProfileButton user={sessionUser} />
         )}
       </div>
-
-
     </div>
 
   );
