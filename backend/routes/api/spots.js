@@ -191,6 +191,52 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     return res.json(spotImageInfo)
 })
 
+//! Edit an Image to a Spot based on the Spot's id
+router.put('/:spotId/images', requireAuth, async (req, res, next) => {
+    const { id, url, preview } = req.body;
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        });
+    }
+
+    const user = await User.findOne({
+        where: { id: req.user.id },
+        include: [{ model: Spot, attributes: ['id'], where: { id: req.params.spotId } }]
+    });
+
+    if (!user) {
+        res.status(403);
+        return res.json({
+            "message": "Not authorized to edit an image"
+        });
+    }
+
+    if (id) { 
+        const spotImage = await SpotImage.findByPk(id);
+
+        if (!spotImage) {
+            res.status(404);
+            return res.json({
+                "message": "Image couldn't be found",
+                "statusCode": 404
+            });
+        }
+
+        const updatedImage = await spotImage.set({ url, preview });
+        await updatedImage.save();
+        return res.json(updatedImage);
+    } 
+    // else { 
+    //     const newImage = await SpotImage.create({ url, preview, spotId: spot.id });
+    //     return res.json(newImage);
+    // }
+});
+
 //! Edit a Spot
 router.put('/:spotId', spotValidator, requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body

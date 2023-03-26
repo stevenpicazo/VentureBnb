@@ -27,22 +27,23 @@
 }
 
 .create-container {
-    height: 645px;
-    width: 560px;
-    overflow-y: auto;
+    height: 760px;
+    width: 660px;
+    overflow: auto;
+    /* overflow-y: auto; */
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     top: -4.2pc;
     left: 50%;
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -42%);
     padding-bottom: 20px;
 }
 
 .create-form {
-    margin-left: 25px;
-    margin-right: 25px;
+    padding-left: 55px;
+    padding-right: 55px;
     display: flex;
     flex-direction: column;
 }
@@ -58,13 +59,25 @@
     font-size: 20px;
 }
 
-.address, .city, .state, .country, .name, .description, .price, .previewImage {
+.address, .city, .state, .country, .name, .price, .previewImage {
     font-size: 16px;
     padding: 20px;
     padding-left: 0px;
     padding-bottom: 15px;
     border: none;
-    border-radius: 8px;
+    border-radius: 3px;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.description {
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    padding: 20px;
+    padding-left: 0px;
+    padding-bottom: 45px;
+    border: none;
+    border-radius: 3px;
+    resize: none;
 }
 
 .listings-button {

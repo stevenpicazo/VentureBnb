@@ -40,7 +40,12 @@ function Profile() {
           <div key={userspot.id}>
             {/* <UserSpotDetails key={userspot.id} userspot={userspot}/> */}
             <div className="userspot-card">
-              <img src={userspot.previewImage} alt="preview" className="userspot-image" />
+              <img
+                key={`preview-${userspot.id}`}
+                src={userspot.previewImage}
+                alt="preview"
+                className="userspot-image"
+              />
               <div className="userspot-info">
                 <div className="userspot-address">{userspot.address},</div>
                 <div className="userspot-city-state">{userspot.city}, {userspot.state}</div>

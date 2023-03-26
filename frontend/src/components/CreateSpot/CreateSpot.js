@@ -34,7 +34,7 @@ function CreateSpot() {
             { url: image3, preview: false },
             { url: image4, preview: false },
             { url: image5, preview: false },
-        ];
+        ]
 
         return dispatch(
             spotsActions.creatThunk(
@@ -48,8 +48,7 @@ function CreateSpot() {
                     price,
                 },
                 images
-            )
-        )
+            ))
             .then(() => {
                 closeModal()
                 history.push(`/listings`);
@@ -148,7 +147,7 @@ function CreateSpot() {
                         </div>
                         <div>
                             <label className="create-label">
-                                <input
+                                <textarea
                                     className='description'
                                     type='text'
                                     onChange={e => setDescription(e.target.value)}

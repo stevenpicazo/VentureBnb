@@ -1,47 +1,126 @@
-/* .form-container {
+.edit-container {
+    padding-top: 1px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.edit-h2 {
-    margin-top: 5px;
+.edit-spot-title-container {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.edit-title {
+    font-size: 36px;
+    font-weight: 400;
+    color: #333;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.edit-form-container {
+    padding: 40px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 5px 10px #e6e6e6;
+}
+
+.edit-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group-button {
     display: flex;
     justify-content: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.edit-spot-form {
-    padding-top: 30px;
-    padding-bottom: 50px;
-    padding-right: 60px;
-    padding-left: 60px;
-    margin: auto;
-    max-width: 650px;
-    color: black;
+    align-items: center;
 }
 
 
-.address, .city, .state, .country, .name, 
-.description, .price, .previewImage {
-    margin-top: 7px;
+.form-label {
+    display: block;
+    font-size: 18px;
+    font-weight: 450;
+    color: #333;
     margin-bottom: 10px;
-    width: 100%;
-    padding: 10px 0 10px;
-    border: 1px solid rgba(3, 3, 3, .6);
-    border-radius: 8px;
-    
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.listings-button {
+.form-input {
     width: 100%;
-    margin: 15px 0 9px 0;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    transition: border-color 0.2s ease-in-out;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #6c63ff;
+}
+
+.form-textarea {
+    resize: none;
+    width: 100%;
+    height: 130px;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    transition: border-color 0.2s ease-in-out;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #6c63ff;
+}
+
+.form-button {
+    background: linear-gradient(to left, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
     border: none;
     border-radius: 8px;
+    color: #fff;
     cursor: pointer;
-    padding-top: 17px;
-    padding-bottom: 17px;
-    background-color: #FF385C;
-    color: rgb(243, 243, 243);
+    font-size: 16px;
+    height: 48px;
+    touch-action: manipulation;
+    width: 100%;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 550;
 }
 
-.listings-button:hover {
-    background-color: #fa5674;
-} */
+.form-button:hover {
+    background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+}
+
+@media (max-width: 768px) {
+    .edit-title {
+        font-size: 24px;
+    }
+}
+
+.image-label {
+    display: inline-block;
+    position: relative;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.image-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+

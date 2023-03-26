@@ -115,7 +115,7 @@ export const editThunk = (spot, spotId) => async (dispatch) => {
     if (res.ok) {
         const spot = await res.json();
         dispatch(actionEditSpot(spot));
-        return spot
+        return spotId;
     };
 }
 
