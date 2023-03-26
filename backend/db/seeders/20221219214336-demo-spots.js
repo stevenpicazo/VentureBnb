@@ -24,7 +24,7 @@ module.exports = {
         price: 268
       },
       {
-        ownerId: 3,
+        ownerId: 1,
         address: '444 Lian Rd.',
         city: 'Miami',
         state: 'FL',

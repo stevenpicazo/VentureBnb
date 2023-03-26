@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     options.tableName = 'Bookings';
     return queryInterface.bulkInsert(options, [
       {
@@ -28,11 +28,30 @@ module.exports = {
         userId: 1,
         startDate: new Date('2023-11-19'),
         endDate: new Date('2023-12-21'),
-      }
+      },
+      {
+        spotId: 4,
+        userId: 1,
+        startDate: new Date('2024-11-19'),
+        endDate: new Date('2024-12-21'),
+      },
+      {
+        spotId: 5,
+        userId: 1,
+        startDate: new Date('2024-01-19'),
+        endDate: new Date('2023-01-21'),
+      },
+      {
+        spotId:9,
+        userId: 1,
+        startDate: new Date('2024-02-19'),
+        endDate: new Date('2023-02-21'),
+      },
+
     ], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Bookings';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
