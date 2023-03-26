@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/">
           <img
             className='nav-logo'
-            src={require('./logo.png')} alt="Home" />
+            src={require('./logo2.png')} alt="Home" />
         </NavLink>
       </div>
       <div className='nav-bar-right-section'>

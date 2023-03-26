@@ -1,0 +1,40 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.2);
+    padding: 12px 0;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.footer-section {
+    flex: 1;
+    margin-right: 50px;
+}
+
+.footer-trademark {
+
+    text-align: center;
+    font-size: 14px;
+    color: #404040;
+}
+
+.footer-icons {
+    font-size: 20px;
+    margin-right: 15px;
+    color: black;
+    cursor: pointer;
+}
+
+.footer-icons:hover {
+    color: #555555;
+    transform: scale(1.2); 
+}
+
+

@@ -10,6 +10,7 @@ import CurrentUserSpots from "./components/CurrenUserSpots/CurrentUsersSpots";
 import EditSpotForm from "./components/EditSpotForm";
 import Trips from "./components/Bookings/Trips";
 import SpotDetails from "./components/SpotsDetails";
+import PastTrips from "./components/Bookings/Trips/PastTrips";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route path={"/trips"}>
             <Trips />
+          </Route>
+          <Route path={"/trips/past"}>
+            <PastTrips />
           </Route>
           <Route exact path={"/spots/:spotId"}>
             <SpotDetails />

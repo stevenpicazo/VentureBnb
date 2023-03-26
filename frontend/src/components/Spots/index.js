@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { readThunk } from "../../store/spots";
 import SpotsList from "./SpotsList";
 import './Spots.css'
+import Footer from "./Footer";
 
 const Spots = () => {
     const dispatch = useDispatch()
@@ -31,6 +32,7 @@ const Spots = () => {
                     ))}
                 </div>
             </div>
+            <Footer />
         </div>
     );
 

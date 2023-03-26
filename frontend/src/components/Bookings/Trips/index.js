@@ -13,6 +13,7 @@ function Trips() {
     const history = useHistory()
     const dispatch = useDispatch()
     const bookings = useSelector((state) => state.bookings)
+    const [activeTab, setActiveTab] = useState('upcoming')
 
     useEffect(() => {
         dispatch(userBookings()).then(() => setLoaded(true))
@@ -51,9 +52,21 @@ function Trips() {
         }
     });
 
+    const handleTabClick = (tab, url) => {
+        setActiveTab(tab)
+        history.push(url)
+    }
 
     return (
         <>
+            <header className="trips-header">
+                <div className="trips-header-title">Trips</div>
+                <div className="trips-tabs">
+                    <span onClick={() => handleTabClick('Upcoming', '/trips')} className='trips-upcomimg'>Upcoming</span>
+                    <span onClick={() => handleTabClick('Current', '/trips/current')} className='trips-current'>Current</span>
+                    <span onClick={() => handleTabClick('Past', '/trips/past')} className='trips-past'>Past</span>
+                </div>
+            </header>
             <div className="trips-container">
                 {upcomingTrips.length > 0 ? (
                     <div className="trips-titles-container">
