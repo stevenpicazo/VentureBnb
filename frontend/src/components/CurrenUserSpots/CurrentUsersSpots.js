@@ -19,7 +19,12 @@ function Profile() {
   }, [dispatch, hasSubmitted]);
 
   if (!Object.values(spotsObj).length) return (
-    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    <div className="no-trips-container">
+      <span className="no-trips-title">My Listings</span>
+      <div className="no-trips-subtitle">No listings...yet!</div>
+      <div className="no-trips-desc">Time to dust off your bags and start planning your next home to list!</div>
+    </div>
+    // <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
   )
 
   if (!loaded) return null
@@ -79,23 +84,8 @@ function Profile() {
               className="listings-img"
               src={userspot.previewImage} alt="listing" />
           </div>
-          {/* <div className="cancel-trip-btn-container ">
-            <button
-              className=" delete-listing-btn"
-              onClick={(e) => deleteSpot(e, userspot.id)}>
-              Delete Listing
-            </button>
-            <button
-              className="edit-listing-btn"
-              onClick={(e) => {
-                e.preventDefault()
-                history.push(`/edit/listing/${userspot.id}`)
-              }}>Edit
-            </button>
-          </div> */}
         </div>
       ))}
-      {/* </div> */}
     </div>
   );
 }
