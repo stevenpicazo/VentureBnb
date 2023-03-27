@@ -296,19 +296,24 @@
 }
 
 .delete-review-button {
-    width: 100%;
-    margin: 15px 0 9px 0;
-    border: none;
-    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 155px;
+    padding: 16.5px;
+    border-radius: 7px;
+    background: linear-gradient(to left, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    /* margin-top: 16px; */
+    margin-bottom: 50px;
     cursor: pointer;
-    padding-top: 17px;
-    padding-bottom: 17px;
-    background-color: #FF385C;
-    color: rgb(243, 243, 243);
+    border: none;
 }
 
 .delete-review-button:hover {
-    background-color: #fa5674;
+    background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
 }
 
 .review-modal-container {
