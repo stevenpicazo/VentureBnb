@@ -42,12 +42,29 @@ module.exports = {
         endDate: new Date('2023-01-21'),
       },
       {
-        spotId:9,
+        spotId: 9,
         userId: 1,
         startDate: new Date('2024-02-19'),
         endDate: new Date('2023-02-21'),
       },
-
+      {
+        spotId: 10,
+        userId: 1,
+        startDate: new Date('2023-03-26'),
+        endDate: new Date('2023-03-29'),
+      },
+      {
+        spotId: 11,
+        userId: 1,
+        startDate: new Date('2022-03-27'),
+        endDate: new Date('2022-03-29'),
+      },
+      {
+        spotId: 1,
+        userId: 1,
+        startDate: new Date('2022-04-27'),
+        endDate: new Date('2022-04-29'),
+      }
     ], {});
   },
 

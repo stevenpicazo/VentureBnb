@@ -1,13 +1,10 @@
-
 import { useHistory } from "react-router-dom";
-import OpenModalButton from "../../OpenModalButton";
-import ReviewForm from "../../Reviews/ReviewForm";
-import './PastTrips.css'
+import DeleteBooking from "../DeleteBooking";
 
-function PastTrips({ booking, formatDate }) {
+const UpcomingTrips = ({ booking, formatDate }) => {
     const history = useHistory()
     return (
-        <div className="past-trips-card" key={booking.id}>
+        <div className="trips-card card-gap-1" key={booking.id}>
             <div className="trip-info-container">
                 <div className="trips-info">
                     <span className="trips-city">{booking?.Spot.city}</span>
@@ -22,22 +19,15 @@ function PastTrips({ booking, formatDate }) {
                             <span className="trips-country">{booking.Spot.country}</span>
                         </div>
                     </div>
-                <div className="trips-review">
-                    <OpenModalButton
-                        className="review-button"
-                        modalComponent={<ReviewForm />}
-                        buttonText="Write a Review"
-                    />
-                </div>
                 </div>
                 <img
                     onClick={() => history.push(`/spots/${booking.Spot?.id}`)}
                     className="trips-img"
                     src={booking.Spot.previewImage} alt="listing" />
             </div>
+            <DeleteBooking booking={booking} />
         </div>
     )
-
 }
 
-export default PastTrips;
+export default UpcomingTrips;

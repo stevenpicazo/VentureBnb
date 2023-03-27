@@ -1,3 +1,44 @@
+.trips-header {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+}
+
+.trips-header-title {
+    width: 93%;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(194, 194, 194);
+    font-size: 30px;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.trips-tabs span {
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.active-tab {
+    font-weight: bold;
+    color: #ff6980;
+}
+
+.upcoming {
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: pointer;
+}
+
+.past {
+
+}
+
 .trips-container {
     display: flex;
     flex-direction: column;

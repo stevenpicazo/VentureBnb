@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { userBookings } from "../../../store/bookings";
-import OpenModalButton from "../../OpenModalButton";
-import DeleteBooking from "../DeleteBooking";
+import PastTrips from "./PastTrips";
 import './Trips.css'
+import UpcomingTrips from "./UpcomingTrips";
 
 function Trips() {
     const [loaded, setLoaded] = useState(false)
@@ -17,6 +17,7 @@ function Trips() {
 
     useEffect(() => {
         dispatch(userBookings()).then(() => setLoaded(true))
+        window.scrollTo(0, 0); 
     }, [dispatch, hasSubmitted])
 
     const formatDate = (dateString) => {
@@ -35,8 +36,9 @@ function Trips() {
         )
     }
 
-    const upcomingTrips = [];
-    const currentTrips = [];
+    let pastTrips = [];
+    let upcomingTrips = [];
+    // let currentTrips = [];
 
     Object.values(bookings).forEach((booking) => {
         if (booking.Spot) {
@@ -46,8 +48,8 @@ function Trips() {
 
             if (startDate > today) {
                 upcomingTrips.push(booking);
-            } else if (endDate >= today) {
-                currentTrips.push(booking);
+            } else if (endDate < today) {
+                pastTrips.push(booking);
             }
         }
     });
@@ -62,69 +64,27 @@ function Trips() {
             <header className="trips-header">
                 <div className="trips-header-title">Trips</div>
                 <div className="trips-tabs">
-                    <span onClick={() => handleTabClick('Upcoming', '/trips')} className='trips-upcomimg'>Upcoming</span>
-                    <span onClick={() => handleTabClick('Current', '/trips/current')} className='trips-current'>Current</span>
-                    <span onClick={() => handleTabClick('Past', '/trips/past')} className='trips-past'>Past</span>
+                    <span onClick={() => handleTabClick('upcoming', '/trips')} className={activeTab === 'upcoming' ? 'active-tab' : null}>Upcoming</span>
+                    <span onClick={() => handleTabClick('past', '/trips/past')} className={activeTab === 'past' ? 'active-tab' : null}>Past</span>
                 </div>
             </header>
             <div className="trips-container">
-                {upcomingTrips.length > 0 ? (
+                {activeTab === 'upcoming' ? (
                     <div className="trips-titles-container">
                         <div className="trips-subtitle">Upcoming Trips</div>
                     </div>
-                ) : null
-                }
-                {upcomingTrips.reverse().map((booking) => (
-                    <div className="trips-card card-gap-1" key={booking.id}>
-                        <div className="trip-info-container">
-                            <div className="trips-info">
-                                <span className="trips-city">{booking?.Spot.city}</span>
-                                <span className="trips-name">{booking?.Spot.name}</span>
-                                <div className="trip-date-address">
-                                    <div className="trip-dates">
-                                        <span className="trips-start-date">{formatDate(booking.startDate)} -</span>
-                                        <span className="trips-end-date">{formatDate(booking.endDate)}</span>
-                                    </div>
-                                    <div className="trips-address-container">
-                                        <span className="trips-address">{booking.Spot.address}, {booking.Spot.city}</span>
-                                        <span className="trips-country">{booking.Spot.country}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <img
-                                onClick={() => history.push(`/spots/${booking.Spot?.id}`)}
-                                className="trips-img"
-                                src={booking.Spot.previewImage} alt="listing" />
-                        </div>
-                        <DeleteBooking booking={booking} />
-                    </div>
+                ) : null}
+                {activeTab === 'upcoming' && upcomingTrips.reverse().map((booking) => (
+                    <UpcomingTrips booking={booking} formatDate={formatDate} />
                 ))}
-                {currentTrips.length > 0 ? (
+
+                {activeTab === 'past' ? (
                     <div className="trips-titles-container">
-                        <div className="trips-subtitle">Current Trips</div>
+                        <div className="trips-subtitle">Past Trips</div>
                     </div>
-                ) : null
-                }
-                {currentTrips.reverse().map((booking) => (
-                    <div className="trips-card" card-gap-2 key={booking.id}>
-                        <div className="trip-info-container">
-                            <div className="trips-info">
-                                <span className="trips-city">{booking?.Spot.city}</span>
-                                <span className="trips-name">{booking?.Spot.name}</span>
-                                <div className="trip-date-address">
-                                    <div className="trip-dates">
-                                        <span className="trips-start-date">{formatDate(booking.startDate)} -</span>
-                                        <span className="trips-end-date">{formatDate(booking.endDate)}</span>
-                                    </div>
-                                    <div className="trips-address-container">
-                                        <span className="trips-address">{booking.Spot.address}, {booking.Spot.city}</span>
-                                        <span className="trips-country">{booking.Spot.country}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <img className="trips-img" src={booking.Spot.previewImage} alt="listing" />
-                        </div>
-                    </div>
+                ) : null}
+                {activeTab === 'past' && pastTrips.reverse().map((booking) => (
+                    <PastTrips booking={booking} formatDate={formatDate} />
                 ))}
             </div>
         </>

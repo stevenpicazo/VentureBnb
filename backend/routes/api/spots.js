@@ -94,6 +94,18 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const startDate2 = new Date(startDate);
     const endDate2 = new Date(endDate);
 
+    const currentDate = new Date();
+    if (startDate2 < currentDate) {
+        res.status(400)
+        return res.json({
+            message: "Validation error",
+            statusCode: 400,
+            errors: {
+                startDate: "Start date cannot be in the past",
+            }
+        })
+    }
+
     const bookings = await Booking.findOne({
         //! checking if bookings have dates that overlap with each other
         where: {
@@ -132,6 +144,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         return res.json(newBooking)
     }
 })
+
 
 //! Create A Spot 
 router.post('/', spotValidator, requireAuth, async (req, res, next) => {
@@ -216,7 +229,7 @@ router.put('/:spotId/images', requireAuth, async (req, res, next) => {
         });
     }
 
-    if (id) { 
+    if (id) {
         const spotImage = await SpotImage.findByPk(id);
 
         if (!spotImage) {
@@ -230,7 +243,7 @@ router.put('/:spotId/images', requireAuth, async (req, res, next) => {
         const updatedImage = await spotImage.set({ url, preview });
         await updatedImage.save();
         return res.json(updatedImage);
-    } 
+    }
     // else { 
     //     const newImage = await SpotImage.create({ url, preview, spotId: spot.id });
     //     return res.json(newImage);
