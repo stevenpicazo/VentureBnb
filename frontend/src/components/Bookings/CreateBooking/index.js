@@ -79,7 +79,7 @@ const CreateBooking = ({ spotId, hasSubmitted, setHasSubmitted, spot }) => {
                             </div>
                         </div>
                         <div className="booking-btn-container">
-                            {sessionUser.id !== spot?.ownerId ? (
+                            {sessionUser?.id !== spot?.ownerId ? (
                                 <button type="submit" className="booking-submit-btn">
                                     Reserve
                                 </button>

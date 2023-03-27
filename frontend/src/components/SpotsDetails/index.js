@@ -200,9 +200,9 @@ function SpotDetails() {
                 <main className="reviews-wrapper">
                     <div className="rating-button-container">
                         <div className="num-reviews">
-                            {!spot.numReviews ? 'No Reviews' : `★ ${rating} · ${spot.numReviews} reviews`}
+                            {!spot?.numReviews ? 'No Reviews' : `★ ${rating} · ${spot?.numReviews} reviews`}
                         </div>
-                        {sessionUser.id !== spot?.ownerId ?
+                        {sessionUser?.id !== spot?.ownerId ?
                             <OpenModalButton
                                 modalComponent={<ReviewForm spot={spot} spotId={spotId} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />}
                                 buttonText="Write a review"
