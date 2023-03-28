@@ -22,12 +22,13 @@ const ReviewForm = ({ spot, spotId, hasSubmitted, setHasSubmitted }) => {
                 { review, stars },
                 spotId))
             .then(() => {
-                setHasSubmitted(!hasSubmitted)
                 closeModal()
+                setHasSubmitted(!hasSubmitted)
             })
             .then(() => {
                 setStars('')
                 setReview('')
+                closeModal()
             })
             .catch(async (res) => {
                 const data = await res.json()

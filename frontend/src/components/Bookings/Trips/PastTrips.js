@@ -25,7 +25,7 @@ function PastTrips({ booking, formatDate }) {
                 <div className="trips-review">
                     <OpenModalButton
                         className="review-button"
-                        modalComponent={<ReviewForm />}
+                        modalComponent={<ReviewForm spot={booking.Spot} spotId={booking.Spot.id}/>}
                         buttonText="Write a Review"
                     />
                 </div>
