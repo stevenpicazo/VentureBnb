@@ -24,7 +24,6 @@ function Profile() {
       <div className="no-trips-subtitle">No listings...yet!</div>
       <div className="no-trips-desc">Time to dust off your bags and start planning your next home to list!</div>
     </div>
-    // <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
   )
 
   if (!loaded) return null
@@ -33,16 +32,7 @@ function Profile() {
     e.preventDefault()
     await dispatch(spotsActions.deleteThunk(spotId))
     setHasSubmitted(!hasSubmitted)
-    // await history.push('/listings') 
   }
-
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-  }
-
 
   return (
     <div className="trips-container">

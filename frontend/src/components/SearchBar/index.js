@@ -49,16 +49,16 @@ const SearchBar = () => {
                 {searchResults.length > 0 && (
                     <div className="search-results-container">
                         {searchResults?.slice(0, 7).map((spot) => (
-                            <div
-                            className="search-result"
+                            <div className="search-result"
                                 onClick={() => {
                                     setSearchResults([]);
                                     setSearch("");
                                     history.push(`/spots/${spot.id}`);
                                 }}                               >
-                                {/* <img className="search-result-image" src={spot.images[0].url} /> */}
+                                <img className="search-result-image" src={spot.images[0].url} />
                                 <div className="search-result-info">
-                                    <div className="search-result-city">{spot.city}, {spot.state}</div>
+                                    <div className="search-result-name">{spot.name}</div>
+                                    <div className="search-result-location">in {spot.city}, {spot.state}</div>
                                 </div>
                             </div>
                         ))}
