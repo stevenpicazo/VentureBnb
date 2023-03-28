@@ -31,13 +31,8 @@
     background-color: #ff395c;
     border-radius: 50%;
     padding: 7px;
-    cursor: pointer;
     font-size: 14px;
     margin-right: 10px;
-}
-
-.nav-search-icon:hover {
-    background-color: #fe5e7c;
 }
 
 .fa-xmark {
