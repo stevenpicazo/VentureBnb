@@ -33,7 +33,7 @@ function SpotsList({ spot }) {
                     modules={[Navigation, Pagination, Mousewheel, Keyboard]}
                     className="spot-image"
                 >
-                    {spot.images.map((img) => (
+                    {spot?.images?.map((img) => (
                         <SwiperSlide>
                             <img src={img.url} />
                         </SwiperSlide>

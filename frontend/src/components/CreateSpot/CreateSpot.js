@@ -21,6 +21,8 @@ function CreateSpot() {
     const [image3, setImage3] = useState("");
     const [image4, setImage4] = useState("");
     const [image5, setImage5] = useState("");
+    const [newSpot, setNewSpotId] = useState('')
+    const [hasSubmitted, setHasSubmitted] = useState(false)
     const [validationErrors, setValidationErrors] = useState([])
     const { closeModal } = useModal()
 
@@ -34,7 +36,7 @@ function CreateSpot() {
             { url: image3, preview: false },
             { url: image4, preview: false },
             { url: image5, preview: false },
-        ]
+        ];
 
         return dispatch(
             spotsActions.creatThunk(
@@ -48,7 +50,8 @@ function CreateSpot() {
                     price,
                 },
                 images
-            ))
+            )
+        )
             .then(() => {
                 closeModal()
                 history.push(`/listings`);
@@ -147,7 +150,7 @@ function CreateSpot() {
                         </div>
                         <div>
                             <label className="create-label">
-                                <textarea
+                                <input
                                     className='description'
                                     type='text'
                                     onChange={e => setDescription(e.target.value)}
@@ -192,6 +195,7 @@ function CreateSpot() {
                                     value={image2}
                                     onChange={(e) => setImage2(e.target.value)}
                                     placeholder='Image url'
+                                    required
                                 />
                             </label>
                             <div className="border"></div>
@@ -204,6 +208,7 @@ function CreateSpot() {
                                     value={image3}
                                     onChange={(e) => setImage3(e.target.value)}
                                     placeholder='Image url'
+                                    required
                                 />
                             </label>
                             <div className="border"></div>
@@ -216,6 +221,7 @@ function CreateSpot() {
                                     value={image4}
                                     onChange={(e) => setImage4(e.target.value)}
                                     placeholder='Image url'
+                                    required
                                 />
                             </label>
                             <div className="border"></div>
@@ -228,6 +234,7 @@ function CreateSpot() {
                                     value={image5}
                                     onChange={(e) => setImage5(e.target.value)}
                                     placeholder='Image url'
+                                    required
                                 />
                             </label>
                             <div className="border"></div>
@@ -241,4 +248,3 @@ function CreateSpot() {
 }
 
 export default CreateSpot
-
