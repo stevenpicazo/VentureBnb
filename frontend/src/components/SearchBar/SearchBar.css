@@ -7,10 +7,11 @@
     border-radius: 50px;
     border: 1px lightgray solid;
     box-shadow: 0 4px 2px rgba(0, 0, 0, 0.05);
+    width: 25rem;
 }
 
 .search-bar-input {
-    width: 320px;
+    width: 21rem;
     border-radius: 50px;
     border: none;
     padding-top: 12px;
