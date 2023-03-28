@@ -10,8 +10,9 @@ const normalizeData = (data) => {
 
 const LOAD_REVIEW = 'reviews/READ'
 const CREATE_REVIEW = 'reviews/CREATE'
+const EDIT_REVIEW = 'reviews/EDIT'
 const DELETE_REVIEW = 'reviews/DELETE'
-// const UPDATE = 'spots/UPDATE'
+
 //! ACTIONS
 export const actionLoadReview = (reviews) => {
     return {
@@ -26,6 +27,14 @@ export const actionCreateReview = (review) => {
         review
     }
 }
+
+export const actionEditReview = (review) => {
+    return {
+        type: EDIT_REVIEW,
+        review
+    }
+}
+
 export const actionDeleteReview = (review) => {
     return {
         type: DELETE_REVIEW,
@@ -52,7 +61,18 @@ export const createThunk = (review, spotId) => async (dispatch) => {
         // dispatch(actionCreateReview(review))
         dispatch(reviewBySpotIdThunk(spotId));
         return review
-    } else throw res
+    } 
+}
+
+export const editReviewThunk = (review, reviewId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        body: JSON.stringify(review)
+    })
+    if (res.ok) {
+        const newReview = await res.json()
+        return newReview
+    } 
 }
 
 export const deleteThunk = (reviewId) => async (dispatch) => {
@@ -78,6 +98,10 @@ const reviewsReducer = (state = initialState, action) => {
             return newState
         }
         case CREATE_REVIEW: {
+            let newState = Object.assign({}, state)
+            return newState
+        }
+        case EDIT_REVIEW: {
             let newState = Object.assign({}, state)
             return newState
         }

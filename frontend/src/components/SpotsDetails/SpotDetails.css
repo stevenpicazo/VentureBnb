@@ -262,7 +262,35 @@
     font-weight: 200;
 }
 
+.edit-delete-review {
+    display: flex;
+}
+
+.delete-review-button {
+    margin-top: 13px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: rgb(80, 80, 80);
+    text-decoration: underline;
+    font-weight: 200;
+}
+
+.edit-review-button {
+    margin-top: 13px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: rgb(80, 80, 80);
+    text-decoration: underline;
+    font-weight: 200;
+}
+
 .review-button:hover {}
+
+
 
 .user-reviews-container {
     display: flex;
@@ -293,27 +321,6 @@
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-}
-
-.delete-review-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 155px;
-    padding: 16.5px;
-    border-radius: 7px;
-    background: linear-gradient(to left, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
-    color: white;
-    font-size: 16px;
-    font-weight: 400;
-    /* margin-top: 16px; */
-    margin-bottom: 50px;
-    cursor: pointer;
-    border: none;
-}
-
-.delete-review-button:hover {
-    background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
 }
 
 .review-modal-container {

@@ -10,6 +10,7 @@ import AllReviews from "../Reviews/AllReviews";
 import DeleteReview from "../Reviews/DeleteReview";
 import ReviewForm from "../Reviews/ReviewForm";
 import CreateBooking from "../Bookings/CreateBooking";
+import EditReview from "../Reviews/EditReview";
 
 function SpotDetails() {
     const dispatch = useDispatch()
@@ -25,7 +26,7 @@ function SpotDetails() {
 
     const sessionUser = useSelector(state => state.session.user);
     const spot = useSelector((state) => state.spots[spotId])
-
+    console.log('spot', spot)
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewArr = Object.values(reviewsObj)
 
@@ -202,7 +203,7 @@ function SpotDetails() {
                         <div className="num-reviews">
                             {!spot?.numReviews ? 'No Reviews' : `★ ${rating} · ${spot?.numReviews} reviews`}
                         </div>
-                        {sessionUser?.id !== spot?.ownerId ?
+                        {sessionUser?.id !== spot?.ownerId && (!reviewsObj || !Object.values(reviewsObj).find(review => review.userId === sessionUser.id)) ?
                             <OpenModalButton
                                 modalComponent={<ReviewForm spot={spot} spotId={spotId} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />}
                                 buttonText="Write a review"
@@ -210,18 +211,30 @@ function SpotDetails() {
                             />
                             : null
                         }
+                        {reviewsObj && Object.values(reviewsObj).map(review => (
+                            sessionUser && (
+                                <div className="edit-delete-review">
+                                    <div review={review} className={"reviewInfo"} key={`review-${review.id}`}>
+                                        <DeleteReview review={review} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />
+                                    </div>
+                                    {sessionUser?.id === review.userId && sessionUser?.id !== spot?.ownerId ?
+                                        <OpenModalButton
+                                            modalComponent={<EditReview review={review} spotId={spotId} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />}
+                                            buttonText="Update review"
+                                            className="edit-review-button"
+                                        />
+                                        : null
+                                    }
+                                </div>
+                            )))}
                     </div>
+
                     <div className="user-reviews-container">
                         {reviewsObj && Object.values(reviewsObj).map(review => (
                             <AllReviews review={review} />
                         ))}
                     </div>
-                    {reviewsObj && Object.values(reviewsObj).map(review => (
-                        sessionUser && (
-                            <div review={review} className={"reviewInfo"} key={`review-${review.id}`}>
-                                <DeleteReview review={review} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />
-                            </div>
-                        )))}
+
                 </main>
             </div>
         </div>
