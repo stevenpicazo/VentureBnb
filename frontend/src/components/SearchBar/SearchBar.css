@@ -47,7 +47,8 @@
     z-index: 1;
     background-color: white;
     border: 1px rgb(210, 210, 210) solid;
-    width: 24%;
+    width: 27%;
+    min-width: 400px;
     top: 60px;
 }
 
