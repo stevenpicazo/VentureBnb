@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import CreateSpot from '../CreateSpot/CreateSpot';
 import './Navigation.css';
 import OpenModalButton from '../OpenModalButton';
+import SearchBar from '../SearchBar';
 
 
 function Navigation({ isLoaded }) {
@@ -20,6 +21,11 @@ function Navigation({ isLoaded }) {
             src={require('./logo2.png')} alt="Home" />
         </NavLink>
       </div>
+
+      <div className='nav-search-bar'>
+        <SearchBar />
+      </div>
+
       <div className='nav-bar-right-section'>
         <i onClick={() => window.open("https://github.com/stevenpicazo", "_blank")} class="fa-brands fa-github nav-icons"></i>
         <i onClick={() => window.open("https://www.linkedin.com/in/steven-picazo-994042225", "_blank")} class="fa-brands fa-linkedin nav-icons"></i>

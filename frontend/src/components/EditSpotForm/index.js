@@ -24,6 +24,10 @@ function EditSpotForm() {
     const { spotId } = useParams()
 
     useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+    useEffect(() => {
         dispatch(spotsActions.thunkGetSpotById(spotId))
     }, [dispatch, spotId])
 
