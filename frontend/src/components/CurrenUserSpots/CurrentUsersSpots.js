@@ -39,6 +39,7 @@ function Profile() {
       <div className="trips-titles-container">
         <div className="trips-subtitle">My Listings</div>
       </div>
+      
       {Object.values(spotsObj).map((userspot) => (
         <div className="listings-card" key={userspot.id}>
           <div className="trip-info-container">
