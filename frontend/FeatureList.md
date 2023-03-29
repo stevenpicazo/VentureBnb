@@ -15,3 +15,9 @@
 
 ## My Listings 
 - Owners of spots are able to edit and delete their listing on this page. Appropriate errors are thrown without proper information submitted. 
+
+## Bookings 
+- Users will be able to book spots and view their past and upcoming bookings in the trips tab located in the drop down menu. 
+
+## Search Bar
+- The search bar can be used to locate any spot listed on the website.
