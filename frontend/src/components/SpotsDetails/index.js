@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from "react";
+import React, { useEffect, useState } from "react";
 import { thunkGetSpotById } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -50,7 +50,7 @@ function SpotDetails() {
         )
     }
 
-    const rating = parseFloat(spot?.avgStarRating).toFixed(2)
+    const rating = parseFloat(spot.avgStarRating).toFixed(2)
 
 
     return (
@@ -84,7 +84,6 @@ function SpotDetails() {
                         </div>
                     )}
                     <div className="description-bookings">
-                        {/* {spot.Owner && sessionUser && spot.Owner.id !== sessionUser.id && ( */}
                         <div className="spot-description-container">
                             <div className="info">
 
@@ -193,7 +192,6 @@ function SpotDetails() {
                                 </div>
                             </div>
                         </div>
-                        {/* )} */}
 
                         <CreateBooking spot={spot} spotId={spotId} setHasSubmitted={setHasSubmitted} hasSubmitted={hasSubmitted} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
 
@@ -203,7 +201,7 @@ function SpotDetails() {
                             <div className="num-reviews">
                                 {!spot?.numReviews ? 'No Reviews' : `★ ${rating} · ${spot?.numReviews} reviews`}
                             </div>
-                            {sessionUser?.id !== spot?.ownerId && (!reviewsObj || !Object.values(reviewsObj).find(review => review.userId === sessionUser.id)) ?
+                            {sessionUser && sessionUser?.id !== spot?.ownerId && (!reviewsObj || !Object.values(reviewsObj).find(review => review.userId === sessionUser?.id)) ?
                                 <OpenModalButton
                                     modalComponent={<ReviewForm spot={spot} spotId={spotId} hasSubmitted={hasSubmitted} setHasSubmitted={setHasSubmitted} />}
                                     buttonText="Write a review"
@@ -243,4 +241,4 @@ function SpotDetails() {
 
 }
 
-export default memo(SpotDetails);
+export default SpotDetails;

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import './CreateBooking.css'
 import * as bookingsActions from "../../../store/bookings"
 import { useHistory } from "react-router-dom";
+import OpenModalButton from "../../OpenModalButton";
+import LoginFormModal from "../../LoginFormModal";
 
 const CreateBooking = ({ spotId, hasSubmitted, setHasSubmitted, spot }) => {
     const dispatch = useDispatch()
@@ -78,17 +80,21 @@ const CreateBooking = ({ spotId, hasSubmitted, setHasSubmitted, spot }) => {
                             </div>
                         </div>
                         <div className="booking-btn-container">
-                            {sessionUser?.id !== spot?.ownerId ? (
+                            {!sessionUser?.id && (
+                                <OpenModalButton
+                                    className="booking-submit-btn"
+                                    modalComponent={<LoginFormModal />}
+                                    buttonText="Reserve"
+                                />
+                            )}
+                            {sessionUser?.id && sessionUser.id !== spot?.ownerId && (
                                 <button type="submit" className="booking-submit-btn">
                                     Reserve
                                 </button>
-                            ) : (
+                            )}
+                            {sessionUser?.id && sessionUser.id === spot?.ownerId && (
                                 <div>
-                                    <button
-                                        type="submit"
-                                        className="booking-submit-btn disabled"
-                                        disabled
-                                    >
+                                    <button type="submit" className="booking-submit-btn disabled" disabled>
                                         Reserve
                                     </button>
                                     <div className="booking-errors">You are the current owner of this listing</div>
