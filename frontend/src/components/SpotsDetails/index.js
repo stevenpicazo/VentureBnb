@@ -50,16 +50,8 @@ function SpotDetails() {
         )
     }
 
-    let booleanFlag = false
-    if (reviewArr.length && sessionUser) {
-        for (let review of reviewArr) {
-            if (review.userId === sessionUser.id) booleanFlag = true
-        }
-    }
-
-
-
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
+      
 
     return (
         <div className="body">
@@ -72,10 +64,13 @@ function SpotDetails() {
                     {spot && spot.SpotImages && (
                         <div className="images-wrapper">
                             <div className="image-details-grid">
-                                {spot.SpotImages.map((image, i) => {
+                                {spot.SpotImages.map((image, idx) => {
                                     return (
                                         !image.preview ? (
-                                            <img src={image.url} alt="image" />
+                                            <>
+                                            {console.log('images', image[idx])}
+                                            <img src={image.url} alt="image" className={`non-preview-img-${idx}`} />
+                                            </>
                                         ) : (
                                             <img
                                                 className="image-grid-col-2 image-grid-row-2"

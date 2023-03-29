@@ -15,8 +15,8 @@
 }
 
 .spot-title {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 350;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
 }
 
 .reviews-location {
@@ -27,7 +27,7 @@
 .image-details-grid {
     --gap: 8px;
     --num-cols: 4;
-    --row-height: 300px;
+    --row-height: 270px;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(var(--num-cols), 1fr);
@@ -35,20 +35,28 @@
     gap: var(--gap);
 }
 
+
 .image-details-grid>img {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
+    width: 100%;
 }
 
 .image-grid-col-2 {
     grid-column: span 2;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
 }
 
 .image-grid-row-2 {
     grid-row: span 2;
+}
+
+.non-preview-img-2 {
+    border-top-right-radius: 13px;
+}
+
+.non-preview-img-4 {
+    border-bottom-right-radius: 13px;
 }
 
 #top-right-img {
@@ -77,13 +85,9 @@
     justify-content: start;
     width: 60%;
     flex-basis: 60%;
-    /* margin-right: 520px; */
-    /* margin: 48px 0 48px 0; */
-    /* display: flex; */
 }
 
 .info {
-    /* width: 100%; */
     line-height: 1.25;
 }
 
@@ -96,6 +100,8 @@
     padding-top: 30px;
     font-weight: 400;
     font-size: 23px;
+    font-family: system-ui, -apple-system, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;;
 }
 
 .listing-info {
@@ -234,7 +240,6 @@
     padding-right: 10px;
     padding-top: 7px;
     color: rgb(97, 97, 97);
-    /* line-height: 1.5; */
 }
 
 .rating-button-container {
