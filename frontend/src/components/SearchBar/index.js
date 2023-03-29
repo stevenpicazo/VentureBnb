@@ -56,7 +56,6 @@ const SearchBar = () => {
                     <div className="search-results-container">
                         {searchResults?.slice(0, 7).map((spot) => (
                             <>
-                                {console.log('spot', spot)}
                                 {spot && spot?.images && spot?.images[0] &&
                                     <div className="search-result"
                                         onClick={() => {

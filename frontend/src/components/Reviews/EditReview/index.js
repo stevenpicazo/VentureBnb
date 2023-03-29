@@ -9,11 +9,6 @@ const EditReview = ({ spotId, review, hasSubmitted, setHasSubmitted }) => {
     const [stars, setStars] = useState('')
     const [validationErrors, setValidationErrors] = useState([]);
     const dispatch = useDispatch()
-    console.log('review', review)
-    // useEffect(() => {
-    //     dispatch(reviewBySpotIdThunk())
-    //     dispatch(editReviewThunk())
-    // })
 
     const { closeModal } = useModal()
 

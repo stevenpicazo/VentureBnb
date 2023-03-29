@@ -42,7 +42,7 @@ function SpotDetails() {
                 if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
             })
     }, [dispatch, hasSubmitted, spotId]) // Add spotId to the dependency array
-    
+
 
     if (!isLoaded || !bookingsObj) {
         return (
@@ -51,7 +51,7 @@ function SpotDetails() {
     }
 
     const rating = parseFloat(spot.avgStarRating).toFixed(2)
-      
+
 
     return (
         <div className="body">
@@ -68,8 +68,7 @@ function SpotDetails() {
                                     return (
                                         !image.preview ? (
                                             <>
-                                            {console.log('images', image[idx])}
-                                            <img src={image.url} alt="image" className={`non-preview-img-${idx}`} />
+                                                <img src={image.url} alt="image" className={`non-preview-img-${idx}`} />
                                             </>
                                         ) : (
                                             <img
