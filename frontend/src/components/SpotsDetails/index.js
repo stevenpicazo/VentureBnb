@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { thunkGetSpotById } from "../../store/spots";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -50,7 +50,7 @@ function SpotDetails() {
         )
     }
 
-    const rating = parseFloat(spot.avgStarRating).toFixed(2)
+    const rating = parseFloat(spot?.avgStarRating).toFixed(2)
 
 
     return (
@@ -243,4 +243,4 @@ function SpotDetails() {
 
 }
 
-export default SpotDetails;
+export default memo(SpotDetails);
