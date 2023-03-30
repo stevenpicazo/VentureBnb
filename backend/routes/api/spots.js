@@ -468,9 +468,9 @@ router.get('/', queryValidator, async (req, res, next) => {
     let { page, size } = req.query;
 
     if (!page || page <= 1 || isNaN(page)) page = 1
-    if (!size || size <= 1 || isNaN(size)) size = 999
+    if (!size || size <= 1 || isNaN(size)) size = 20
 
-    if (size > 999) size = 999;
+    if (size > 20) size = 20;
 
     page = parseInt(page)
     size = parseInt(size)

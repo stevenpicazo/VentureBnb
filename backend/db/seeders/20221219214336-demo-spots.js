@@ -227,6 +227,30 @@ module.exports = {
         description: 'Elevate your vacation experience in this sleek and contemporary home, featuring a stunning infinity pool overlooking the city skyline. The fully equipped spacious bedrooms have stylish bathrooms and all provide for a luxurious retreat.',
         price: 300
       },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'Miami',
+        state: 'FL',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Villa Elyzeum',
+        description: 'Perched on a seaside hill, Villa Elyzeum captures stunning views of the Mediterranean. Located in the vicinity of two UNESCO World Heritage Sites, and walking distance from the beach.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'Miami',
+        state: 'FL',
+        country: 'United States',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Palmilla Estates',
+        description: "Fire up the barbeque, throw the big game on the outdoor TV, and enjoy the sunset from the scenic patio of this Cabo villa on the Palmilla Estate. When you're not lounging by the poolside, hanging out in the hot tub, or relaxing by the fire.",
+        price: 300
+      },
 
     ], {});
   },
