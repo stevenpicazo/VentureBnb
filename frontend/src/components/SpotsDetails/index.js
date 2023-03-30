@@ -26,6 +26,7 @@ function SpotDetails() {
 
     const sessionUser = useSelector(state => state.session.user);
     const spot = useSelector((state) => state.spots[spotId])
+    console.log('spots', useSelector((state) => state.spots))
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewArr = Object.values(reviewsObj)
 
@@ -41,8 +42,7 @@ function SpotDetails() {
                 const spotData = await res.json()
                 if (spotData && spotData.validationErrors) setValidationErrors(spotData.validationErrors);
             })
-    }, [dispatch, hasSubmitted, spotId]) // Add spotId to the dependency array
-
+    }, [dispatch, hasSubmitted, spotId]) 
 
     if (!isLoaded || !bookingsObj) {
         return (

@@ -77,7 +77,7 @@
 .home-page-spot-info {
     display: flex;
     flex-direction: column;
-    max-width: 290px;
+    margin-top: 6px;
 }
 
 
