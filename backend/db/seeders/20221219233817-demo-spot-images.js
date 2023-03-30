@@ -442,6 +442,60 @@ module.exports = {
         preview: false,
       },
 
+      //! SPOT 17
+      {
+        spotId: 17,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53417893/original/63787420-6a55-4d88-b459-c65d0251ba31.jpeg?im_w=1200',
+        preview: true,
+      },
+      {
+        spotId: 17,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53417893/original/629dbec2-bdb8-48ff-afb0-518eec0f8fa0.jpeg?im_w=720',
+        preview: false,
+      },
+      {
+        spotId: 17,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53417893/original/37e688ac-2614-4588-b501-1c5752c29f69.jpeg?im_w=720',
+        preview: false,
+      },
+      {
+        spotId: 17,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53417893/original/0250953e-6890-44a3-916a-2339b6c1d362.jpeg?im_w=720',
+        preview: false,
+      },
+      {
+        spotId: 17,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53417893/original/6d82536e-6350-4d74-b672-1bcb0bccb1c6.jpeg?im_w=720',
+        preview: false,
+      },
+
+      //! SPOT 18
+      {
+        spotId: 18,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-731050307050312405/original/adf30be8-484a-46e6-99da-293d29ea7b27.jpeg?im_w=1200',
+        preview: true,
+      },
+      {
+        spotId: 18,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-731050307050312405/original/0f9b2553-8742-4e1f-a904-a5f5014e1b5a.jpeg?im_w=720',
+        preview: false,
+      },
+      {
+        spotId: 18,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-731050307050312405/original/403fa365-ea18-455d-802b-28284687640e.jpeg?im_w=1200',
+        preview: false,
+      },
+      {
+        spotId: 18,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-731050307050312405/original/9e691f04-c742-4f39-ab0d-5a380078d15c.jpeg?im_w=1200',
+        preview: false,
+      },
+      {
+        spotId: 18,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-731050307050312405/original/471a052c-e0cc-4e69-a990-6669b13200e1.jpeg?im_w=1200',
+        preview: false,
+      },
+
     ], {});
   },
 
@@ -449,7 +503,7 @@ module.exports = {
     options.tableName = 'SpotImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] }
     }, {});
   }
 };

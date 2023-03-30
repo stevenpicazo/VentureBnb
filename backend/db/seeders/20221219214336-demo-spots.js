@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     options.tableName = 'Spots';
     return queryInterface.bulkInsert(options, [
       {
@@ -203,12 +203,35 @@ module.exports = {
         description: 'Elevate your vacation experience in this sleek and contemporary home, featuring a stunning infinity pool overlooking the city skyline. The fully equipped spacious bedrooms have stylish bathrooms and all provide for a luxurious retreat.',
         price: 300
       },
-
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'Vancouver',
+        state: 'BC',
+        country: 'Canada',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Elevate your vacation experience in this sleek and contemporary home, featuring a stunning infinity pool overlooking the city skyline. The fully equipped spacious bedrooms have stylish bathrooms and all provide for a luxurious retreat.',
+        price: 300
+      },
+      {
+        ownerId: 6,
+        address: '563 McKinney Rd.',
+        city: 'Vancouver',
+        state: 'BC',
+        country: 'Canada',
+        lat: 57.7645358,
+        lng: -334.4730327,
+        name: 'Noble Estate',
+        description: 'Elevate your vacation experience in this sleek and contemporary home, featuring a stunning infinity pool overlooking the city skyline. The fully equipped spacious bedrooms have stylish bathrooms and all provide for a luxurious retreat.',
+        price: 300
+      },
 
     ], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
