@@ -14,7 +14,6 @@ function Navigation({ isLoaded }) {
   return (
     <div className='nav-container'>
       <div className='home-button'>
-        {/* <i class="fa-brands fa-gg-circle"> */}
         <NavLink exact to="/">
           <img
             className='nav-logo'

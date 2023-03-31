@@ -30,7 +30,7 @@ const SearchBar = () => {
         <div className="search-wrapper">
             <div className="search-container">
                 <div className="search-bar-container">
-                    
+
                     <input
                         className="search-bar-input"
                         type="text"

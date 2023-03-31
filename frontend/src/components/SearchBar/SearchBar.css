@@ -44,13 +44,13 @@
 
 .search-results-container {
     position: absolute;
-    z-index: 1;
     background-color: white;
     border: 1px rgb(210, 210, 210) solid;
     width: 25%;
     min-width: 400px;
     top: 68px;
     border-radius: 8px;
+    z-index: 2;
 }
 
 .search-result {
@@ -99,11 +99,11 @@
 
 .no-search-results {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     background-color: white;
     border: 1px rgb(210, 210, 210) solid;
-    width: 24%;
-    top: 60px;
+    width: 25%;
+    top: 68px;
     padding: 10px;
 }
 
@@ -114,4 +114,5 @@
     left: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
 }
