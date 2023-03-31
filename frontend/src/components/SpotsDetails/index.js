@@ -26,7 +26,6 @@ function SpotDetails() {
 
     const sessionUser = useSelector(state => state.session.user);
     const spot = useSelector((state) => state.spots[spotId])
-    console.log('spots', useSelector((state) => state.spots))
     const reviewsObj = useSelector((state) => state.reviews)
     const reviewArr = Object.values(reviewsObj)
 
