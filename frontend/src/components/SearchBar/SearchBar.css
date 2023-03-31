@@ -47,15 +47,17 @@
     z-index: 1;
     background-color: white;
     border: 1px rgb(210, 210, 210) solid;
-    width: 27%;
+    width: 25%;
     min-width: 400px;
-    top: 60px;
+    top: 68px;
+    border-radius: 8px;
 }
 
 .search-result {
     display: flex;
     align-items: center;
     padding: 10px;
+    padding-left: 17px;
     cursor: pointer;
 }
 
