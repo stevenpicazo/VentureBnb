@@ -35,9 +35,7 @@
     cursor: pointer;
 }
 
-.past {
-
-}
+.past {}
 
 .trips-container {
     display: flex;
