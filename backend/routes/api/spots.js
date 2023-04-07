@@ -468,9 +468,9 @@ router.get('/', queryValidator, async (req, res, next) => {
     let { page, size } = req.query;
 
     if (!page || page <= 1 || isNaN(page)) page = 1
-    if (!size || size <= 1 || isNaN(size)) size = 20
+    if (!size || size <= 1 || isNaN(size)) size = 1000
 
-    if (size > 20) size = 20;
+    if (size > 1000) size = 1000;
 
     page = parseInt(page)
     size = parseInt(size)
@@ -532,6 +532,7 @@ router.get('/', queryValidator, async (req, res, next) => {
         size
     })
 })
+
 
 //! Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {

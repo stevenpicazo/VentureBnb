@@ -521,7 +521,7 @@ module.exports = {
         url: 'https://a0.muscache.com/im/pictures/95ec29aa-6d3f-489b-b108-c0fea10ae8ef.jpg?im_w=1200',
         preview: false,
       },
-      
+
       //! SPOT 20
       {
         spotId: 20,
@@ -549,7 +549,62 @@ module.exports = {
         preview: false,
       },
 
-      
+      //! SPOT 21
+
+      {
+        spotId: 21,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/d9db73e0-2f3e-4cd2-8174-a41b410bb6e5?im_w=1200',
+        preview: true,
+      },
+      {
+        spotId: 21,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/f2563864-d2c5-4a71-9b34-19cfcbf3585b?im_w=720',
+        preview: false,
+      },
+      {
+        spotId: 21,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/36c86409-22a0-46ca-83d5-2aabc18b93ca?im_w=720',
+        preview: false,
+      },
+      {
+        spotId: 21,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/4f1df392-45e6-47d3-ad26-e02dee921d4a?im_w=1200',
+        preview: false,
+      },
+      {
+        spotId: 21,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/f6b0a50f-1985-4231-a3c4-a64004b36bcd?im_w=1200',
+        preview: false,
+      },
+
+      //! SPOT 22
+
+      {
+        spotId: 22,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/d9db73e0-2f3e-4cd2-8174-a41b410bb6e5?im_w=1200',
+        preview: true,
+      },
+      {
+        spotId: 22,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/f2563864-d2c5-4a71-9b34-19cfcbf3585b?im_w=720',
+        preview: false,
+      },
+      {
+        spotId: 22,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/36c86409-22a0-46ca-83d5-2aabc18b93ca?im_w=720',
+        preview: false,
+      },
+      {
+        spotId: 22,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/4f1df392-45e6-47d3-ad26-e02dee921d4a?im_w=1200',
+        preview: false,
+      },
+      {
+        spotId: 22,
+        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/f6b0a50f-1985-4231-a3c4-a64004b36bcd?im_w=1200',
+        preview: false,
+      },
+
 
     ], {});
   },
@@ -558,7 +613,7 @@ module.exports = {
     options.tableName = 'SpotImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19, 20] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] }
     }, {});
   }
 };
