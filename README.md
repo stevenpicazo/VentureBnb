@@ -13,7 +13,7 @@
 
 ## VentureBnB
 
-This project is aimed to replicate the core features of the original website. Users are able to login and signup or just use a demo account to test of the features of the app. Once logged in the user is able to create, edit, and delete listings just as the Airbnb. Reviewing spots is also a feature that was added. Reviews can only come from users who are not the owner of the spot. 
+Venturebnb is clone to Airbnb. This project is aimed to replicate the core features of the original website. Users are able to login and signup or just use a demo account to test of the features of the app. Once logged in the user is able to create, edit, and delete listings just as the Airbnb. Reviewing spots is also a feature that was added. Reviews can only come from users who are not the owner of the spot. 
 
 Live site: <a href='https://a-jq2a.onrender.com' alt=''>Venturebnb</a>
 
