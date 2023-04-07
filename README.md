@@ -33,9 +33,7 @@ Technologies Used:
 
 <br/>
 
-## Features
-
-The most common user flow of Plendar is as follows:
+## Overview of my site
 
 ### Land on the homepage
 <img width="800px" alt="homepage" src="https://user-images.githubusercontent.com/105809464/230541076-9eb818d5-a812-45d8-99cc-c166a66545b4.png">
