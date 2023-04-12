@@ -594,16 +594,6 @@ module.exports = {
         url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/36c86409-22a0-46ca-83d5-2aabc18b93ca?im_w=720',
         preview: false,
       },
-      {
-        spotId: 22,
-        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/4f1df392-45e6-47d3-ad26-e02dee921d4a?im_w=1200',
-        preview: false,
-      },
-      {
-        spotId: 22,
-        url: 'https://a0.muscache.com/im/pictures/monet/Luxury-736983305872788888/original/f6b0a50f-1985-4231-a3c4-a64004b36bcd?im_w=1200',
-        preview: false,
-      },
 
 
     ], {});
