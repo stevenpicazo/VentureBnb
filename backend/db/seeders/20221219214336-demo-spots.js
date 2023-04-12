@@ -251,7 +251,7 @@ module.exports = {
         description: "Fire up the barbeque, throw the big game on the outdoor TV, and enjoy the sunset from the scenic patio of this Cabo villa on the Palmilla Estate. When you're not lounging by the poolside, hanging out in the hot tub, or relaxing by the fire.",
         price: 300
       },
-
+   
     ], {});
   },
 
