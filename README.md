@@ -13,7 +13,7 @@
 
 ## VentureBnB
 
-This project is aimed to replicate the core features of the original website. Users are able to login and signup or just use a demo account to test of the features of the app. Once logged in the user is able to create, edit, and delete listings just as the Airbnb. Reviewing spots is also a feature that was added. Reviews can only come from users who are not the owner of the spot. 
+Venturebnb is clone to Airbnb. This project is aimed to replicate the core features of the original website. Users are able to login and signup or just use a demo account to test of the features of the app. Once logged in the user is able to create, edit, and delete listings just as the Airbnb. Reviewing spots is also a feature that was added. Reviews can only come from users who are not the owner of the spot. 
 
 Live site: <a href='https://a-jq2a.onrender.com' alt=''>Venturebnb</a>
 
@@ -33,9 +33,7 @@ Technologies Used:
 
 <br/>
 
-## Features
-
-The most common user flow of Plendar is as follows:
+## Overview of my site
 
 ### Land on the homepage
 <img width="800px" alt="homepage" src="https://user-images.githubusercontent.com/105809464/230541076-9eb818d5-a812-45d8-99cc-c166a66545b4.png">
@@ -46,11 +44,12 @@ The most common user flow of Plendar is as follows:
 ### View the spot details
 <img width="800px" alt="spot details" src="https://user-images.githubusercontent.com/105809464/230541397-e188fa6d-e120-43ab-a95b-4f1cd170e07a.png">
 
-### View listings you created
-<img width="800px" alt="listings" src="https://user-images.githubusercontent.com/105809464/230541630-2f9c82c9-2f3f-4dd3-a2f5-38c35b8524ee.png">
-
 ### View your upcoming and past bookings
-<img width="800px" alt="bookings" src="https://user-images.githubusercontent.com/105809464/230541833-f43a9a6c-1a22-4c99-bb84-d2f62f582ab0.png">
+<img width="800px" alt="Screen Shot 2023-04-06 at 9 54 31 PM" src="https://user-images.githubusercontent.com/105809464/230543600-6afc60ab-1d1c-4844-b76b-27009c91a4fc.png">
+
+### View listings you created
+<img width="800px" alt="Screen Shot 2023-04-06 at 9 55 02 PM" src="https://user-images.githubusercontent.com/105809464/230543606-b8d7ef9f-4b39-40ce-abcb-e91133a073e9.png">
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
